@@ -7,10 +7,12 @@ import Quote from '../components/core/AboutPage/Quote'
 import FoundingStory from "../assets/Images/FoundingStory.png"
 import StatsComponent from '../components/core/AboutPage/StatsComponent'
 import LearningGrid from '../components/core/AboutPage/LearningGrid'
+import ContactFormSection from '../components/core/AboutPage/ContactFormSection'
+import Footer from "../components/core/HomePage/common/footer"
 
 const About = () => {
   return (
-    <div className='mt-[100px] text-richblack-5 w-11/12 max-w-maxContent mx-auto'>
+    <div className='mt-[100px] text-richblack-5  max-w-maxContent mx-auto'>
         {/* section 1 */}
         <section>
             <div>
@@ -72,10 +74,18 @@ const About = () => {
         {/* Section 4 */}
         <StatsComponent />
         {/* Section 5 */}
-        <section className='mx-auto flex flex-row items-center justify-center gap-5'>
+        <section className='mx-auto flex flex-col items-center mb-[140px] justify-center gap-5'>
             <LearningGrid />
             <ContactFormSection />
         </section>
+        <section>
+            <div>
+                Reviews from other learners
+                {/* <ReviewSlider /> */}
+            </div>
+            <Footer/>
+        </section>
+
     </div>
   )
 }
