@@ -12,18 +12,21 @@ import Footer from "../components/core/HomePage/common/footer"
 
 const About = () => {
   return (
-    <div className='mt-[100px] text-richblack-5  max-w-maxContent mx-auto'>
+    <div className=''>
         {/* section 1 */}
-        <section>
-            <div>
-                <header>
-                   Bring Innovation in Online Education for a 
-                   <HighlightedText text={"Brighter future"} /> 
-                   <p>Studynotion is a forefront of driving innovation in online education. We're passionate about creating brighter future by offering cutting edge courses,
+<section className=' items-center justify-center h-full'>
+
+<div className='w-full h-[618px] bg-richblack-800 mt-[80px]  items-center justify-center'>
+
+                <header className='text-richblack-5 '>
+                    {/* <p className='items-'>About us</p> */}
+                  <h1 className='text-richblack-5 w-11/12 text-4xl font-bold items-center justify-center px-[25px]  translate-x-9 py-5'>Driving Innovation in Online Education for a 
+                 <br></br> <HighlightedText text={"Brighter future"} /> </h1> 
+                   <p className='text-richblack-50 text-sm mt-5 mb-10'>Studynotion is a forefront of driving innovation in online education. We're passionate about creating brighter future by offering cutting edge courses,
                      leveraging emerging technologies and nurturing a vibrant learning community.
                    </p>
                 </header>
-                <div className='flex gap-x-3 mx-auto'>
+                <div className='lg:flex gap-x-3 mx-auto items-center justify-center '>
                     <img src={BannerImage1} />
                     <img src={BannerImage2} />
                     <img src={BannerImage3} />
