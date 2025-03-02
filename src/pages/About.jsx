@@ -14,19 +14,21 @@ const About = () => {
   return (
     <div className=''>
         {/* section 1 */}
-<section className=' items-center justify-center h-full'>
+<section className=''>
 
-<div className='w-full h-[618px] bg-richblack-800 mt-[80px]  items-center justify-center'>
+<div className='w-full bg-richblack-800 pt-10 mx-auto flex flex-col items-center justify-center'>
 
+<p className='text-richblack-25 w-full bg-richblack-800 flex items-center justify-center '>About us</p>
+                
                 <header className='text-richblack-5 '>
-                    {/* <p className='items-'>About us</p> */}
-                  <h1 className='text-richblack-5 w-11/12 text-4xl font-bold items-center justify-center px-[25px]  translate-x-9 py-5'>Driving Innovation in Online Education for a 
-                 <br></br> <HighlightedText text={"Brighter future"} /> </h1> 
-                   <p className='text-richblack-50 text-sm mt-5 mb-10'>Studynotion is a forefront of driving innovation in online education. We're passionate about creating brighter future by offering cutting edge courses,
+                    
+                  <h1 className='text-richblack-5 text-4xl font-bold items-center flex flex-col justify-center mt-7 '>Driving Innovation in Online Education for a
+                <br></br> <HighlightedText text={"Brighter future"}/></h1> 
+                   <p className='text-richblack-50 text-sm mt-10 mb-10 flex '>Studynotion is a forefront of driving innovation in online education. We're passionate about creating brighter future by offering cutting edge courses,
                      leveraging emerging technologies and nurturing a vibrant learning community.
                    </p>
                 </header>
-                <div className='lg:flex gap-x-3 mx-auto items-center justify-center '>
+                <div className='lg:flex gap-x-3 mx-auto items-center justify-center translate-y-11 '>
                     <img src={BannerImage1} />
                     <img src={BannerImage2} />
                     <img src={BannerImage3} />
@@ -35,28 +37,32 @@ const About = () => {
         </section>
         {/* section 2 */}
         <section>
-        <div>
+        <div className='w-full'>
             <Quote />
         </div>
         </section>
         {/* Section 3 */}
         <section>
-            <div className='flex flex-col'>
+            <div className='flex flex-col text-richblack-200'>
                 {/* founding story wala div */}
                 <div>
-                    <div>
-                        <h1>Our Founding Story</h1>
+                <div className='flex'>
+                <div className='w-[50%]'>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-[#FF0066] via-[#FF3D33] to-[#FF5722] text-transparent bg-clip-text drop-shadow-lg">
+  Our Founding Story
+</h1>
                         <p>Our e-learning platform was born out of a shared vision and passion for transforming education. It all began with a group of educators, technologists, and lifelong learners who recognized the need for accessible, flexible, and high-quality learning opportunities in a rapidly evolving digital world.</p>
                         <p>As experienced educators ourselves, we witnessed firsthand the limitations and challenges of traditional education systems. We believed that education should not be confined to the walls of a classroom or restricted by geographical boundaries. We envisioned a platform that could bridge these gaps and empower individuals from all walks of life to unlock their full 
                             potential.</p>
 
-                    </div>
-                    <div>
+                     </div>
+                     <div className='w-[500px] items-center justify-center mx-auto px-[15px]'>
                         <img src={FoundingStory} alt="" />
                     </div>
                 </div>
+                </div>
                  {/* vision and mission wala div */}
-            <div className='flex'>
+             <div className='flex'>
                 {/* left box */}
                 <div>
                     <h1>Our Vision</h1>
