@@ -30,6 +30,8 @@ const About = () => {
                 </header>
                 <div className='lg:flex gap-x-3 mx-auto items-center justify-center translate-y-11 '>
                     <img src={BannerImage1} />
+                    <div class="w-full h-64 bg-gradient-radial from-[#111827] via-[#1f2937] to-[#9a6b2f]">
+</div>
                     <img src={BannerImage2} />
                     <img src={BannerImage3} />
                 </div>
@@ -43,38 +45,38 @@ const About = () => {
         </section>
         {/* Section 3 */}
         <section>
-            <div className='flex flex-col text-richblack-200'>
+            <div className='flex flex-col  text-richblack-200 w-11/12 mt-[80px] mx-auto justify-center items-center'>
                 {/* founding story wala div */}
-                <div>
-                <div className='flex'>
-                <div className='w-[50%]'>
+                <div >
+                <div className='flex px-5'>
+                <div className='w-[50%] ml-7'>
                 <h1 class="text-3xl font-bold bg-gradient-to-r from-[#FF0066] via-[#FF3D33] to-[#FF5722] text-transparent bg-clip-text drop-shadow-lg">
   Our Founding Story
 </h1>
-                        <p>Our e-learning platform was born out of a shared vision and passion for transforming education. It all began with a group of educators, technologists, and lifelong learners who recognized the need for accessible, flexible, and high-quality learning opportunities in a rapidly evolving digital world.</p>
+                        <p>Our e-learning platform was born out of a shared vision and passion for transforming education. It all began with a group of educators, technologists, and lifelong learners who recognized the need for accessible, flexible, and high-quality learning opportunities in a rapidly evolving digital world.</p><br></br>
                         <p>As experienced educators ourselves, we witnessed firsthand the limitations and challenges of traditional education systems. We believed that education should not be confined to the walls of a classroom or restricted by geographical boundaries. We envisioned a platform that could bridge these gaps and empower individuals from all walks of life to unlock their full 
                             potential.</p>
 
                      </div>
-                     <div className='w-[500px] items-center justify-center mx-auto px-[15px]'>
+                     <div className='w-[500px] items-center justify-center mx-auto px-[15px] -translate-x-10'>
                         <img src={FoundingStory} alt="" />
                     </div>
                 </div>
                 </div>
                  {/* vision and mission wala div */}
-             <div className='flex'>
+             <div className='flex mx-auto mt-[150px] items-center justify-center w-11/12 gap-x-10'>
                 {/* left box */}
-                <div>
-                    <h1>Our Vision</h1>
-                    <p>With this vision in mind, we set out on a journey to create an e-learning platform that would revolutionize the way people learn. Our team of dedicated experts worked tirelessly to develop a robust and intuitive platform that combines cutting-edge technology with engaging content, fostering a dynamic and interactive learning 
+                <div className=' items-center justify-center'>
+                    <h1 className='text-3xl font-bold bg-gradient-to-r from-[#E68426] to-[#EF9811] text-transparent bg-clip-text '>Our Vision</h1>
+                    <p className='mt-[20px]'>With this vision in mind, we set out on a journey to create an e-learning platform that would revolutionize the way people learn. Our team of dedicated experts worked tirelessly to develop a robust and intuitive platform that combines cutting-edge technology with engaging content, fostering a dynamic and interactive learning 
                         experience.</p>
                 </div>
                 {/* right box */}
-                <div>
-                    <h1>
+                <div className='items-center justify-center px-7 mx-7 translate-x-16'>
+                    <h1 className='text-3xl font-bold bg-gradient-to-r from-[#66a3d8] to-[#01A3D4] text-transparent bg-clip-text '>
                         Our Mission
                     </h1>
-                    <p>our mission goes beyond just delivering courses online. We wanted to create a vibrant community of learners, where individuals can connect, collaborate, and learn from one another. We believe that knowledge thrives in an environment of sharing and dialogue, and we foster this spirit of collaboration through forums, live sessions, and networking opportunities.</p>
+                    <p className='mt-[20px]'>our mission goes beyond just delivering courses online. We wanted to create a vibrant community of learners, where individuals can connect, collaborate, and learn from one another. We believe that knowledge thrives in an environment of sharing and dialogue, and we foster this spirit of collaboration through forums, live sessions, and networking opportunities.</p>
                 </div>
                 </div>
             </div>
