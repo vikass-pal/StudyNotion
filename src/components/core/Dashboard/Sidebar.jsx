@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import SidebarLinks from './SidebarLinks'
 import { VscSettingsGear, VscSignOut } from 'react-icons/vsc'
 import { useNavigate } from 'react-router-dom'
+import ConfirmationModal from '../../core/HomePage/common/ConfirmationModal'
 
 const Sidebar = () => {
     const { user, loading: profileLoading } = useSelector((state) => state.profile)
