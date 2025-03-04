@@ -13,6 +13,7 @@ import OpenRoute from "./components/core/Auth/OpenRoute"; // Import OpenRoute co
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Error from "./pages/Error";
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 
 const App = () => {
   return (
@@ -62,9 +63,10 @@ const App = () => {
             </PrivateRoute>
           }
         >
-          <Route path="dashboard/my-profile" element={<MyProfile />} 
+          <Route path="dashboard/my-profile" element={<MyProfile />}  />
+          <Route path="dashboard/enrolled-courses" element={<EnrolledCourses/>} />
           
-          />
+         
           {/* <Route path="dashboard/settings" element={< Setting/>} /> */}
 
         </Route>
