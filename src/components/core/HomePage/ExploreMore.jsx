@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {HomePageExplore} from "../../../data/homepage-explore"
 import HighlightedText from '../HomePage/HighlightedText'
 import CourseCard from '../HomePage/CourseCard'
@@ -14,6 +14,8 @@ const tabsName = [
 ];
 
 const ExploreMore = () => {
+ 
+
   const [currentTab, setCurrentTab] = useState(tabsName[0]);
   const [courses, setCourses] = useState(HomePageExplore[0].courses);
   const [currentCard, setCurrentCard] = useState(HomePageExplore[0].courses[0].heading);
@@ -57,7 +59,28 @@ const ExploreMore = () => {
 
     </div>
     {/* Course card group */}
+    {/* <button 
+      className="mt-5 p-2 bg-blue-500 text-white rounded"
+      onClick={() => {
+        setModalData({
+          text1: "Confirm Action",
+          text2: "Are you sure you want to proceed?",
+          btn1Text: "Yes",
+          btn1Handler: () => {
+            // Handle confirmation action
+            setIsModalOpen(false);
+          },
+          btn2Text: "No",
+          btn2Handler: () => setIsModalOpen(false),
+        });
+        setIsModalOpen(true); // Open the modal
+      }}
+    >
+      Open Confirmation Modal
+    </button> */}
+
     <div className='absolute flex flex-row gap-10 justify-between w-full -translate-x-64 -translate-y-40 mt-10 '>
+
       {
         courses.map((element, index) => {
           return (
