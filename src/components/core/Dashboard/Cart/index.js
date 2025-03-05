@@ -9,7 +9,15 @@ export default function Cart() {
     return(
         <div>
             <h1>Cart</h1>
-            <p></p>
+            <p>{totalItems} Courses in Cart</p>
+            {
+                total > 0 ?
+                (<div>
+                   <RenderCartCourses />
+                   <RenderTotalAmount /> 
+                </div>) :
+                (<div></div>) 
+            }
         </div>
     )
 }
