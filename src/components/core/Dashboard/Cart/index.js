@@ -16,7 +16,9 @@ export default function Cart() {
                    <RenderCartCourses />
                    <RenderTotalAmount /> 
                 </div>) :
-                (<div></div>) 
+                (<div>
+                    You have not regiatered to any course
+                </div>) 
             }
         </div>
     )

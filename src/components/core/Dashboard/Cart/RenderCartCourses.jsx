@@ -1,17 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const RenderCartCourses = () => {
 
 const {cart} = useSelector((state) => state.cart)
+const dispatch = useDispatch();
 
   return (
     <div>
         {
             Cart.map((course, index) => {
-                <div>
+                <div> 
+                    <div>
                     <img src={course?.thumbnail} alt="" />
                     <div>
                         <p>{course?.courseName}</p>
@@ -30,6 +33,15 @@ const {cart} = useSelector((state) => state.cart)
                             />
                             <span>{course?.ratingAndReviews?.length} Ratings</span>
                         </div>
+                    </div>
+                    
+                    </div>
+                    <div>
+                        <button onClick={() => dispatch(removeFromCart(course._id))}>
+                        <MdDelete />
+                        <span>Remove</span>
+                        </button>
+                        <p>₹ {course?.price}</p>
                     </div>
                 </div>
             })
