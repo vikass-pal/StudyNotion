@@ -3,17 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-
+import ReactStars from "react-rating-stars-component"
 const RenderCartCourses = () => {
 
 const {cart} = useSelector((state) => state.cart)
 const dispatch = useDispatch();
 
+const removeFromCart= () => {
+    
+}
+
   return (
     <div>
         {
-            Cart.map((course, index) => {
-                <div> 
+            cart.map((course, index) => {
+                <div key={index}>  
                     <div>
                     <img src={course?.thumbnail} alt="" />
                     <div>

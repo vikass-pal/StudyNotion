@@ -12,9 +12,8 @@ const {
     editCourse,
     deleteCourse,
     getInstructorCourses,
-    showAllCourses,
 
-} = require('../controllers/course')
+} = require('../controllers/Course')
 
 const { updateCourseProgress } = require('../controllers/courseProgress')
 
@@ -23,7 +22,6 @@ const {
     createCategory,
     showAllCategories,
     getCategoryPageDetails,
-    showAllcategory,
 } = require('../controllers/Category');
 
 
@@ -32,7 +30,7 @@ const {
     createSection,
     updateSection,
     deleteSection,
-} = require('../controllers/section');
+} = require('../controllers/Section');
 
 
 // subSections controllers
@@ -40,15 +38,14 @@ const {
     createSubSection,
     updateSubSection,
     deleteSubSection
-} = require('../controllers/subSection');
+} = require('../controllers/SubSection');
 
 
 // rating controllers
 const {
     createRating,
     getAverageRating,
-    getAllRatingReview,
-    getAllRatings
+    getAllRatingReview
 } = require('../controllers/ratingAndReview');
 
 
@@ -81,18 +78,18 @@ router.post('/deleteSubSection', auth, isInstructor, deleteSubSection);
 // Get Details for a Specific Courses
 router.post('/getCourseDetails', getCourseDetails);
 // Get all Courses
-router.get('/showAllCourses', showAllCourses);
+router.get('/getAllCourses', getAllCourses);
 // get full course details
-router.post('/getCourseDetails', auth, getCourseDetails);
+router.post('/getFullCourseDetails', auth, getFullCourseDetails);
 // Get all Courses Under a Specific Instructor
-// router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 
 
 // Edit Course routes
-// router.post("/editCourse", auth, isInstructor, editCourse)
+router.post("/editCourse", auth, isInstructor, editCourse)
 
-// // Delete a Course
-// router.delete("/deleteCourse", auth, isInstructor, deleteCourse)
+// Delete a Course
+router.delete("/deleteCourse", auth, isInstructor, deleteCourse)
 
 // update Course Progress
 router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
@@ -104,8 +101,8 @@ router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 // ********************************************************************************************************
 // Category can Only be Created by Admin
 
-router.post('/createCategory', auth, isAdmin, createCategory);
-router.get('/showAllCategory', showAllcategory);
+// router.post('/createCategory', auth, isAdmin, createCategory);
+// router.get('/showAllCategories', showAllCategories);
 // router.post("/getCategoryPageDetails", getCategoryPageDetails)
 
 
@@ -116,7 +113,7 @@ router.get('/showAllCategory', showAllcategory);
 // ********************************************************************************************************
 router.post('/createRating', auth, isStudent, createRating);
 router.get('/getAverageRating', getAverageRating);
-router.get('/getAllRatings', getAllRatings);
+// router.get('/getReviews', getAllRatingReview);
 
 
 module.exports = router;

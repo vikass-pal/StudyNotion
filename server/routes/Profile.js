@@ -26,13 +26,13 @@ router.get('/getUserDetails', auth, getUserDetails);
 
 
 // Get Enrolled Courses
-// router.get('/getEnrolledCourses', auth, getEnrolledCourses);
+router.get('/getEnrolledCourses', auth, getEnrolledCourses);
 
 // update profile image
 router.put('/updateUserProfileImage', auth, updateUserProfileImage);
 
 // instructor Dashboard Details
-// router.get('/instructorDashboard', auth, isInstructor, instructorDashboard);
+router.get('/instructorDashboard', auth, isInstructor, instructorDashboard);
 
 
 

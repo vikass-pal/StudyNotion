@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login"; // Import the Login component
@@ -14,8 +15,14 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Error from "./pages/Error";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
+import Cart from "./components/core/Dashboard/Cart/index"
+import { ACCOUNT_TYPE } from "./utils/constants";
+
 
 const App = () => {
+
+  const { user } = useSelector((state) => state.profile)
+
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
       <Navbar />
@@ -64,7 +71,18 @@ const App = () => {
           }
         >
           <Route path="dashboard/my-profile" element={<MyProfile />}  />
-          <Route path="dashboard/enrolled-courses" element={<EnrolledCourses/>} />
+       
+
+
+          {
+            user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <>
+                 <Route path="dashboard/cart" element={<Cart />}  />
+                 <Route path="dashboard/enrolled-courses" element={<EnrolledCourses/>} />
+              </>
+            )
+          }
+
           
          
           {/* <Route path="dashboard/settings" element={< Setting/>} /> */}
