@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const RequirementField = ({name,label, register, errors,setValue,getValues}) => {
   const [requirement, setRequirement] = useState("");
   const [requirementList, setRequirementList] = useState([]);
+
+  useEffect(() => {
+    register(name, {
+      required:true,
+      validate: (value)   => value.length > 0
+    })
+  },[])
 
   const handleAddRequirement = () => {
     if(requirement) {
@@ -19,7 +26,51 @@ const RequirementField = ({name,label, register, errors,setValue,getValues}) => 
 
   return (
     <div>
-      
+      <label htmlFor={name}>{label}<sup>*</sup></label>
+      <div>
+        <input 
+        type='text'
+        id={name}
+        value={requirement}
+        onChange={(e) => setRequirement(e.target.value)}
+        className='w-full'
+        />
+        <button 
+        type='button'
+        onClick={handleAddRequirement}
+        className='font-semibold text-yellow-50'
+        >Add
+
+        </button>
+
+      </div>
+     {
+      requirement > 0 && (
+        <ul>
+        {
+          requirementList.map((requirement, index) => {
+            <li key={index}>
+              <span>{requirement}</span>
+              <button type='button' 
+              onClick={() => handleRemoveRequirement(index)}
+              className='text-xs text-pure-greys-300'>
+                Clear
+              </button>
+            </li>
+          })
+        }
+  
+        </ul>
+      )
+     }
+    {
+      errors[name] && (
+        <span>
+          {label} is Required
+        </span>
+      )
+    }
+
     </div>
   )
 }

@@ -3,14 +3,17 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import { useSelector } from 'react-redux';
-import fetchCourseCategories from '../../../../../slices/courseSlice'
+import { fetchCourseCategories } from '../../../../../services/operations/courseDetailsAPI'
+
+import RequirementField from './RequirementField';
 
 const CourseInformationForm = () => {
     const {
         register,
         handleSubmit,
         setValue,
-        getValue,
+        error,
+        getValues,
         formState: { errors },
     } = useForm();
 
@@ -34,8 +37,8 @@ const CourseInformationForm = () => {
         setValue("courseShortDesc", course.courseDescription);
         setValue("coursePrice", course.price);
         setValue("courseTags", course.tag);
-        setValue("courseBenefits", course.whatYouWillLearn);
-        setValue("courseCategory", course.categor);
+          setValue("courseBenefits", course.whatYouWillLearn);
+        setValue("courseCategory", course.category);
         setValue("courseRequirement", course.instructions);
         setValue("courseImage", course.thumbnail);
         
@@ -47,7 +50,53 @@ const CourseInformationForm = () => {
       getCategories();
     },[])
 
+    const isFormUpdated = () => {
+      const currentValues = getValues();
+      if(currentValues.courseTitle !== course.courseName || 
+        currentValues.courseShortDesc !== course.courseDescription || 
+        currentValues.coursePrice !== course.price || 
+        // currentValues.courseTags.toString() !== course.tags.toString() || 
+        // currentValues.courseImage !== course.thumbnail || 
+        currentValues.courseBenefits !== course.whatYouWillLearn || 
+        currentValues.courseCategory._id !== course.category._id || 
+        currentValues.courseRequirements.toString() !== course.instructions.toString()
+       
+
+
+
+      )
+        return true;
+      else
+      return false;
+    }
+
     const onSubmit = async(data) => {
+      if(editCourse) {
+        if(currentValues.courseTitle !== course.courseName) {
+          FormData.append("courseName", data.courseTitle);
+        }
+        if(currentValues.courseShortDesc !== course.courseDescription) {
+          FormData.append("courseDescription", data.courseShortDesc);
+        }
+        if(currentValues.coursePrice !== course.price) {
+          FormData.append("price", data.coursePrice);
+        }
+        if(currentValues.courseBenefits !== course.whatYouWillLearn) {
+          FormData.append("whatYouWillLearn", data.courseBenefits);
+        }
+        if(currentValues.courseCategory._id !== course.category._id) {
+          FormData.append("category", data.courseCategory);
+        }
+        if(currentValues.courseTitle !== course.courseName) {
+          FormData.append("courseName", data.courseTitle);
+        }
+        if(currentValues.courseRequirements.toString() !== course.instructions.toString()) {
+          FormData.append("instructions",JSON.stringify(data.courseRequirements));
+        }
+setLoading(true);
+        const result = await editCourseDetails(formData, token)
+
+      }
 
     }
 
@@ -139,7 +188,7 @@ const CourseInformationForm = () => {
           className='min-h-[130px] w-full'
           />
           {
-            error.courseBenefits && (
+            errors.courseBenefits && (
               <span>
                 Benefits of the course are required
               </span>
@@ -156,6 +205,26 @@ const CourseInformationForm = () => {
         setValue={setValue}
         getValues={getValues}
         />
+
+      <div>
+          {
+            editCourse && (
+              <button onClick={() => dispatch(setStep(2))}
+              className='flex items-center gap-x-2 bg-richblack-200'
+              >
+                Continue without Saving
+              </button>
+            )
+          }
+          <IconBtn 
+          text={!editCourse ? "Next" : "Save Changes"}
+          />
+        
+      </div>
+
+
+
+
     </form>
   )
 }
