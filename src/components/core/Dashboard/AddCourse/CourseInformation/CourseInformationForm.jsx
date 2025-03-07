@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { HiOutlineCurrencyRupee } from "react-icons/hi";
+import { useSelector } from 'react-redux';
+import fetchCourseCategories from '../../../../../slices/courseSlice'
 
 const CourseInformationForm = () => {
     const {
@@ -38,13 +41,15 @@ const CourseInformationForm = () => {
         
       }
 
-      const onSubmit = async(data) => {
-
-      }
+      
 
 
       getCategories();
     },[])
+
+    const onSubmit = async(data) => {
+
+    }
 
 
   return (
@@ -53,7 +58,7 @@ const CourseInformationForm = () => {
     className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8 '
     >
       <div>
-        <label>Course Title <sup>*</sup></label>
+        <label htmlFor='courseTitle'>Course Title <sup>*</sup></label>
         <input 
         id='courseTitle'
         placeholder='Enter Course Title'
@@ -67,7 +72,7 @@ const CourseInformationForm = () => {
       </div>
 
       <div>
-        <label>Course Short Description <sup>*</sup></label>
+        <label htmlFor='courseShortDesc'>Course Short Description <sup>*</sup></label>
         <textarea 
         id='courseShortDesc'
         placeholder='Enter Description'
@@ -82,20 +87,75 @@ const CourseInformationForm = () => {
 
       </div>
 
-      <div>
-        <label>Course Price <sup>*</sup></label>
+      <div className='relative'>
+        <label htmlFor='coursePrice'>Course Price <sup>*</sup></label>
         <input 
         id='coursePrice'
         placeholder='Enter Course Price'
         {...register("coursePrice", {required:true , valueAsNumber:true})}
-        className='w-full' />
+        className='w-full ' />
+        <HiOutlineCurrencyRupee className='absolute top-1/2 text-black' />
         {
           errors.coursePrice && (
             <span>Course Price is Required</span>
           )
         }
       </div>
+          <div>
+            <label htmlFor='courseCategory'>Course Category</label>
+            <select 
+            id='courseCategory'
+            defaultValue=""
+            {...register("courseCategory", {required:true})}
+            >
+              <option value="" disabled>Choose a Category</option>
+              {
+                !loading && courseCategories.map((category,index) => (
+                  <option key={index}  value={category?._id}>
+                    {category?.name}
+                  </option>
+                ))
+              }
 
+            </select>
+            {
+          errors.courseCategories && (
+            <span>Course Category is Required</span>
+          )
+        }
+            
+          </div>
+
+          {/* create a custom component for handling tags input */}
+
+        {/* create a component for uploading and showing preview of media */}
+
+        <div>
+          <label>Benefits of the Course<sup>*</sup></label>
+          <textarea 
+          id='courseBenefits'
+          placeholder='Enter Benefits of your Course'
+          {...register("courseBenefits", {required:true})}
+          className='min-h-[130px] w-full'
+          />
+          {
+            error.courseBenefits && (
+              <span>
+                Benefits of the course are required
+              </span>
+            )
+          }
+        </div>
+
+
+        <RequirementField
+        name='courseRequirements'
+        label='Requirements/Instructions'
+        register={register}
+        errors={errors}
+        setValue={setValue}
+        getValues={getValues}
+        />
     </form>
   )
 }
