@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import { useSelector } from 'react-redux';
-import { fetchCourseCategories } from '../../../../../services/operations/courseDetailsAPI'
+import { addCourseDetails, fetchCourseCategories } from '../../../../../services/operations/courseDetailsAPI'
 
 import RequirementField from './RequirementField';
 
@@ -12,12 +12,13 @@ const CourseInformationForm = () => {
         register,
         handleSubmit,
         setValue,
-        error,
+       
         getValues,
         formState: { errors },
     } = useForm();
 
     const dispatch = useDispatch();
+    const {token} = useSelector((state) => state.auth)
     const [loading, setLoading] = useState(false);
     const {course, editCourse} = useSelector((state) => state.course);
     const [courseCategories, setCourseCategories] = useState([]);
@@ -72,6 +73,9 @@ const CourseInformationForm = () => {
 
     const onSubmit = async(data) => {
       if(editCourse) {
+       if(isFormUpdated()) {
+        const currentValues = getValues();
+        const formData = new FormData();
         if(currentValues.courseTitle !== course.courseName) {
           FormData.append("courseName", data.courseTitle);
         }
@@ -94,10 +98,36 @@ const CourseInformationForm = () => {
           FormData.append("instructions",JSON.stringify(data.courseRequirements));
         }
 setLoading(true);
-        const result = await editCourseDetails(formData, token)
+        const result = await editCourseDetails(formData, token);
+        setLoading(false);
+        if (result) {
+          setStep(2);
+          dispatch(setCourse(result));
+        }
+       }
+       return ;
 
       }
+     
+      // create a new Course
+      const formData = new FormData();
+      formData.append("courseName", data.courseTitle);
+      formData.append("courseDescription", data.courseShortDesc);
+      formData.append("price", data.coursePrice);
+      formData.append("whatYouWillLearn", data.courseBenefits);
+      formData.append("category", data.courseCategory);
+      formData.append("instructions", JSON.stringify(data.courseRequirements));
+      formData.append("courseName", data.courseTitle);
+      formData.append("courseName", data.courseTitle);
+      formData.append("status", COURSE_STATUS.DRAFT);
 
+      setLoading(true);
+      const result = await addCourseDetails(formData, token);
+      if(result) {
+        setStep(2);
+        dispatch(setCourse(result));
+      }
+      setLoading(false);
     }
 
 
