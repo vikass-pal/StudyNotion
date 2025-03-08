@@ -6,7 +6,8 @@ const Category = require("../models/Category");
 exports.createCategory = async (req, res) => {
     try {
         // getting info
-        const {name, description} = req.body;
+        const { name, description } = req.body;
+
 
         // validation
         if(!name || !description) {
@@ -42,7 +43,8 @@ exports.createCategory = async (req, res) => {
 
 exports.showAllcategory = async (req, res) => {
     try{
-        const allCategory = await Category.find({}, {name:true, description:true});
+        const allCategory = await Category.find({}, { name: true, description: true });
+
         return res.status(200).json({
             success:true,
             data: allCategory,
@@ -62,9 +64,11 @@ exports.showAllcategory = async (req, res) => {
 exports.categoryPageDetails = async (req, res) => {
     try{
         // get categoryid
-        const {categoryId} = req.body;
+        const { categoryId } = req.body;
+
         // get courses for specified categoryId
-        const selectedCategory = await Category.findById(categoryId)
+        const selectedCategory = await Category.findById(categoryId).populate("courses")
+
         .populate("courses")
         .exec();
         // validation
@@ -75,7 +79,8 @@ exports.categoryPageDetails = async (req, res) => {
             })
         }
         // get coursesfor diff categories
-        const differentCategories = await Category.find({
+        const differentCategories = await Category.find({ 
+
             _id: {$ne: categoryId},
         })
         .populate("courses")

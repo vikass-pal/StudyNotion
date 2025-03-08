@@ -3,7 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import { useSelector } from 'react-redux';
-import { addCourseDetails, fetchCourseCategories } from '../../../../../services/operations/courseDetailsAPI'
+import { addCourseDetails, fetchCourseCategories, editCourseDetails } from '../../../../../services/operations/courseDetailsAPI'
+import IconBtn from '../../../HomePage/common/IconBtn';
+import { setCourse, setStep } from "../../../../../slices/courseSlice"
+import { COURSE_STATUS } from "../../../../../utils/constants"
 
 import RequirementField from './RequirementField';
 
@@ -117,8 +120,8 @@ setLoading(true);
       formData.append("whatYouWillLearn", data.courseBenefits);
       formData.append("category", data.courseCategory);
       formData.append("instructions", JSON.stringify(data.courseRequirements));
-      formData.append("courseName", data.courseTitle);
-      formData.append("courseName", data.courseTitle);
+      // formData.append("courseName", data.courseTitle);
+      // formData.append("courseName", data.courseTitle);
       formData.append("status", COURSE_STATUS.DRAFT);
 
       setLoading(true);

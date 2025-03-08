@@ -24,7 +24,8 @@ exports.createCourse = async (req, res) => {
         }
 
         const instructorId = req.user.id;
-        const categoryDetails = await Category.findById(category);
+        const categoryDetails = await Category.findById(category).populate("courses");
+
         if (!categoryDetails) {
             return res.status(401).json({
                 success: false,
@@ -72,7 +73,8 @@ exports.createCourse = async (req, res) => {
 
 exports.getAllCourses = async (req, res) => {
     try {
-        const allCourses = await Course.find({});
+        const allCourses = await Course.find({}).populate("category");
+
         return res.status(200).json({
             success: true,
             data: allCourses,

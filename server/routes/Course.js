@@ -30,7 +30,7 @@ const {
     createSection,
     updateSection,
     deleteSection,
-} = require('../controllers/Section');
+} = require('../controllers/section');
 
 
 // subSections controllers
@@ -38,7 +38,7 @@ const {
     createSubSection,
     updateSubSection,
     deleteSubSection
-} = require('../controllers/SubSection');
+} = require('../controllers/subSection');
 
 
 // rating controllers
@@ -50,7 +50,7 @@ const {
 
 
 // Middlewares
-const { auth, isAdmin, isInstructor, isStudent } = require('../middlewares/auth')
+const { auth, isAdmin, isInstructor, isStudent } = require('../middleware/auth')
 
 
 // ********************************************************************************************************
@@ -101,9 +101,9 @@ router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 // ********************************************************************************************************
 // Category can Only be Created by Admin
 
-// router.post('/createCategory', auth, isAdmin, createCategory);
-// router.get('/showAllCategories', showAllCategories);
-// router.post("/getCategoryPageDetails", getCategoryPageDetails)
+router.post('/createCategory', auth, isAdmin, createCategory);
+router.get('/showAllCategories', showAllCategories);
+router.post("/getCategoryPageDetails", getCategoryPageDetails)
 
 
 
@@ -113,7 +113,7 @@ router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 // ********************************************************************************************************
 router.post('/createRating', auth, isStudent, createRating);
 router.get('/getAverageRating', getAverageRating);
-// router.get('/getReviews', getAllRatingReview);
+router.get('/getReviews', getAllRatingReview);
 
 
 module.exports = router;
