@@ -139,7 +139,7 @@ const CourseInformationForm = () => {
   return (
     <form 
     onSubmit={handleSubmit(onSubmit)} 
-    className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8 '
+    className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8  text-black'
     >
       <div>
         <label htmlFor='courseTitle'>Course Title <sup>*</sup></label>
@@ -157,11 +157,12 @@ const CourseInformationForm = () => {
 
       <div>
         <label htmlFor='courseShortDesc'>Course Short Description <sup>*</sup></label>
-        <textarea 
+        <textarea  
+
         id='courseShortDesc'
         placeholder='Enter Description'
         {...register("courseShortDesc", {required:true})}
-        className='min-h-[140px] w-full'
+        className='min-h-[140px] w-full text-black'
         />
         {
           errors.courseShortDesc && (
@@ -189,6 +190,7 @@ const CourseInformationForm = () => {
             <label htmlFor='courseCategory'>Course Category</label>
             <select 
             id='courseCategory'
+            className='text-black'
             defaultValue=""
             {...register("courseCategory", {required:true})}
             >
