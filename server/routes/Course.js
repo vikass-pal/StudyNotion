@@ -30,7 +30,7 @@ const {
     createSection,
     updateSection,
     deleteSection,
-} = require('../controllers/section');
+} = require('../controllers/Section');
 
 
 // subSections controllers
@@ -38,7 +38,7 @@ const {
     createSubSection,
     updateSubSection,
     deleteSubSection
-} = require('../controllers/subSection');
+} = require('../controllers/Subsection');
 
 
 // rating controllers
@@ -50,7 +50,7 @@ const {
 
 
 // Middlewares
-const { auth, isAdmin, isInstructor, isStudent } = require('../middleware/auth')
+const { auth, isAdmin, isInstructor, isStudent } = require('../middlewares/auth')
 
 
 // ********************************************************************************************************
@@ -111,9 +111,9 @@ router.post("/getCategoryPageDetails", getCategoryPageDetails)
 // ********************************************************************************************************
 //                                      Rating and Review
 // ********************************************************************************************************
-router.post('/createRating', auth, isStudent, createRating);
-router.get('/getAverageRating', getAverageRating);
-router.get('/getReviews', getAllRatingReview);
+// router.post('/createRating', auth, isStudent, createRating);
+// router.get('/getAverageRating', getAverageRating);
+// router.get('/getReviews', getAllRatingReview);
 
 
 module.exports = router;

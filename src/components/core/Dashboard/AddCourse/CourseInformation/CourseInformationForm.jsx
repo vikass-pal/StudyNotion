@@ -5,6 +5,7 @@ import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import { useSelector } from 'react-redux';
 import { addCourseDetails, fetchCourseCategories, editCourseDetails } from '../../../../../services/operations/courseDetailsAPI'
 import IconBtn from '../../../HomePage/common/IconBtn';
+import { MdNavigateNext } from "react-icons/md"
 import { setCourse, setStep } from "../../../../../slices/courseSlice"
 import { COURSE_STATUS } from "../../../../../utils/constants"
 
@@ -75,36 +76,37 @@ const CourseInformationForm = () => {
     }
 
     const onSubmit = async(data) => {
+      
       if(editCourse) {
        if(isFormUpdated()) {
         const currentValues = getValues();
         const formData = new FormData();
         if(currentValues.courseTitle !== course.courseName) {
-          FormData.append("courseName", data.courseTitle);
+          formData.append("courseName", data.courseTitle);
         }
         if(currentValues.courseShortDesc !== course.courseDescription) {
-          FormData.append("courseDescription", data.courseShortDesc);
+          formData.append("courseDescription", data.courseShortDesc);
         }
         if(currentValues.coursePrice !== course.price) {
-          FormData.append("price", data.coursePrice);
+          formData.append("price", data.coursePrice);
         }
         if(currentValues.courseBenefits !== course.whatYouWillLearn) {
-          FormData.append("whatYouWillLearn", data.courseBenefits);
+          formData.append("whatYouWillLearn", data.courseBenefits);
         }
         if(currentValues.courseCategory._id !== course.category._id) {
-          FormData.append("category", data.courseCategory);
+          formData.append("category", data.courseCategory);
         }
-        if(currentValues.courseTitle !== course.courseName) {
-          FormData.append("courseName", data.courseTitle);
-        }
+        // if(currentValues.courseTitle !== course.courseName) {
+        //   formData.append("courseName", data.courseTitle);
+        // }
         if(currentValues.courseRequirements.toString() !== course.instructions.toString()) {
-          FormData.append("instructions",JSON.stringify(data.courseRequirements));
+          formData.append("instructions",JSON.stringify(data.courseRequirements));
         }
-setLoading(true);
+          setLoading(true);
         const result = await editCourseDetails(formData, token);
         setLoading(false);
         if (result) {
-          setStep(2);
+          dispatch(setStep(2))
           dispatch(setCourse(result));
         }
        }
@@ -127,7 +129,7 @@ setLoading(true);
       setLoading(true);
       const result = await addCourseDetails(formData, token);
       if(result) {
-        setStep(2);
+        dispatch(setStep(2))
         dispatch(setCourse(result));
       }
       setLoading(false);
@@ -251,7 +253,9 @@ setLoading(true);
           }
           <IconBtn 
           text={!editCourse ? "Next" : "Save Changes"}
-          />
+          >
+            <MdNavigateNext />
+                    </IconBtn>
         
       </div>
 

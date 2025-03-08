@@ -41,7 +41,7 @@ exports.createCategory = async (req, res) => {
 
 // get all category
 
-exports.showAllcategory = async (req, res) => {
+exports.showAllCategories = async (req, res) => {
     try{
         const allCategory = await Category.find({}, { name: true, description: true });
 
@@ -61,7 +61,7 @@ exports.showAllcategory = async (req, res) => {
 
 // category page details
 
-exports.categoryPageDetails = async (req, res) => {
+exports.getCategoryPageDetails = async (req, res) => {
     try{
         // get categoryid
         const { categoryId } = req.body;
