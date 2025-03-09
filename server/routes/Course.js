@@ -58,7 +58,8 @@ const { auth, isAdmin, isInstructor, isStudent } = require('../middlewares/auth'
 // ********************************************************************************************************
 // Courses can Only be Created by Instructors
 
-router.post('/createCourse', auth, isInstructor, createCourse);
+router.post('/createCourse', auth, isInstructor, createCourse); // Route for creating a new course
+
 
 //Add a Section to a Course
 router.post('/addSection', auth, isInstructor, createSection);
@@ -78,7 +79,8 @@ router.post('/deleteSubSection', auth, isInstructor, deleteSubSection);
 // Get Details for a Specific Courses
 router.post('/getCourseDetails', getCourseDetails);
 // Get all Courses
-router.get('/getAllCourses', getAllCourses);
+router.get('/getAllCourses', getAllCourses); // Route for fetching all courses
+
 // get full course details
 router.post('/getFullCourseDetails', auth, getFullCourseDetails);
 // Get all Courses Under a Specific Instructor

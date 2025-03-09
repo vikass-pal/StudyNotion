@@ -81,6 +81,7 @@ const CourseInformationForm = () => {
        if(isFormUpdated()) {
         const currentValues = getValues();
         const formData = new FormData();
+        
         if(currentValues.courseTitle !== course.courseName) {
           formData.append("courseName", data.courseTitle);
         }
@@ -129,7 +130,7 @@ const CourseInformationForm = () => {
       setLoading(true);
       const result = await addCourseDetails(formData, token);
       if(result) {
-        dispatch(setStep(2))
+        setStep(2)
         dispatch(setCourse(result));
       }
       setLoading(false);
@@ -142,7 +143,8 @@ const CourseInformationForm = () => {
     className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8  text-black'
     >
       <div>
-        <label htmlFor='courseTitle'>Course Title <sup>*</sup></label>
+        <label htmlFor='courseTitle'>Course Title <sup>*</sup></label> {/* Required field for course title */}
+
         <input 
         id='courseTitle'
         placeholder='Enter Course Title'
@@ -156,7 +158,8 @@ const CourseInformationForm = () => {
       </div>
 
       <div>
-        <label htmlFor='courseShortDesc'>Course Short Description <sup>*</sup></label>
+        <label htmlFor='courseShortDesc'>Course Short Description <sup>*</sup></label> {/* Required field for short description */}
+
         <textarea  
 
         id='courseShortDesc'
@@ -173,7 +176,8 @@ const CourseInformationForm = () => {
       </div>
 
       <div className='relative'>
-        <label htmlFor='coursePrice'>Course Price <sup>*</sup></label>
+        <label htmlFor='coursePrice'>Course Price <sup>*</sup></label> {/* Required field for course price */}
+
         <input 
         id='coursePrice'
         placeholder='Enter Course Price'
@@ -187,7 +191,8 @@ const CourseInformationForm = () => {
         }
       </div>
           <div>
-            <label htmlFor='courseCategory'>Course Category</label>
+        <label htmlFor='courseCategory'>Course Category</label> {/* Optional field for selecting course category */}
+
             <select 
             id='courseCategory'
             className='text-black'
@@ -217,7 +222,8 @@ const CourseInformationForm = () => {
         {/* create a component for uploading and showing preview of media */}
 
         <div>
-          <label>Benefits of the Course<sup>*</sup></label>
+        <label>Benefits of the Course<sup>*</sup></label> {/* Required field for course benefits */}
+
           <textarea 
           id='courseBenefits'
           placeholder='Enter Benefits of your Course'

@@ -9,7 +9,9 @@ return (
                 Add Course
             </h1>
             <div>
+                {/* Render the steps for adding a course */}
                 <RenderSteps />
+
             </div>
         </div>
         <div>
