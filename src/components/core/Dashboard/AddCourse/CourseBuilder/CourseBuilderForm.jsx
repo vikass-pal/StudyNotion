@@ -38,6 +38,14 @@ const CourseBuilderForm = () => {
         },token
       )
     }
+
+    // update values
+
+    if(result) {
+      dispatch(setCourse(result));
+      setEditSectionName(null);
+      setValue('sectionName', '');
+    }
   }
 
   const goToNext = () => {
