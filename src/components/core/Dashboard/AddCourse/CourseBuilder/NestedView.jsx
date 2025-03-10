@@ -53,6 +53,23 @@ const NestedView = ({handleChangeEditSectionName}) => {
 
                             </div>
                         </summary>
+                        <div>
+                            {
+                                section.subSection.map((data) => {
+                                    <div
+                                    key={data?._id}
+                                    onClick={() => setViewSubSection(data)}
+                                    className='flex items-center gap-x-3 p-4 border-b-2'
+                                    >
+                                        <div className='flex items-center  gap-x-3 '>
+                                        <RxDropdownMenu />
+                                        <p>{data.title}</p>
+                                        </div>
+
+                                        </div>
+                                })
+                            }
+                        </div>
                     </details>
                 ))
             }
