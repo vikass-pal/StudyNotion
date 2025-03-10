@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { IoIosArrowForward } from "react-icons/io";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
+import NestedView from './NestedView';
 import { createSection, updateSection } from '../../../../../services/operations/courseDetailsAPI';
 
 const CourseBuilderForm = () => {
@@ -46,6 +47,7 @@ const CourseBuilderForm = () => {
       setEditSectionName(null);
       setValue('sectionName', '');
     }
+    setLoading(false);
   }
 
   const goToNext = () => {
@@ -60,6 +62,14 @@ const CourseBuilderForm = () => {
     // if everything is fine goto next step
     dispatch(setStep(3));
   }
+
+  const handleChangeEditSectionName = (sectionId, sectionName) => {
+    if(editSectionName === sectionId) {
+      cancelEdit(); 
+    }
+    setEditSectionName(sectionId);
+    setValue("sectionName", sectionName);
+  }
   
 
   const cancelEdit = () => {
@@ -72,7 +82,7 @@ const CourseBuilderForm = () => {
       <p>Course Builder</p>
       <form>
         <div>
-          <label>Course Builder<sup>*</sup></label>
+          <label htmlFor='sectionName'>Course Builder<sup>*</sup></label>
           <input 
           id='sectionName'
           placeholder='Add section name'
@@ -108,7 +118,7 @@ const CourseBuilderForm = () => {
         </div>
       </form>
       {course.courseContent.length > 0 && (
-        <NestedView />
+        <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
       )}
 
       <div>
