@@ -5,6 +5,8 @@ import { RxDropdownMenu } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiSolidDownArrow } from "react-icons/bi";
+import { IoAdd } from "react-icons/io5";
+import SubSectionModal from './SubSectionModal';
 
 const NestedView = ({handleChangeEditSectionName}) => {
 
@@ -17,6 +19,9 @@ const NestedView = ({handleChangeEditSectionName}) => {
     const [viewSubSection, setViewSubSection] = useState(null);
     const [confirmationModal, setConfirmationModal] = useState(null);
     const handleDeleteSection = () => {
+
+    }
+    const handleDeleteSubSection = (subSection_id, section_id) => {
 
     }
 
@@ -65,15 +70,55 @@ const NestedView = ({handleChangeEditSectionName}) => {
                                         <RxDropdownMenu />
                                         <p>{data.title}</p>
                                         </div>
+                                        <div>
+                                            <button onClick={() => setEditSubSection({...data, sectionId:section._id})}>
+                                                <MdEdit />
+                                            </button>
+                                            <button onClick={() => {
+                                    setConfirmationModal({
+                                        text1:"Delete this SubSection",
+                                        text2: "Selected Lectures of  Subsection will be deleted",
+                                        btn1Text:"Delete",
+                                        btn2Text:"Cancel",
+                                        btn1Handler: () => handleDeleteSubSection(data.id, section._id),
+                                        btn2Handler: () => setConfirmationModal(null),
+                                    })
+                                }}>
+                                     <AiOutlineDelete />
+                                </button>
+                                        </div>
 
                                         </div>
                                 })
                             }
+                            <button onClick={setAddSubSection(section._id)}
+                            className='mt-4 flex items-center gap-x-2 text-yellow-50'>
+                            <IoAdd />
+                            <p>Add Lecture</p>
+                            </button>
                         </div>
                     </details>
                 ))
             }
         </div>
+        {
+            addSubSection ? (<SubSectionModal 
+           modalData={addSubSection}
+           setModalData={setAddSubSection}
+           add={true} />) :
+            viewSubSection ? (<SubSectionModal modalData={viewSubSection}
+                setModalData={setViewSubSection}
+                add={true} />) :
+            editSubSection ? (<SubSectionModal modalData={editSubSection}
+                setModalData={setEditSubSection}
+                add={true} />) :
+            (<div></div>)
+}
+
+            {confirmationModal ? (
+                <ConfirmationModal modalData={confirmationModal} />
+            ) : (<div></div>)
+        }
     </div>
   )
 }
