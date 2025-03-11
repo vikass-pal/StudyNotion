@@ -3,25 +3,24 @@ require("dotenv").config();
 const User = require("../models/User");
 
 exports.auth = async (req, res, next) => {
-    console.log("Auth middleware triggered"); // Added logging for debugging
+    console.log("Auth middleware triggered"); // Debugging
     try {
-        // extract token
         const token = req.body?.token || req.cookies?.token || req.header('Authorization')?.replace('Bearer ', '');
 
-        // if token is missing
         if (!token) {
+            console.log("No token found");
             return res.status(401).json({
                 success: false,
                 message: 'Token is missing',
             });
         }
 
-        // verify the token
         try {
             const decode = jwt.verify(token, process.env.JWT_SECRET);
-            console.log("Decoded token:", decode); // Added logging for debugging
+            console.log("Decoded token:", decode); // Debugging
             req.user = decode;
         } catch (err) {
+            console.log("Invalid token:", err.message);
             return res.status(401).json({
                 success: false,
                 message: 'Invalid token',
@@ -29,17 +28,19 @@ exports.auth = async (req, res, next) => {
         }
         next();
     } catch (error) {
+        console.log("Token validation error:", error.message);
         return res.status(401).json({
             success: false,
             message: 'Something went wrong while validating the token',
         });
     }
-}
+};
+
 
 // isStudent
 exports.isStudent = async (req, res, next) => {
     try {
-        if (req.user?.accountType !== "Student" || req.user?.accountType !== "student") {
+        if (req.user?.accountType !== "Student" ) {
             return res.status(401).json({
                 success: false,
                 message: 'This is a protected route for students only',
@@ -57,7 +58,8 @@ exports.isStudent = async (req, res, next) => {
 // isInstructor
 exports.isInstructor = async (req, res, next) => {
     try {
-        if (req.user?.accountType !== "Instructor") {
+        console.log("User Account Type:", req.user?.accountType); // Debugging
+        if (req.user?.accountType?.toLowerCase() !== "instructor") {
             return res.status(401).json({
                 success: false,
                 message: 'This is a protected route for instructors only',
@@ -70,7 +72,7 @@ exports.isInstructor = async (req, res, next) => {
             message: 'User role cannot be verified, please try again'
         });
     }
-}
+};
 
 // isAdmin
 exports.isAdmin = async (req, res, next) => {
