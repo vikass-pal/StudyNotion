@@ -60,6 +60,7 @@ exports.isInstructor = async (req, res, next) => {
     try {
         console.log("User Account Type:", req.user?.accountType); // Debugging
         if (req.user?.accountType?.toLowerCase() !== "instructor") {
+
             return res.status(401).json({
                 success: false,
                 message: 'This is a protected route for instructors only',
