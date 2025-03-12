@@ -38,7 +38,7 @@ export default function RequirementsField({ name, label, register, setValue, err
   }
 
   return (
-    <div className="flex flex-col space-y-2 ">
+    <div className="flex flex-col space-y-2  m-5 ">
       <label className="text-sm text-richblack-5" htmlFor={name}>
         {label} <sup className="text-pink-200">*</sup>
       </label>
@@ -46,10 +46,11 @@ export default function RequirementsField({ name, label, register, setValue, err
       <div className="flex flex-col items-start space-y-2">
         <input
           type="text"
+          placeholder="Add Requirements"
           id={name}
           value={requirement}
           onChange={(e) => setRequirement(e.target.value)}
-          className="form-style w-full text-black"
+          className="form-style w-full bg-richblack-700 rounded-lg  p-3 "
         />
         <button
           type="button"

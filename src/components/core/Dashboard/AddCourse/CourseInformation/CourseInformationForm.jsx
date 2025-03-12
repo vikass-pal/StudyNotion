@@ -8,6 +8,8 @@ import IconBtn from '../../../HomePage/common/IconBtn';
 import { MdNavigateNext } from "react-icons/md"
 import { setCourse, setStep } from "../../../../../slices/courseSlice"
 import { COURSE_STATUS } from "../../../../../utils/constants"
+import ChipInput from './ChipInput';
+import Upload from '../Upload';
 
 import RequirementField from './RequirementField';
 
@@ -57,21 +59,17 @@ const CourseInformationForm = () => {
 
     const isFormUpdated = () => {
       const currentValues = getValues();
-      if(currentValues.courseTitle !== course.courseName || 
-        currentValues.courseShortDesc !== course.courseDescription || 
-        currentValues.coursePrice !== course.price || 
-        // currentValues.courseTags.toString() !== course.tags.toString() || 
-        // currentValues.courseImage !== course.thumbnail || 
-        currentValues.courseBenefits !== course.whatYouWillLearn || 
-        currentValues.courseCategory._id !== course.category._id || 
-        currentValues.courseRequirements.toString() !== course.instructions.toString()
-       
-
-
-
-      )
-        return true;
-      else
+      if (
+        currentValues.courseTitle !== course.courseName ||
+        currentValues.courseShortDesc !== course.courseDescription ||
+        currentValues.coursePrice !== course.price ||
+        currentValues.courseTags.toString() !== course.tag.toString() ||
+        currentValues.courseBenefits !== course.whatYouWillLearn ||
+        currentValues.courseCategory._id !== course.category._id ||
+        currentValues.courseRequirements.toString() !== course.instructions.toString() ||
+        currentValues.courseImage !== course.thumbnail) {
+        return true
+      }
       return false;
     }
 
@@ -120,12 +118,14 @@ const CourseInformationForm = () => {
       formData.append("courseName", data.courseTitle);
       formData.append("courseDescription", data.courseShortDesc);
       formData.append("price", data.coursePrice);
+      formData.append("tag", JSON.stringify(data.courseTags))
       formData.append("whatYouWillLearn", data.courseBenefits);
       formData.append("category", data.courseCategory);
       formData.append("instructions", JSON.stringify(data.courseRequirements));
       // formData.append("courseName", data.courseTitle);
       // formData.append("courseName", data.courseTitle);
       formData.append("status", COURSE_STATUS.DRAFT);
+      formData.append("thumbnailImage", data.courseImage)
 
       setLoading(true);
       const result = await addCourseDetails(formData, token);
@@ -140,16 +140,16 @@ const CourseInformationForm = () => {
   return (
     <form 
     onSubmit={handleSubmit(onSubmit)} 
-    className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8  text-black'
+    className='rounded-md bg-richblack-800 w-[660px] pt-4 text-sm  -translate-y-6'
     >
-      <div>
-        <label htmlFor='courseTitle'>Course Title <sup>*</sup></label> {/* Required field for course title */}
+      <div className='  items-center justify-center m-5'>
+        <label htmlFor='courseTitle'>Course Title <sup className=''>*</sup></label> {/* Required field for course title */}
 
         <input 
         id='courseTitle'
         placeholder='Enter Course Title'
         {...register("courseTitle", {required:true})}
-        className='w-full' />
+        className='w-full bg-richblack-700 rounded-lg  p-3 ' />
         {
           errors.courseTitle && (
             <span>Course Title is Required</span>
@@ -157,7 +157,7 @@ const CourseInformationForm = () => {
         }
       </div>
 
-      <div>
+      <div className='m-5'>
         <label htmlFor='courseShortDesc'>Course Short Description <sup>*</sup></label> {/* Required field for short description */}
 
         <textarea  
@@ -165,7 +165,7 @@ const CourseInformationForm = () => {
         id='courseShortDesc'
         placeholder='Enter Description'
         {...register("courseShortDesc", {required:true})}
-        className='min-h-[140px] w-full text-black'
+        className='min-h-[140px] w-full bg-richblack-700 rounded-lg p-4'
         />
         {
           errors.courseShortDesc && (
@@ -175,27 +175,27 @@ const CourseInformationForm = () => {
 
       </div>
 
-      <div className='relative'>
+      <div className='relative m-5'>
         <label htmlFor='coursePrice'>Course Price <sup>*</sup></label> {/* Required field for course price */}
 
         <input 
         id='coursePrice'
         placeholder='Enter Course Price'
         {...register("coursePrice", {required:true , valueAsNumber:true})}
-        className='w-full ' />
-        <HiOutlineCurrencyRupee className='absolute top-1/2 text-black' />
+        className='w-full bg-richblack-700 rounded-lg  p-3 px-8 ' />
+        <HiOutlineCurrencyRupee className='absolute top-1/2 text-white text-[25px] ml-1' />
         {
           errors.coursePrice && (
             <span>Course Price is Required</span>
           )
         }
       </div>
-          <div>
+          <div className='flex flex-col m-5 '>
         <label htmlFor='courseCategory'>Course Category</label> {/* Optional field for selecting course category */}
 
             <select 
             id='courseCategory'
-            className='text-black'
+            className='bg-richblack-700 rounded-lg p-3'
             defaultValue=""
             {...register("courseCategory", {required:true})}
             >
@@ -218,17 +218,34 @@ const CourseInformationForm = () => {
           </div>
 
           {/* create a custom component for handling tags input */}
+           <ChipInput
+                  label="Tags"
+                  name="courseTags"
+                  placeholder="Enter Tags and press Enter or Comma"
+                  register={register}
+                  errors={errors}
+                  setValue={setValue}
+                />
 
         {/* create a component for uploading and showing preview of media */}
+         {/* Course Thumbnail Image */}
+              <Upload
+                name="courseImage"
+                label="Course Thumbnail"
+                register={register}
+                setValue={setValue}
+                errors={errors}
+                editData={editCourse ? course?.thumbnail : null}
+              />
 
-        <div>
+        <div className='m-5'>
         <label>Benefits of the Course<sup>*</sup></label> {/* Required field for course benefits */}
 
           <textarea 
           id='courseBenefits'
           placeholder='Enter Benefits of your Course'
           {...register("courseBenefits", {required:true})}
-          className='min-h-[130px] w-full'
+          className='min-h-[130px] w-full bg-richblack-700 rounded-lg  p-4'
           />
           {
             errors.courseBenefits && (
@@ -253,7 +270,7 @@ const CourseInformationForm = () => {
           {
             editCourse && (
               <button onClick={() => dispatch(setStep(2))}
-              className='flex items-center gap-x-2 bg-richblack-200'
+              className='flex items-center gap-x-2 bg-richblack-200 '
               >
                 Continue without Saving
               </button>
@@ -261,6 +278,7 @@ const CourseInformationForm = () => {
           }
           <IconBtn 
           text={!editCourse ? "Next" : "Save Changes"}
+          className="m-4"
           >
             <MdNavigateNext />
                     </IconBtn>
