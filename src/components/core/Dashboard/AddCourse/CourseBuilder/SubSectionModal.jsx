@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
+import { setCourse } from '../../../../../slices/courseSlice';
 
 const SubSectionModal = (
   modalData,
@@ -44,8 +45,17 @@ const SubSectionModal = (
         return false;
       }
     }
+    const handleSubmitSubSection = () => {
+const currentValues = getValues();
+const formData = new FormData();
 
-    const onSubmit = () => {
+formData.append("sectionId", modalData.sectionId);
+formData.append("subSectionId", modalData._id);
+
+
+    }
+
+    const onSubmit = async (data) => {
       if(view)
         return ;
 
@@ -60,7 +70,19 @@ const SubSectionModal = (
       }
 
       const formData = new FormData();
-      formData.append("sectionId", modalData)
+      formData.append("sectionId", modalData);
+      formData.append("title", data.lectureTitle);
+      formData.append("description", data.lectureDesc);
+      formData.append("video", data.lectureVideo);
+      setLoading(true)
+      // api call
+      const result = await createSubSection(formData, token);
+
+      if(result) {
+        dispatch(setCourse(result));
+      }
+      setModalData(null);
+      setLoading(false);
 
     }
 
