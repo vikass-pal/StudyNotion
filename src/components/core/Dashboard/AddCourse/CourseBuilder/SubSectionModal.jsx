@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { setCourse } from '../../../../../slices/courseSlice';
-
+import { RxCross1 } from "react-icons/rx";
 const SubSectionModal = (
   modalData,
   setModalData,
@@ -45,13 +45,32 @@ const SubSectionModal = (
         return false;
       }
     }
-    const handleSubmitSubSection = () => {
+    const handleSubmitSubSection = async () => {
 const currentValues = getValues();
 const formData = new FormData();
 
 formData.append("sectionId", modalData.sectionId);
 formData.append("subSectionId", modalData._id);
 
+      if(currentValues.lectureTitle !== modalData.title) {
+        formData.append("title", currentValues.lectureTitle);
+      }
+      if(currentValues.lectureDesc !== modalData.description) {
+        formData.append("description", currentValues.lectureDesc);
+      }
+      if(currentValues.lectureVideo !== modalData.videoUrl) {
+        formData.append("video", currentValues.lectureVideo);
+      }
+
+      setLoading(true);
+      // Api call
+      const result = await updateSubSection(formData, token);
+      if(result) {
+        // TODO same check
+        dispatch(setCourse(result))
+      }
+      setModalData(null);
+      setLoading(false);
 
     }
 
@@ -89,7 +108,44 @@ formData.append("subSectionId", modalData._id);
 
   return (
     <div>
-      
+      <div>
+        <div>
+          <p>{view && "Viewing"} {Add && "Adding"} {edit && "Editing"} Lecture</p>
+          <button onClick= {() => (!loading ? setModalData(null) : {})}>
+          <RxCross1 />
+          </button>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Upload 
+          name="lectureVideo"
+          label="Lecture Video"
+          register= {register}
+          setValue = {setValue}
+          error = {errors}
+          video = {true}
+          viewData= {view ? modalData.videoUrl: null}
+          editData = {edit ? modalData.videoUrl : null}
+          
+          />
+          <div>
+            <label>Lecture Title</label>
+            <input 
+            id='lectureTitle'
+            placeholder='Enter lecture Title'
+            {...register("lectureTitle", {required:true})}
+            className='w-full' />
+            {errors.lectureTitle && (<span>Lecture Title is Required</span>)}
+          </div>
+          <div>
+            <label>Lecture Description</label>
+            <textarea 
+            id='lectureDesc'
+            placeholder='Enter lecture Description'
+            {...register("lectureDesc", {required:true})}
+            className='w-full min-h-[130px]' />
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
