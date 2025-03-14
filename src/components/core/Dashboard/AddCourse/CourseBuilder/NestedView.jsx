@@ -7,6 +7,8 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { IoAdd } from "react-icons/io5";
 import SubSectionModal from './SubSectionModal';
+import { deleteSection, deleteSubSection } from '../../../../../services/operations/courseDetailsAPI';
+import { setCourse } from '../../../../../slices/courseSlice';
 
 const NestedView = ({handleChangeEditSectionName}) => {
 
@@ -18,10 +20,24 @@ const NestedView = ({handleChangeEditSectionName}) => {
     const [editSubSection, setEditSubSection] = useState(null);
     const [viewSubSection, setViewSubSection] = useState(null);
     const [confirmationModal, setConfirmationModal] = useState(null);
-    const handleDeleteSection = () => {
+    const handleDeleteSection = async (section_id) => {
+        const result = await deleteSection({
+            section_id,
+            courseid: course._id,
+            token,
+        })
+        if(result) {
+            dispatch(setCourse(result))
+        }
+        setConfirmationModal(null)
 
     }
-    const handleDeleteSubSection = (subSection_id, section_id) => {
+    const handleDeleteSubSection =  async (subSection_id, section_id) => {
+        const result = await deleteSubSection({subSectionId, sectionId, token});
+        if(result) {
+            dispatch(setCourse(result))
+        }
+        setConfirmationModal(null)
 
     }
 

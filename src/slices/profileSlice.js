@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { ACCOUNT_TYPE } from "../utils/constants"
 
 const initialState = {
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
@@ -14,14 +15,19 @@ const initialState = {
 
 const profileSlice = createSlice({
     name: "profile",
-    initialState: initialState,
+    initialState: {
+        user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+        loading: false,
+    },
     reducers: {
         setUser(state, value) {
-            state.user = value.payload;
+            state.user = {
+                ...value.payload,
+                accountType: value.payload.accountType?.toLowerCase() === "instructor"
+                  ? ACCOUNT_TYPE.INSTRUCTOR
+                  : value.payload.accountType,
+            };
         },
-        setLoading(state, value) {
-            state.loading = value.payload
-        }
     },
 });
 

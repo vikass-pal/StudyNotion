@@ -2,6 +2,14 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { setCourse } from '../../../../../slices/courseSlice';
 import { RxCross1 } from "react-icons/rx";
+import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import {createSubSection , updateSubSection} from '../../../../../services/operations/courseDetailsAPI'
+import Upload from '../Upload'
+import IconBtn from '../../../../common/IconBtn'
+import toast from 'react-hot-toast';
+
+import { useEffect, useState } from 'react';
 const SubSectionModal = (
   modalData,
   setModalData,
@@ -143,7 +151,17 @@ formData.append("subSectionId", modalData._id);
             placeholder='Enter lecture Description'
             {...register("lectureDesc", {required:true})}
             className='w-full min-h-[130px]' />
+            {errors.lectureDesc && (<span>Lecture Description is Required</span>)}
           </div>
+          {
+            !view && (
+              <div>
+                <IconBtn 
+                text={loading ? "Loading...": edit ? "Save Changes" : "Save"}
+                />
+              </div>
+            )
+          }
         </form>
       </div>
     </div>

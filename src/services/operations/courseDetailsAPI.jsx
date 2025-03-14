@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast"
 // import { setLoading } from "../../slices/profileSlice";
 import { apiConnector } from "../apiconnector"
 import { courseEndpoints } from "../apis"
+import { ACCOUNT_TYPE } from "../../utils/constants";
 
 const {
   COURSE_DETAILS_API,
@@ -308,6 +309,9 @@ export const fetchInstructorCourses = async (token) => {
         Authorization: `Bearer ${token}`,
       }
     )
+    if (response?.data?.user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR) {
+    throw new Error("Access denied. User is not an instructor.");
+  }
     console.log("INSTRUCTOR COURSES API RESPONSE", response)
     if (!response?.data?.success) {
       throw new Error("Could Not Fetch Instructor Courses")

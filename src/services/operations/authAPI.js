@@ -52,7 +52,7 @@ export function signUp(accountType, firstName, lastName, email, password, confir
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
-        accountType,
+        accountType : accountType.toLowerCase(),
         firstName,
         lastName,
         email,
