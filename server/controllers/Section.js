@@ -17,7 +17,10 @@ exports.createSection = async (req, res) => {
         }
 
         // create entry in DB
-        const newSection = await Section.create({ sectionName });
+        const newSection = await Section.create({ 
+            sectionName, 
+            subSection: []  // ✅ Ensure subSection is initialized as an empty array
+        });
 
         // link - section id to current course 
         const updatedCourse = await Course.findByIdAndUpdate(courseId,

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {createSubSection , updateSubSection} from '../../../../../services/operations/courseDetailsAPI'
 import Upload from '../Upload'
-import IconBtn from '../../../../common/IconBtn'
+import IconBtn from '../../../HomePage/common/IconBtn';
 import toast from 'react-hot-toast';
 
 import { useEffect, useState } from 'react';
@@ -118,7 +118,7 @@ formData.append("subSectionId", modalData._id);
     <div>
       <div>
         <div>
-          <p>{view && "Viewing"} {Add && "Adding"} {edit && "Editing"} Lecture</p>
+          <p>{view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture</p>
           <button onClick= {() => (!loading ? setModalData(null) : {})}>
           <RxCross1 />
           </button>

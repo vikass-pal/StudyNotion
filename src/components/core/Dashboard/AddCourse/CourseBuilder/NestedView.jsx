@@ -9,6 +9,7 @@ import { IoAdd } from "react-icons/io5";
 import SubSectionModal from './SubSectionModal';
 import { deleteSection, deleteSubSection } from '../../../../../services/operations/courseDetailsAPI';
 import { setCourse } from '../../../../../slices/courseSlice';
+import ConfirmationModal from '../../../HomePage/common/ConfirmationModal';
 
 const NestedView = ({handleChangeEditSectionName}) => {
 
@@ -32,8 +33,9 @@ const NestedView = ({handleChangeEditSectionName}) => {
         setConfirmationModal(null)
 
     }
-    const handleDeleteSubSection =  async (subSection_id, section_id) => {
-        const result = await deleteSubSection({subSectionId, sectionId, token});
+const handleDeleteSubSection =  async (subSection_id, section_id) => {
+        const result = await deleteSubSection({subSectionId: subSection_id, sectionId: section_id, token});
+
         if(result) {
             dispatch(setCourse(result))
         }
@@ -43,7 +45,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
 
   return (
     <div>
-        <div className='rounded-lg p-6 px-8'>
+       <div className='rounded-lg p-6 px-8'>
             {
                 course?.courseContent?.map((section) => (
                     <details key={section._id} open>
@@ -53,7 +55,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
                           <p>{section.sectionName}</p>
                             </div>  
                             <div>
-                                <button onClick={handleChangeEditSectionName(section._id, section.sectionName)}>
+                                <button onClick={() =>handleChangeEditSectionName(section._id, section.sectionName)}>
                                     <MdEdit />
                                 </button>
                                 <button onClick={() => {
@@ -76,7 +78,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
                         </summary>
                         <div>
                             {
-                                section.subSection.map((data) => {
+                                section.subSection.map((data) => (
                                     <div
                                     key={data?._id}
                                     onClick={() => setViewSubSection(data)}
@@ -105,9 +107,9 @@ const NestedView = ({handleChangeEditSectionName}) => {
                                         </div>
 
                                         </div>
-                                })
+                                ))
                             }
-                            <button onClick={setAddSubSection(section._id)}
+                            <button onClick={() => setAddSubSection(section._id)}
                             className='mt-4 flex items-center gap-x-2 text-yellow-50'>
                             <IoAdd />
                             <p>Add Lecture</p>

@@ -8,17 +8,19 @@ import NestedView from './NestedView';
 import { createSection, updateSection } from '../../../../../services/operations/courseDetailsAPI';
 import { setCourse, setStep, } from "../../../../../slices/courseSlice"
 import { setEditCourse } from '../../../../../slices/courseSlice';
-import IconBtn from "../../../../common/IconBtn"
+import IconBtn from '../../../HomePage/common/IconBtn';
 
 const CourseBuilderForm = () => {
   const {register, handleSubmit, setValue, formState: {errors} } = useForm();
   const [editSectionName, setEditSectionName] = useState(null);
   const {course} = useSelector((state) => state.course);
   const dispatch = useDispatch();
+
   const goBack = () => {
     dispatch(setStep(1));
     dispatch(setEditCourse(true));
   }
+  
   const [loading, setLoading] = useState(false);
   const {token} = useSelector((state) => state.auth);
 
@@ -54,7 +56,7 @@ const CourseBuilderForm = () => {
     setLoading(false);
   }
 
-  const goToNext = () => {
+  const goToNext = () => { 
     if(course.courseContent.length === 0) {
       toast.error("Please add atleast one Section");
       return;
@@ -88,7 +90,7 @@ const CourseBuilderForm = () => {
   return (
     <div className='text-white'>
       <p>Course Builder</p>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor='sectionName'>Course Builder<sup>*</sup></label>
           <input 
