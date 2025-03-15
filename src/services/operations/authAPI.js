@@ -5,6 +5,7 @@ import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
 import { endpoints } from "../apis"
+
 const {
   SENDOTP_API,
   SIGNUP_API,
@@ -52,7 +53,7 @@ export function signUp(accountType, firstName, lastName, email, password, confir
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
-        accountType : accountType.toLowerCase(),
+        accountType,
         firstName,
         lastName,
         email,
