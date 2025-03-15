@@ -53,7 +53,7 @@ const handleDeleteSubSection =  async (subSection_id, section_id) => {
                           <div className='flex items-center  gap-x-3 '>
                           <RxDropdownMenu />
                           <p>{section.sectionName}</p>
-                          
+
                             </div>  
                             <div>
                                 <button onClick={() =>handleChangeEditSectionName(section._id, section.sectionName)}>
@@ -70,6 +70,8 @@ const handleDeleteSubSection =  async (subSection_id, section_id) => {
                                     })
                                 }}>
                                         <AiOutlineDelete />
+
+                                        
 
                                 </button>
                                 <span>|</span>
