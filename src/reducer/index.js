@@ -6,11 +6,13 @@ import courseReducer from '../slices/courseSlice'
 
 
 
+
 const rootReducer = combineReducers({ 
     auth:authReducer,
     profile:profileReducer,
     cart:cartReducer,
-   course:courseReducer
+   course: courseReducer
+
 })
 
 export default rootReducer
