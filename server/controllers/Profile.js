@@ -3,7 +3,7 @@ const User = require("../models/User");
 const CourseProgress = require('../models/CourseProgress')
 const Course = require('../models/Course')
 
-const { uploadImageToCloudinary, deleteResourceFromCloudinary } = require('../utils/imageUploader');
+const { uploadImagesToCloudinary, deleteResourceFromCloudinary } = require('../utils/imageUploader');
 const { convertSecondsToDuration } = require('../utils/secToDuration')
 
 
@@ -162,7 +162,7 @@ exports.updateUserProfileImage = async (req, res) => {
         // console.log('profileImage = ', profileImage)
 
         // upload imga eto cloudinary
-        const image = await uploadImageToCloudinary(profileImage,
+        const image = await uploadImagesToCloudinary(profileImage,
             process.env.FOLDER_NAME, 1000, 1000);
 
         // console.log('image url - ', image);

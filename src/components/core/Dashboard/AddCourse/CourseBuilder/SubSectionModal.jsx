@@ -11,11 +11,13 @@ import toast from 'react-hot-toast';
 
 import { useEffect, useState } from 'react';
 const SubSectionModal = (
+ {
   modalData,
   setModalData,
   add= false,
   view = false,
   edit = false,
+ }
 ) => {
   const {
     register,
@@ -31,11 +33,14 @@ const SubSectionModal = (
     const {token} = useSelector((state) => state.auth);
 
     useEffect(() => {
-      if(view || edit ) {
-        setValue("lectureTitle", modalData.title);
-        setValue("lectureDesc", modalData.description);
-        setValue("lectureVideo", modalData.videoUrl);
+      if(view || edit) {
+        
+          setValue("lectureTitle", modalData.title);
+          setValue("lectureDesc", modalData.description);
+          setValue("lectureVideo", modalData.videoUrl);
+        
       }
+
     },[]);
 
     const isFormUpdated = () => {
@@ -129,17 +134,16 @@ formData.append("subSectionId", modalData._id);
           </button>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Upload 
-          name="lectureVideo"
-          label="Lecture Video"
-          register= {register}
-          setValue = {setValue}
-          error = {errors}
-          video = {true}
-          viewData= {view ? modalData.videoUrl: null}
-          editData = {edit ? modalData.videoUrl : null}
-          
-          />
+        <Upload 
+  name="lectureVideo"
+  label="Lecture Video"
+  register={register}
+  setValue={setValue}
+  errors={errors}
+  video={true}
+  viewData={view ? modalData?.videoUrl || "" : null}  // ✅ Ensures videoUrl is never undefined
+  editData={edit ? modalData?.videoUrl || "" : null}  // ✅ Ensures videoUrl is never undefined
+/>
           <div>
             <label>Lecture Title</label>
             <input 
@@ -155,7 +159,7 @@ formData.append("subSectionId", modalData._id);
             id='lectureDesc'
             placeholder='Enter lecture Description'
             {...register("lectureDesc", {required:true})}
-            className='w-full min-h-[130px]' />
+            className='w-full min-h-[130px] text-black' />
             {errors.lectureDesc && (<span>Lecture Description is Required</span>)}
           </div>
           {
