@@ -37,7 +37,10 @@ const handleDeleteSubSection =  async (subSection_id, section_id) => {
         const result = await deleteSubSection({subSectionId: subSection_id, sectionId: section_id, token});
 
         if(result) {
-            dispatch(setCourse(result))
+            const updatedCourseContent = course.courseContent.map((section) => section._id === sectionId ? result : section);
+            const updatedCourse = {...course, courseContent: updatedCourseContent};
+            dispatch(setCourse(updatedCourse))
+
         }
         setConfirmationModal(null)
 

@@ -53,10 +53,12 @@ const SubSectionModal = (
         return false;
       }
     }
-    const handleSubmitSubSection = async () => {
+
+
+
+const handleEditSubsection = async () => {
 const currentValues = getValues();
 const formData = new FormData();
-
 formData.append("sectionId", modalData.sectionId);
 formData.append("subSectionId", modalData._id);
 
@@ -74,7 +76,8 @@ formData.append("subSectionId", modalData._id);
       // Api call
       const result = await updateSubSection(formData, token);
       if(result) {
-        // TODO same check
+        const updatedCourseContent = course.courseContent.map((section) => section._id === modalData.sectionId ? result : section);
+            const updatedCourse = {...course, courseContent: updatedCourseContent};
         dispatch(setCourse(result))
       }
       setModalData(null);
@@ -91,7 +94,7 @@ formData.append("subSectionId", modalData._id);
           toast.error("NO changes made to the form")
         }
         else {
-          handleSubmitSubSection();
+          handleEditSubsection();
         }
         return;
       }
@@ -106,6 +109,8 @@ formData.append("subSectionId", modalData._id);
       const result = await createSubSection(formData, token);
 
       if(result) {
+        const updatedCourseContent = course.courseContent.map((section) => section._id === modalData ? result : section);
+        const updatedCourse = {...course, courseContent: updatedCourseContent};
         dispatch(setCourse(result));
       }
       setModalData(null);
