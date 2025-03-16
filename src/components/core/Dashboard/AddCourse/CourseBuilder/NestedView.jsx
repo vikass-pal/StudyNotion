@@ -33,18 +33,18 @@ const NestedView = ({handleChangeEditSectionName}) => {
         setConfirmationModal(null)
 
     }
-const handleDeleteSubSection =  async (subSection_id, section_id) => {
-        const result = await deleteSubSection({subSectionId: subSection_id, sectionId: section_id, token});
-
-        if(result) {
-            const updatedCourseContent = course.courseContent.map((section) => section._id === sectionId ? result : section);
-            const updatedCourse = {...course, courseContent: updatedCourseContent};
-            dispatch(setCourse(updatedCourse))
-
-        }
-        setConfirmationModal(null)
-
+const handleDeleteSubSection = async (subSectionId, sectionId) => {
+    const result = await deleteSubSection({ subSectionId, sectionId, token })
+    if (result) {
+      // update the structure of course - As we have got only updated section details 
+      const updatedCourseContent = course.courseContent.map((section) =>
+        section._id === sectionId ? result : section
+      )
+      const updatedCourse = { ...course, courseContent: updatedCourseContent }
+      dispatch(setCourse(updatedCourse))
     }
+    setConfirmationModal(null)
+  }
 
   return (
     <div>
@@ -94,7 +94,7 @@ const handleDeleteSubSection =  async (subSection_id, section_id) => {
                                         <RxDropdownMenu />
                                         <p>{data.title}</p>
                                         </div>
-                                        <div>
+                                        <div onClick={(e) => e.stopPropagation()}>
                                             <button onClick={() => setEditSubSection({...data, sectionId:section._id})}>
                                                 <MdEdit />
                                             </button>

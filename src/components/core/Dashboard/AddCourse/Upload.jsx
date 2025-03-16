@@ -39,8 +39,9 @@ export default function Upload({ name, label, register, setValue, errors, video 
   }
 
   useEffect(() => {
-    register(name, { required: true })
-  }, [register])
+    console.log("Upload Component - name prop:", name);  // ✅ Debugging Log
+    register(name, { required: true });
+}, [register]);
 
 
   useEffect(() => {
