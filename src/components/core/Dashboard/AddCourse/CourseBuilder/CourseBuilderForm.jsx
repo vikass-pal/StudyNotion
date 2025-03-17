@@ -13,7 +13,8 @@ import IconBtn from '../../../HomePage/common/IconBtn';
 const CourseBuilderForm = () => {
   const {register, handleSubmit, setValue, formState: {errors} } = useForm();
   const [editSectionName, setEditSectionName] = useState(null);
-  const {course} = useSelector((state) => state.course);
+  const courseData = useSelector((state) => state.course) || {};
+const course = courseData.course || { courseContent: [] };
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const {token} = useSelector((state) => state.auth);
@@ -57,20 +58,19 @@ const CourseBuilderForm = () => {
    }
  
    // go To Next
-   const goToNext = () => {
-     if (!course || !course.courseContent || course.courseContent.length === 0) {
-
-       toast.error("Please add atleast one section")
-       return;
+    const goToNext = () => {
+       if (!course?.courseContent ||course.courseContent.length === 0) {
+         toast.error("Please add atleast one section")
+         return;
+       }
+       if (course.courseContent.some((section) => section.subSection.length === 0)) {
+         toast.error("Please add atleast one lecture in each section")
+         return;
+       }
+   
+       // all set go ahead
+       dispatch(setStep(3))
      }
-     if (course.courseContent.some((section) => section.subSection.length === 0)) {
-       toast.error("Please add atleast one lecture in each section")
-       return;
-     }
- 
-     // all set go ahead
-     dispatch(setStep(3))
-   }
  
    // go Back
    const goBack = () => {
@@ -80,64 +80,79 @@ const CourseBuilderForm = () => {
 
   
   return (
-    <div className='text-white'>
-      <p>Course Builder</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor='sectionName'>Course Builder<sup>*</sup></label>
-          <input 
-          id='sectionName'
-          placeholder='Add section name'
-          {...register("sectionName", {required:true})}
-          className='w-full text-black'
+     <div className="space-y-8 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-6">
+          <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
+    
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Section Name */}
+            <div className="flex flex-col space-y-2">
+              <label className="text-sm text-richblack-5" htmlFor="sectionName">
+                Section Name <sup className="text-pink-200">*</sup>
+              </label>
+              <input
+                id="sectionName"
+                disabled={loading}
+                placeholder="Add a section to build your course"
+                {...register("sectionName", { required: true })}
+                className="form-style w-full"
+              />
+              {errors.sectionName && (
+                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                  Section name is required
+                </span>
+              )}
+            </div>
+    
+            {/* Edit Section Name OR Create Section */}
+            <div className="flex items-end gap-x-4">
+              <IconBtn
+                type="submit"
+                disabled={loading}
+                text={editSectionName ? "Edit Section Name" : "Create Section"}
+                outline={true}
+              >
+                 <IoMdAddCircleOutline />
+              </IconBtn>
+              {/* if editSectionName mode is on */}
+              {editSectionName && (
+                <button
+                  type="button"
+                  onClick={cancelEdit}
+                  className="text-sm text-richblack-300 underline"
+                >
+                  Cancel Edit
+                </button>
+              )}
+              
+            </div>
+            
+          </form>
           
-          />
+    
+          {/* nesetd view of section - subSection */}
+          
           {
-            errors.sectionName && (
-              <span>Section Name is required</span>
-            )
-          }
-        </div>
-        <div className='mt-10 flex'>
-          <IconBtn type="Submit"
-          text={editSectionName ? "Edit Section Name" : "Create Section"}
-          outline={true}
-          customClasses={"text-white"}
-          >
-            <IoMdAddCircleOutline />
-
-
-
-          </IconBtn>
-          {editSectionName && (
-            <button
-            type='button'
-            onClick={cancelEdit}
-            >
-              Cancel Edit
-            </button>
+          console.log("Course Content:", course?.courseContent)
+}
+         { course.courseContent.length > 0 && (
+            <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
           )}
-          
+    
+          {/* Next Prev Button */}
+          <div className="flex justify-end gap-x-3">
+            <button
+              onClick={goBack}
+              className={`rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
+            >
+              Back
+            </button>
+    
+            {/* Next button */}
+            <IconBtn disabled={loading} text="Next" onclick={goToNext}>
+               <IoIosArrowForward />
+            </IconBtn>
+          </div>
         </div>
-        
-      </form>
-      
-      {course.courseContent.length > 0 && (
-        <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
-      )}
-
-      <div>
-        <button className='flex justify-end gap-x-3'
-        onClick={goBack}>
-          Back
-        </button>
-        <IconBtn text="Next" onClick={goToNext}>
-        <IoIosArrowForward />
-        </IconBtn>
-      
-      </div>
-
-    </div>
   )
 }
 
