@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
+  course: {
+      courseContent: []
+  },
   step: 1,
-  course: { courseContent: [] }, // Initialize course with an empty courseContent array
-
   editCourse: false,
   paymentLoading: false,
 }

@@ -11,6 +11,7 @@ import { deleteSection, deleteSubSection } from '../../../../../services/operati
 import { setCourse } from '../../../../../slices/courseSlice';
 import ConfirmationModal from '../../../HomePage/common/ConfirmationModal';
 
+
 const NestedView = ({handleChangeEditSectionName}) => {
 
     const {course} = useSelector((state) => state.course)
@@ -22,17 +23,13 @@ const NestedView = ({handleChangeEditSectionName}) => {
     const [viewSubSection, setViewSubSection] = useState(null);
     const [confirmationModal, setConfirmationModal] = useState(null);
     
-    const handleDeleteSection = async (section_id) => {
-        const result = await deleteSection({
-            section_id,
-            courseid: course._id,
-            token,
-        })
-        if(result) {
-            dispatch(setCourse(result))
+    const handleDeleteSection = async (sectionId) => {
+        const result = await deleteSection({ sectionId, courseId: course._id, token, })
+        if (result) {
+          dispatch(setCourse(result))
         }
         setConfirmationModal(null)
-    }
+      }
 
     const handleDeleteSubSection = async (subSectionId, sectionId) => {
         const result = await deleteSubSection({ subSectionId, sectionId, token })

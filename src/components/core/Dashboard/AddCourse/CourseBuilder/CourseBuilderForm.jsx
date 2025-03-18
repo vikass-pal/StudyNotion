@@ -131,9 +131,9 @@ const course = courseData.course || { courseContent: [] };
     
           {/* nesetd view of section - subSection */}
           
-          {
+          {/* {
           console.log("Course Content:", course?.courseContent)
-}
+} */}
          { course.courseContent.length > 0 && (
             <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
           )}
