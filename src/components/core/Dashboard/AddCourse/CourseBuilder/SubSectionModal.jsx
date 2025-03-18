@@ -83,7 +83,7 @@ formData.append("subSectionId", modalData._id);
       if(result) {
         const updatedCourseContent = course.courseContent.map((section) => section._id === modalData.sectionId ? result : section);
             const updatedCourse = {...course, courseContent: updatedCourseContent};
-        dispatch(setCourse(result))
+        dispatch(setCourse(updatedCourse))
       }
       setModalData(null);
       setLoading(false);
@@ -116,7 +116,7 @@ formData.append("subSectionId", modalData._id);
       if(result) {
         const updatedCourseContent = course.courseContent.map((section) => section._id === modalData ? result : section);
         const updatedCourse = {...course, courseContent: updatedCourseContent};
-        dispatch(setCourse(result));
+        dispatch(setCourse(updatedCourse));
       }
       setModalData(null);
       setLoading(false);

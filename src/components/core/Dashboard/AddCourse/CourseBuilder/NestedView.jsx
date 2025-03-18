@@ -81,7 +81,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
                         </summary>
                         <div>
                             {
-                                section.subSection.map((data) => (
+                                section?.subSection?.map((data) => (
                                     <div
                                     key={data?._id}
                                     onClick={() => setViewSubSection(data)}
@@ -96,18 +96,18 @@ const NestedView = ({handleChangeEditSectionName}) => {
                                                 <MdEdit />
                                             </button>
                                             <button onClick={() => {
-                                    setConfirmationModal({
-                                        text1:"Delete this SubSection",
-                                        text2: "Selected Lectures of  Subsection will be deleted",
-                                        btn1Text:"Delete",
-                                        btn2Text:"Cancel",
-                                        btn1Handler: () => handleDeleteSubSection(data.id, section._id),
-                                        btn2Handler: () => setConfirmationModal(null),
-                                    })
-                                }}>
-                                     <AiOutlineDelete />
-                                </button>
-                                        </div>
+                                                setConfirmationModal({
+                                            text1:"Delete this SubSection",
+                                            text2: "Selected Lectures of  Subsection will be deleted",
+                                            btn1Text:"Delete",
+                                            btn2Text:"Cancel",
+                                            btn1Handler: () => handleDeleteSubSection(data.id, section._id),
+                                            btn2Handler: () => setConfirmationModal(null),
+                                            })
+                                            }}>
+                                            <AiOutlineDelete />
+                                             </button>
+                                            </div>
 
                                         </div>
                                 ))

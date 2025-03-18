@@ -78,11 +78,11 @@ exports.updateSubSection = async (req, res) => {
         }
 
         // add data
-        if (title) {
+        if (title !== undefined) {
             subSection.title = title;
         }
 
-        if (description) {
+        if (description !== undefined) {
             subSection.description = description;
         }
 
@@ -152,43 +152,48 @@ exports.updateSubSection = async (req, res) => {
 // ================ Delete SubSection ================
 exports.deleteSubSection = async (req, res) => {
     try {
-        const { subSectionId, sectionId } = req.body
-        await Section.findByIdAndUpdate(
-            { _id: sectionId },
-            {
-                $pull: {
-                    subSection: subSectionId,
-                },
-            }
-        )
+        const { subSectionId, sectionId } = req.body;
 
-        // delete from DB
-        const subSection = await Subsection.findByIdAndDelete({ _id: subSectionId })
-
-        if (!subSection) {
-            return res
-                .status(404)
-                .json({ success: false, message: "SubSection not found" })
+        // Validate Inputs
+        if (!subSectionId || !sectionId) {
+            return res.status(400).json({
+                success: false,
+                message: "Both subSectionId and sectionId are required",
+            });
         }
 
-        const updatedSection = await Section.findById(sectionId).populate('subSection')
+        // Ensure Subsection Exists
+        const subSection = await Subsection.findById(subSectionId);
+        if (!subSection) {
+            return res.status(404).json({
+                success: false,
+                message: "SubSection not found",
+            });
+        }
 
-        // In frontned we have to take care - when subsection is deleted we are sending ,
-        // only section data not full course details as we do in others 
+        // Remove Subsection from Section
+        await Section.findByIdAndUpdate(
+            sectionId,
+            { $pull: { subSection: subSectionId } },
+            { new: true }
+        );
 
-        // success response
+        // Delete Subsection from DB
+        await Subsection.findByIdAndDelete(subSectionId);
+
+        // Return updated section
+        const updatedSection = await Section.findById(sectionId).populate("subSection");
+
         return res.json({
             success: true,
             data: updatedSection,
             message: "SubSection deleted successfully",
-        })
+        });
     } catch (error) {
-        console.error(error)
+        console.error("Error deleting subsection:", error);
         return res.status(500).json({
             success: false,
-
-            error: error.message,
             message: "An error occurred while deleting the SubSection",
-        })
+        });
     }
-}
+};

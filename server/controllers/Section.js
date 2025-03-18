@@ -110,8 +110,18 @@ exports.updateSection = async (req, res) => {
 // ================ Delete Section ================
 exports.deleteSection = async (req, res) => {
     try {
-        const { sectionId, courseId } = req.body;
+        const { sectionName, sectionId, courseId } = req.body;
         // console.log('sectionId = ', sectionId);
+        if (!sectionId) {
+            return res.status(400).json({
+                success: false,
+                message: 'All fields are required'
+            });
+        }
+
+        // delete sub Section
+
+        // await Subsection.deleteMany({ _id: { $in:section.subSection }});
 
         // delete section by id from DB
         await Section.findByIdAndDelete(sectionId);
