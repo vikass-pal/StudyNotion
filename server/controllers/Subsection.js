@@ -89,7 +89,7 @@ exports.updateSubSection = async (req, res) => {
         // upload video to cloudinary
         if (req.files && req.files.videoFile !== undefined) {
             const video = req.files.videoFile;
-            const uploadDetails = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
+            const uploadDetails = await uploadImagesToCloudinary(video, process.env.FOLDER_NAME);
             subSection.videoUrl = uploadDetails.secure_url;
             subSection.timeDuration = uploadDetails.duration;
         }

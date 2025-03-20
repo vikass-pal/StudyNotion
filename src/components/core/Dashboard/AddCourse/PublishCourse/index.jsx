@@ -2,6 +2,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import IconBtn from '../../../HomePage/common/IconBtn';
+import { COURSE_STATUS } from '../../../../../utils/constants';
+import { useEffect } from 'react';
 
 export default function PublishCourse () {
     const {register, handleSubmit, setValue, getValues} = useForm();
@@ -10,12 +12,29 @@ export default function PublishCourse () {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        if(course?.status === COURSE_STATUS.PUBLISHED) {
+            setValue("public",true);
+        }
+        
+    },[]);
+
     const goBack = () => {
         dispatch(setStep(2));
     }
 
-    const onSubmit = () => {
+    const handleCoursePublish = () => {
+        if(course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true || 
+        (course.status === COURSE_STATUS.DRAFT && getValues("public") === false)) {
+            // no updation in form
+            // no need to make api call
+            goToCourses();
+            return ;
+        }
+    }
 
+    const onSubmit = () => {
+        handleCoursePublish();
     }
   return (
     <div className='rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 '>

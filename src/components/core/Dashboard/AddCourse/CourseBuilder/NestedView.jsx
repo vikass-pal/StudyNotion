@@ -81,7 +81,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
                         </summary>
                         <div>
                             {
-                                section?.subSection?.map((data) => (
+                                section.subSection.map((data) => (
                                     <div
                                     key={data?._id}
                                     onClick={() => setViewSubSection(data)}
@@ -95,16 +95,17 @@ const NestedView = ({handleChangeEditSectionName}) => {
                                             <button onClick={() => setEditSubSection({...data, sectionId:section._id})}>
                                                 <MdEdit />
                                             </button>
-                                            <button onClick={() => {
+                                            <button onClick={() => 
                                                 setConfirmationModal({
                                             text1:"Delete this SubSection",
                                             text2: "Selected Lectures of  Subsection will be deleted",
                                             btn1Text:"Delete",
                                             btn2Text:"Cancel",
-                                            btn1Handler: () => handleDeleteSubSection(data.id, section._id),
+                                            btn1Handler: () => handleDeleteSubSection(data._id, section._id),
+
                                             btn2Handler: () => setConfirmationModal(null),
                                             })
-                                            }}>
+                                            }>
                                             <AiOutlineDelete />
                                              </button>
                                             </div>
@@ -122,24 +123,35 @@ const NestedView = ({handleChangeEditSectionName}) => {
                 ))
             }
         </div>
-        {
-            addSubSection ? (<SubSectionModal 
-           modalData={addSubSection}
-           setModalData={setAddSubSection}
-           add={true} />) :
-            viewSubSection ? (<SubSectionModal modalData={viewSubSection}
-                setModalData={setViewSubSection}
-                add={true} />) :
-            editSubSection ? (<SubSectionModal modalData={editSubSection}
-                setModalData={setEditSubSection}
-                add={true} />) :
-            (<div></div>)
-}
-
-            {confirmationModal ? (
+        
+              {/* Modal Display */}
+              {addSubSection ? (
+                <SubSectionModal
+                  modalData={addSubSection}
+                  setModalData={setAddSubSection}
+                  add={true}
+                />
+              ) : viewSubSection ? (
+                <SubSectionModal
+                  modalData={viewSubSection}
+                  setModalData={setViewSubSection}
+                  view={true}
+                />
+              ) : editSubSection ? (
+                <SubSectionModal
+                  modalData={editSubSection}
+                  setModalData={setEditSubSection}
+                  edit={true}
+                />
+              ) : (
+                <></>
+              )}
+              {/* Confirmation Modal */}
+              {confirmationModal ? (
                 <ConfirmationModal modalData={confirmationModal} />
-            ) : (<div></div>)
-        }
+              ) : (
+                <></>
+              )}
     </div>
   )
 }
