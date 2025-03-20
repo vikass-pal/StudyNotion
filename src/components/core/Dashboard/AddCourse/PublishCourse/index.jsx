@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import IconBtn from '../../../HomePage/common/IconBtn';
 import { COURSE_STATUS } from '../../../../../utils/constants';
 import { useEffect } from 'react';
+import { useState } from 'react';
+import { editCourseDetails } from "../../../../../services/operations/courseDetailsAPI"
+import { resetCourseState, setStep } from "../../../../../slices/courseSlice"
 
 export default function PublishCourse () {
     const {register, handleSubmit, setValue, getValues} = useForm();
@@ -28,7 +31,7 @@ export default function PublishCourse () {
         // navigate("/dashboard/my-courses")
     }
 
-    const handleCoursePublish = () => {
+    const handleCoursePublish = async () => {
         if(course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true || 
         (course.status === COURSE_STATUS.DRAFT && getValues("public") === false)) {
             // no updation in form
@@ -41,6 +44,16 @@ export default function PublishCourse () {
         const formData = new FormData()
         formData.append("courseId", course._id);
         const courseStatus = getValues("public") ? COURSE_STATUS.PUBLISHED : COURSE_STATUS.DRAFT;
+        formData.append("status", courseStatus);
+
+        setLoading(true);
+        const result = await editCourseDetails(formData, token);
+
+        if(result) {
+            goToCourses();
+        }
+        
+        setLoading(false);
     }
 
     const onSubmit = () => {

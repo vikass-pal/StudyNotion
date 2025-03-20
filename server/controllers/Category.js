@@ -80,11 +80,10 @@ exports.getCategoryPageDetails = async (req, res) => {
         }
         // get coursesfor diff categories
         const differentCategories = await Category.find({ 
-
             _id: {$ne: categoryId},
         })
         .populate("courses")
-        exec();
+        .exec();
         // get top selling courses
         // HW write it on own
         // return response
