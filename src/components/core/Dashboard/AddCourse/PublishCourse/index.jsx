@@ -23,6 +23,11 @@ export default function PublishCourse () {
         dispatch(setStep(2));
     }
 
+    const goToCourses = () => {
+        dispatch(resetCourseState());
+        // navigate("/dashboard/my-courses")
+    }
+
     const handleCoursePublish = () => {
         if(course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true || 
         (course.status === COURSE_STATUS.DRAFT && getValues("public") === false)) {
@@ -31,6 +36,11 @@ export default function PublishCourse () {
             goToCourses();
             return ;
         }
+        // if form is updated
+
+        const formData = new FormData()
+        formData.append("courseId", course._id);
+        const courseStatus = getValues("public") ? COURSE_STATUS.PUBLISHED : COURSE_STATUS.DRAFT;
     }
 
     const onSubmit = () => {
