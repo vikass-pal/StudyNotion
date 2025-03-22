@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Thead, Table, Tr, Thead  } from 'react-super-responsive-table';
+import { Thead, Table, Tr, Thead , Th, Td } from 'react-super-responsive-table';
 import { COURSE_STATUS } from '../../../../utils/constants';
 import ConfirmationModal from '../../HomePage/common/ConfirmationModal'
 import {setCourse} from '../../../../slices/courseSlice';
 import {deleteCourse, fetchInstructorCourses} from '../../../../services/operations/courseDetailsAPI'
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 
 export default function CourseTable({courses, setCourses}) {
     const {token} = useSelector((state) => state.auth)
@@ -17,7 +18,7 @@ export default function CourseTable({courses, setCourses}) {
         await deleteCourse({courseId:courseId}, token);
         const result = await fetchInstructorCourses(token);
         if(result) {
-            setCourse(result);
+            setCourses(result);
         }
         setConfirmationModal(null);
         setLoading(false)
