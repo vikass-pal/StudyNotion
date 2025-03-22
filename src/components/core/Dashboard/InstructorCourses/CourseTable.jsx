@@ -1,18 +1,22 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Thead, Table, Tr, Thead , Th, Td } from 'react-super-responsive-table';
+import { Thead, Table, Tr ,Tbody, Th, Td } from 'react-super-responsive-table';
 import { COURSE_STATUS } from '../../../../utils/constants';
 import ConfirmationModal from '../../HomePage/common/ConfirmationModal'
 import {setCourse} from '../../../../slices/courseSlice';
 import {deleteCourse, fetchInstructorCourses} from '../../../../services/operations/courseDetailsAPI'
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+
 
 export default function CourseTable({courses, setCourses}) {
     const {token} = useSelector((state) => state.auth)
     const dispatch = useDispatch();
     const [loading , setLoading] = useState(false)
     const [confirmationModal, setConfirmationModal] = useState(null);
-    const handleCourseDelete = async() => {
+const handleCourseDelete = async(courseId) => {
+
         setLoading(true);
 
         await deleteCourse({courseId:courseId}, token);
@@ -119,5 +123,3 @@ export default function CourseTable({courses, setCourses}) {
         </div>
       )
 }
-  
-

@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { fetchInstructorCourses } from '../../../services/operations/courseDetailsAPI';
 import CourseTable from '../Dashboard/InstructorCourses/CourseTable'
-
+import { useState } from 'react';
+import { useEffect } from 'react';
+import IconBtn from '../HomePage/common/IconBtn';
 const MyCourses = () => {
   const {token} = useSelector((state) => state.auth);
   const navigate = useNavigate();
