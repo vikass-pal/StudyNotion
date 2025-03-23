@@ -20,6 +20,7 @@ import { ACCOUNT_TYPE } from "./utils/constants";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import EditCourse from "./components/core/Dashboard/EditCourse";
+import Catalog from "./pages/Catalog";
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
             <Home />
           </OpenRoute>
         } />
+          <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="/login" element={
           <OpenRoute>
             <Login />

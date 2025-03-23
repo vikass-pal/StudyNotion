@@ -14,8 +14,8 @@ const MyCourses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    console.log("User Data:", user);  // ✅ Debugging log
-    console.log("User Role:", user?.accountType);
+    // console.log("User Data:", user);  // ✅ Debugging log
+    // console.log("User Role:", user?.accountType);
     const fetchCourses = async() => {
       const result = await fetchInstructorCourses(token);
       if(result) {

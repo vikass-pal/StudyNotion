@@ -11,39 +11,46 @@ import ProfileDropDown from '../Auth/ProfileDropDown'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { IoIosArrowDropdown } from "react-icons/io";
-
-const subLinks = [{
-  title: "python",
-  link:"/catelog/python"
-},
-{
-  title: "web-dev",
-  link:"/catelog/webdevelopment"
-}
+import {fetchCourseCategories} from '../../../../services/operations/courseDetailsAPI'
+// const subLinks = [{
+//   title: "python",
+//   link:"/catelog/python"
+// },
+// {
+//   title: "web-dev",
+//   link:"/catelog/webdevelopment"
+// }
   
-]
+// ]
 
 const Navbar = () => {
 
   const {token} = useSelector((state)=> state.auth);
   const {user} = useSelector((state) => state.profile);
   const {totalItems} = useSelector((state) => state.cart);
-  // const [subLinks, setSubLinks] = useState([]);
+  const [subLinks, setSubLinks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // const fetchLinks =  async() => {
-  //   try{
-  //     const result = await apiConnector("GET", categories.CATEGORIES_API);
-  //     console.log("Printing Sublinks result:", result);
-  //     setSubLinks(result.data.data);
-  //   } catch(error) {
-  //     console.log("could not fetch the category list");
-  //   }
-  // }
 
-  // useEffect( () => {
-  //  fetchLinks();
-  // }, [])
 
+  const fetchSublinks = async () => {
+          try {
+              setLoading(true)
+              const res = await fetchCourseCategories();
+              // const result = await apiConnector("GET", categories.CATEGORIES_API);
+              // const result = await apiConnector('GET', 'http://localhost:4000/api/v1/course/showAllCategories');
+              // console.log("Printing Sublinks result:", result);
+              setSubLinks(res);
+          }
+          catch (error) {
+              console.log("Could not fetch the category list = ", error);
+          }
+          setLoading(false)
+      }
+
+       useEffect(() => {
+              fetchSublinks();
+          }, [])
 
 
 const location = useLocation();
@@ -70,22 +77,31 @@ const location = useLocation();
                       <IoIosArrowDropdown />
                       <div className='invisible absolute left-[50%] top-[50%] 
                       flex flex-col transition-all duration-200 rounded-md p-4 bg-richblack-5
-                       text-richblack-900 opacity-0 translate-x-[-50%] translate-y-[80%]
+                       text-richblack-900 opacity-0 translate-x-[-50%] translate-y-[5%]
                       group-hover:visible group-hover:opacity-100 lg:w-[300px]'>
 
                         <div className='absolute left-[50%] top-0 w-6 h-6 rotate-45 translate-y-[-45%] translate-x-[80%]  rounded bg-richblack-5  '>
 
                         </div>
-                        {
-                          subLinks.length ? (
-                            subLinks.map((subLink, index) => (
-                              <Link to={`${subLink.link}`} key={index} >
-                              <p>{subLink.title}</p>
-                              
-                              </Link>
-                            ))
-                          ) : (<div></div>)
-                        }
+                       {loading ? (<p className="text-center ">Loading...</p>)
+                                                                           : subLinks.length ? (
+                                                                               <>
+                                                                                   {subLinks?.map((subLink, i) => (
+                                                                                       <Link
+                                                                                           to={`/catalog/${subLink.name
+                                                                                               .split(" ")
+                                                                                               .join("-")
+                                                                                               .toLowerCase()}`}
+                                                                                           className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                                                                                           key={i}
+                                                                                       >
+                                                                                           <p>{subLink.name}</p>
+                                                                                       </Link>
+                                                                                   ))}
+                                                                               </>
+                                                                           ) : (
+                                                                               <p className="text-center">No Courses Found</p>
+                                                                           )}
 
                       </div>
                     </div>
