@@ -15,6 +15,7 @@ export default function CourseTable({courses, setCourses}) {
     const dispatch = useDispatch();
     const [loading , setLoading] = useState(false)
     const [confirmationModal, setConfirmationModal] = useState(null);
+    const navigate = useNavigate();
 const handleCourseDelete = async(courseId) => {
 
         setLoading(true);
@@ -90,9 +91,9 @@ const handleCourseDelete = async(courseId) => {
                                     <Td>
                                         <button 
                                         disabled={loading}
-                                        // onClick={() => {
-                                        //     navigate
-                                        // }}
+                                        onClick={() => {
+                                            navigate(`/dashboard/edit-course/${course._id}`)
+                                        }}
                                         >
                                             EDIT
                                         </button>
