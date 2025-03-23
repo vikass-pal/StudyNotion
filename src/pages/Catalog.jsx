@@ -65,7 +65,16 @@ const Catelog = () => {
      </div>
      {/* section 3 */}
       <div>
-        <p>Frequently brought</p>
+        <div>Frequentlt Bought</div>
+        <div className='grid grid-cols-1 lg:grid-cols-2'> 
+          {
+            catalogPageData?.data?.mostSellingCourses?.slice(0,4).
+            map((course, index) => {
+              <Course_Card course={course} key={index} Height={'h-[400px]'} />
+            })
+          }
+        </div>
+
       </div>
       <Footer />
 
