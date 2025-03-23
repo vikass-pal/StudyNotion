@@ -120,7 +120,7 @@ const handleCourseDelete = async(courseId) => {
                      }
                 </Tbody>
             </Table>
-            {confirmationModal && <confirmationModal modalData={confirmationModal} /> }
+            {confirmationModal && <ConfirmationModal modalData={confirmationModal} /> }
 
         </div>
       )

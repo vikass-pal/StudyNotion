@@ -6,20 +6,24 @@ import CourseTable from '../Dashboard/InstructorCourses/CourseTable'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import IconBtn from '../HomePage/common/IconBtn';
+
 const MyCourses = () => {
-  const {token} = useSelector((state) => state.auth);
+  const {token , user} = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
+    console.log("User Data:", user);  // ✅ Debugging log
+    console.log("User Role:", user?.accountType);
     const fetchCourses = async() => {
       const result = await fetchInstructorCourses(token);
       if(result) {
         setCourses(result);
       }
-      fetchCourses();
     }
+    fetchCourses(); // Call fetchCourses here
+
   },[])
 
   return (
