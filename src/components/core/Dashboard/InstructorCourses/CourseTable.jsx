@@ -8,6 +8,7 @@ import {deleteCourse, fetchInstructorCourses} from '../../../../services/operati
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 export default function CourseTable({courses, setCourses}) {
