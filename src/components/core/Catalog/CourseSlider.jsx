@@ -1,9 +1,9 @@
 import React from 'react'
-import {Swiper, swiperSlide} from 'swiper/react'
+import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination'
-import {FreeMode, Paagin} from 'swiper'
+import { Autoplay, FreeMode, Paagin} from 'swiper'
 
 const CourseSlider = ({Courses}) => {
   return (
@@ -15,6 +15,9 @@ const CourseSlider = ({Courses}) => {
         loop={true}
         spaceBetween={200}
         modules={[pagination]} 
+        pagination={{
+          dynamicBullets: true,
+        }}
         >
           {
             Courses?.map((course, index) => (
