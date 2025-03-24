@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {categories} from '../services/apis'
-import Footer from '../components/common/Footer'
-import {apiConnector} from '../services/apisConnector'
+import footer from '../components/core/HomePage/common/footer'
+import {apiConnector} from '../services/apiconnector'
+import CourseSlider from '../components/core/Catalog/CourseSlider'
+import Course_Card from '../components/core/Catalog/Course_Card'
+import {getCatalogPageData} from '../services/pageAndComponentData'
+import { useState } from 'react'
 
-const Catelog = () => {
+const Catalog = () => {
 
   const {catalogName} = useParams();
   const [catalogPageData, setCatalogPageData] = useState(null);
@@ -12,8 +16,8 @@ const Catelog = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      const res = await apiConnector("GET",categories.CATEGORIES_API);
-      const category_id = res?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
+      const res = await apiConnector("GET", categories.CATEGORIES_API);
+      const category_id = res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
     setCategoryId(category_id);
     }
 
@@ -76,10 +80,11 @@ const Catelog = () => {
         </div>
 
       </div>
-      <Footer />
+
+          <footer />
 
     </div>
   )
 }
 
-export default Catelog
+export default Catalog
