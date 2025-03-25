@@ -14,10 +14,14 @@ const CourseSlider = ({Courses}) => {
         slidesPerView={1}
         loop={true}
         spaceBetween={200}
-        modules={[pagination]} 
-        pagination={{
-          dynamicBullets: true,
+        pagination={true}
+        modules={[Pagination, Autoplay, Navigation]}
+        className='mySwiper' 
+        autoplay={{
+          delay: 1000,
+          disableOnInteraction: false,
         }}
+        navigation={true}
         >
           {
             Courses?.map((course, index) => (
