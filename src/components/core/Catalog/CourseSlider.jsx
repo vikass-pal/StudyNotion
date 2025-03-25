@@ -22,6 +22,9 @@ const CourseSlider = ({Courses}) => {
           disableOnInteraction: false,
         }}
         navigation={true}
+        // breakpoints=({
+        //   1024:{slidesPerView:3,}
+        // })
         >
           {
             Courses?.map((course, index) => (
