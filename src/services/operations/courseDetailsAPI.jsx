@@ -305,6 +305,7 @@ export const fetchInstructorCourses = async (token) => {
   let result = []
   // const toastId = toast.loading("Loading...")
   try {
+    console.log("Fetching Instructor Courses, Token:", token);
     const response = await apiConnector(
       "GET",
       GET_ALL_INSTRUCTOR_COURSES_API,

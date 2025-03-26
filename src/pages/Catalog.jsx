@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {categories} from '../services/apis'
-import footer from '../components/core/HomePage/common/footer'
+import Footer from "../components/core/HomePage/common/footer"
 import {apiConnector} from '../services/apiconnector'
 import CourseSlider from '../components/core/Catalog/CourseSlider'
 import Course_Card from '../components/core/Catalog/Course_Card'
@@ -84,7 +84,7 @@ const Catalog = () => {
 
       </div>
 
-          <footer />
+          <Footer />
 
     </div>
   )

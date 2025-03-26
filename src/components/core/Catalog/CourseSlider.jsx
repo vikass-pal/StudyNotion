@@ -3,28 +3,29 @@ import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination'
-import { Autoplay, FreeMode, Paagin} from 'swiper'
+// import { Autoplay } from 'swiper'
+// import { FreeMode, Pagination, Navigation } from 'swiper'
+
+
+import Course_Card from './Course_Card'
 
 const CourseSlider = ({Courses}) => {
   return (
     <>
     {
       Courses?.length ? (
-        <Swiper 
-        slidesPerView={1}
-        loop={true}
-        spaceBetween={200}
-        pagination={true}
-        modules={[Pagination, Autoplay, Navigation]}
-        className='mySwiper' 
-        autoplay={{
-          delay: 1000,
-          disableOnInteraction: false,
-        }}
-        navigation={true}
-        // breakpoints=({
-        //   1024:{slidesPerView:3,}
-        // })
+       <Swiper
+                 slidesPerView={1}
+                 spaceBetween={25}
+                 loop={true}
+                 // modules={[ Pagination]}
+       
+                 breakpoints={{
+                   1024: {
+                     slidesPerView: 3,
+                   },
+                 }}
+                 className="max-h-[30rem] pt-8 px-2"
         >
           {
             Courses?.map((course, index) => (

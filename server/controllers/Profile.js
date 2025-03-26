@@ -1,5 +1,7 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
+// const { ACCOUNT_TYPE } = require("../utils/constants");
+
 const CourseProgress = require('../models/CourseProgress')
 const Course = require('../models/Course')
 

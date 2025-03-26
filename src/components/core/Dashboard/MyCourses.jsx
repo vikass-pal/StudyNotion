@@ -8,23 +8,28 @@ import { useEffect } from 'react';
 import IconBtn from '../HomePage/common/IconBtn';
 
 const MyCourses = () => {
-  const {token , user} = useSelector((state) => state.auth);
-  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+  const [courses, setCourses] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  const [courses, setCourses] = useState([]);
-
-  useEffect(() => {
-    // console.log("User Data:", user);  // ✅ Debugging log
-    // console.log("User Role:", user?.accountType);
-    const fetchCourses = async() => {
-      const result = await fetchInstructorCourses(token);
-      if(result) {
-        setCourses(result);
-      }
-    }
-    fetchCourses(); // Call fetchCourses here
-
-  },[])
+  // useEffect(() => {
+    // console.log("User Data:", user);  // ✅ Check user details
+    // console.log("User Role:", user?.accountType);  // ✅ Check role
+  
+    useEffect(() => {
+        const fetchCourses = async () => {
+          setLoading(true);
+          const result = await fetchInstructorCourses(token)
+          // console.log('Instructors all courses  ', result);
+          setLoading(false);
+          if (result) {
+            setCourses(result)
+          }
+        }
+        fetchCourses()
+      }, [])
+  
 
   return (
     <div className='text-white'>
