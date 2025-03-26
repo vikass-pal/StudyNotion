@@ -3,28 +3,26 @@ import toast from 'react-hot-toast'
 import { apiConnector } from './apiconnector';
 import {catalogData} from './apis'
 
-export const getCatalogPageData = async(categoryId) => {
-  const toastId = toast.loading('Loading...');
+// ================ get Catalog Page Data  ================
+export const getCatalogPageData = async (categoryId) => {
+  // const toastId = toast.loading("Loading...");
   let result = [];
   try {
     const response = await apiConnector("POST", catalogData.CATALOGPAGEDATA_API,
-        {categoryId: categoryId}
-    );
-    if(!response?.data?.success){
-        throw new Error("Could not fetch Category page data.");
-    }
-        const result = response?.data;
-    
+      { categoryId: categoryId, });
 
-  } catch(error) {
-    console.log("CATALOG PAGE DATA API ERROR...", error);
-    toast.error(error.message);
-    result = error.response?.data;
-    
+    if (!response?.data?.success)
+      throw new Error("Could not Fetch Category page data");
+
+    console.log("CATALOG PAGE DATA API RESPONSE............", response)
+    result = response?.data?.data;
+
   }
-  toast.dismiss(toastId);
-    return result;
-
+  catch (error) {
+    console.log("CATALOG PAGE DATA API ERROR....", error);
+    // toast.error(error.response?.data.message);
+    result = error.response?.data.data;
+  }
+  // toast.dismiss(toastId);
+  return result;
 }
-
- 

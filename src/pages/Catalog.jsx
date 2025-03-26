@@ -6,40 +6,45 @@ import {apiConnector} from '../services/apiconnector'
 import CourseSlider from '../components/core/Catalog/CourseSlider'
 import Course_Card from '../components/core/Catalog/Course_Card'
 import {getCatalogPageData} from '../services/pageAndComponentData'
+import { fetchCourseCategories } from './../services/operations/courseDetailsAPI';
 import { useState } from 'react'
 
 const Catalog = () => {
 
   const {catalogName} = useParams();
+  const [loading, setLoading] = useState(false);
   const [catalogPageData, setCatalogPageData] = useState(null);
   const [categoryId, setCategoryId] = useState("");
 
   useEffect(() => {
-    const getCategories = async () => {
-      const res = await apiConnector("GET", categories.CATEGORIES_API);
-      const category_id = res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
-    setCategoryId(category_id);
-    }
+    ; (async () => {
+        try {
+            const res = await fetchCourseCategories();
+            const category_id = res.filter(
+                (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
+            )[0]._id
+            setCategoryId(category_id)
+        } catch (error) {
+            console.log("Could not fetch Categories.", error)
+        }
+    })()
+}, [catalogName])
 
-    getCategories();
-  },[catalogName]);
 
-  useEffect(() => {
-    const getCategoryDetails = async() => {
-      try{
-        const res = await getCatalogPageData(categoryId);
-        setCatalogPageData(res);
-      }
-      catch(error) {
-        console.log(error);
-      }
+useEffect(() => {
+    if (categoryId) {
+        ; (async () => {
+            setLoading(true)
+            try {
+                const res = await getCatalogPageData(categoryId)
+                setCatalogPageData(res)
+            } catch (error) {
+                console.log(error)
+            }
+            setLoading(false)
+        })()
     }
-    if(categoryId) {
-      getCategoryDetails();
-    }
-    
-
-  },[categoryId])
+}, [categoryId])
 
   return (
     <div className='text-white'>
