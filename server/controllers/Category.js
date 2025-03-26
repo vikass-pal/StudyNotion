@@ -13,6 +13,8 @@ exports.createCategory = async (req, res) => {
         // getting info
         const { name, description } = req.body;
 
+        
+
 
         // validation
         if(!name || !description) {
