@@ -1,6 +1,7 @@
 const { response } = require("express");
 const Category = require("../models/Category");
 
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max)
 }
@@ -13,7 +14,7 @@ exports.createCategory = async (req, res) => {
         // getting info
         const { name, description } = req.body;
 
-        
+
 
 
         // validation
