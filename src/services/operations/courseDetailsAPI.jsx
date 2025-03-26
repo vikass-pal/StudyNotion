@@ -305,7 +305,6 @@ export const fetchInstructorCourses = async (token) => {
   let result = []
   // const toastId = toast.loading("Loading...")
   try {
-    console.log("Fetching Instructor Courses, Token:", token);
     const response = await apiConnector(
       "GET",
       GET_ALL_INSTRUCTOR_COURSES_API,
@@ -314,9 +313,6 @@ export const fetchInstructorCourses = async (token) => {
         Authorization: `Bearer ${token}`,
       }
     )
-    if (response?.data?.user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR) {
-    throw new Error("Access denied. User is not an instructor.");
-  }
     console.log("INSTRUCTOR COURSES API RESPONSE", response)
     if (!response?.data?.success) {
       throw new Error("Could Not Fetch Instructor Courses")

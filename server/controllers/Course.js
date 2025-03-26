@@ -372,22 +372,27 @@ exports.getInstructorCourses = async (req, res) => {
         // Get the instructor ID from the authenticated user or request body
         const instructorId = req.user.id
 
-        // Find all courses belonging to the instructor
+        // Find all courses belonging to the instructor and check if the user is an instructor
+
         const instructorCourses = await Course.find({ instructor: instructorId, }).sort({ createdAt: -1 })
 
 
         // Return the instructor's courses
         res.status(200).json({
+            message: 'Courses made by Instructor fetched successfully',
+
             success: true,
             data: instructorCourses,
             // totalDurationInSeconds:totalDurationInSeconds,
-            message: 'Courses made by Instructor fetched successfully'
+            message: 'Courses made by Instructor fetched successfully',
+
         })
     } catch (error) {
         console.error(error)
         res.status(500).json({
             success: false,
-            message: "Failed to retrieve instructor courses",
+            message: "Failed to retrieve instructor courses. Please ensure you are an instructor.",
+
             error: error.message,
         })
     }
@@ -454,7 +459,3 @@ exports.deleteCourse = async (req, res) => {
         })
     }
 }
-
-
-
-
