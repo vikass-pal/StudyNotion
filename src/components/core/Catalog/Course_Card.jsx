@@ -7,12 +7,15 @@ import GetAvgRating from '../../../utils/avgRating'
 
 
 const Course_Card = ({course, Height}) => {
+    // console.log("Course Data:", course);
+
     const [avgReviewCount, setAvgReviewCount] = useState(0);
     useEffect(() => {
         const count = GetAvgRating(course.ratingAndReviews);
         setAvgReviewCount(count);
         
     },[course])
+    
   return (
     <div>
         <Link to={`/courses/${course._id}`}>

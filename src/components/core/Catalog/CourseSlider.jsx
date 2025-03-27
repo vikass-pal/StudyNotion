@@ -10,8 +10,11 @@ import 'swiper/css/pagination'
 import Course_Card from './Course_Card'
 
 const CourseSlider = ({Courses}) => {
+  console.log("Courses in Slider:", Courses);
+
   return (
     <>
+    
     {
       Courses?.length ? (
        <Swiper
@@ -27,6 +30,7 @@ const CourseSlider = ({Courses}) => {
                  }}
                  className="max-h-[30rem] pt-8 px-2"
         >
+          
           {
             Courses?.map((course, index) => (
               <SwiperSlide key={index}>
@@ -38,8 +42,15 @@ const CourseSlider = ({Courses}) => {
 
         </Swiper>
       ) : (
-        <p>No Courses Found </p>
+        <div>
+          
+          <p>No Courses Found </p>
+        </div>
+        
+        
+        
       ) 
+      
 
     }
     
