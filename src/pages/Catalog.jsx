@@ -16,63 +16,63 @@ const Catalog = () => {
   const [catalogPageData, setCatalogPageData] = useState(null);
   const [categoryId, setCategoryId] = useState("");
 
-//   useEffect(() => {
-//     ; (async () => {
-//         try {
-//             const res = await fetchCourseCategories();
-//             const category_id = res.filter(
-//                 (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
-//             )[0]._id
-//             setCategoryId(category_id)
-//         } catch (error) {
-//             console.log("Could not fetch Categories.", error)
-//         }
-//     })()
-// }, [catalogName])
-
-useEffect(() => {
-  const getCategories = async () => {
-    const res = await apiConnector("GET",categories.CATEGORIES_API);
-    const category_id = res?.data?.data?.filter(
-                      (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
-                  )[0]._id;
-                  setCategoryId(category_id);
-
-  }
-  getCategories();
-},[catalogName]);
-
+  useEffect(() => {
+    ; (async () => {
+        try {
+            const res = await fetchCourseCategories();
+            const category_id = res.filter(
+                (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
+            )[0]._id
+            setCategoryId(category_id)
+        } catch (error) {
+            console.log("Could not fetch Categories.", error)
+        }
+    })()
+}, [catalogName])
 
 // useEffect(() => {
-//     if (categoryId) {
-//         ; (async () => {
-//             setLoading(true)
-//             try {
-//                 const res = await getCatalogPageData(categoryId)
-//                 setCatalogPageData(res)
-//             } catch (error) {
-//                 console.log(error)
-//             }
-//             setLoading(false)
-//         })()
-//     }
-// }, [categoryId])
+//   const getCategories = async () => {
+//     const res = await apiConnector("GET",categories.CATEGORIES_API);
+//     const category_id = res?.data?.data?.filter(
+//                       (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
+//                   )[0]._id;
+//                   console.log("Category ID:", category_id); 
+//                   setCategoryId(category_id);
+
+//   }
+//   getCategories();
+// },[catalogName]);
+
 
 useEffect(() => {
-  
-    const getCategoryDetails = async () => {
-      try{
-        const res = await getCatalogPageData(categoryId);
-        setCatalogPageData(res);
-      }
-      catch(error) {
-        console.log(error);
-      }
-      
-      }
-      getCategoryDetails();
-  
-},[categoryId])
+    if (categoryId) {
+        ; (async () => {
+            setLoading(true)
+            try {
+                const res = await getCatalogPageData(categoryId)
+                setCatalogPageData(res)
+            } catch (error) {
+                console.log(error)
+            }
+            setLoading(false)
+        })()
+    }
+}, [categoryId])
+
+// useEffect(() => {
+//     const getCategoryDetails = async () => {
+//       try {
+//         const res = await getCatalogPageData(categoryId);
+//         console.log("Catalog Page Data:", res); // Debugging API response
+//         setCatalogPageData(res);
+//       } catch (error) {
+//         console.log("Error fetching catalog page data:", error);
+//       }
+//     };
+//     if (categoryId) {
+//       getCategoryDetails();
+//     }
+// }, [categoryId])
 
 
   return (
@@ -101,21 +101,24 @@ useEffect(() => {
      <div>
     <div>Top Courses in {catalogPageData?.data?.selectedCategory?.name} </div>
       <div>
-        <CourseSlider  Courses={catalogPageData?.data?.differentCategory?.courses} />
+        {/* <CourseSlider  Courses={catalogPageData?.data?.differentCategory?.courses} /> */}
+        <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses || []} />
+        {console.log("Courses in selectedCategory:", catalogPageData?.data?.selectedCategory?.courses)}
+
       </div>
      </div>
      {/* section 3 */}
       <div>
         <div>Frequently Bought</div>
-        <div className='grid grid-cols-1 lg:grid-cols-2'> 
-          {
-            catalogPageData?.data?.mostSellingCourses?.slice(0,4).
-            map((course, index) => {
-              <Course_Card course={course} key={index} Height={'h-[400px]'} />
-            })
-          }
+        <div className='grid grid-cols-1 lg:grid-cols-2'>
+            {catalogPageData?.data?.mostSellingCourses?.length > 0 ? (
+                catalogPageData.data.mostSellingCourses.slice(0, 4).map((course, index) => (
+                    <Course_Card course={course} key={index} Height={'h-[400px]'} />
+                ))
+            ) : (
+                <p>No courses available in this category.</p>
+            )}
         </div>
-
       </div>
 
           <Footer />

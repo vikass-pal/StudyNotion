@@ -32,12 +32,17 @@ const CourseSlider = ({Courses}) => {
         >
           
           {
-            Courses?.map((course, index) => (
-              <SwiperSlide key={index}>
+            Courses?.map((course, index) => {
+              console.log("Rendering Course:", course); // Debugging each course
+              return( <SwiperSlide key={index}>
                 <Course_Card course={course} Height={"h-[250px]"} />
 
               </SwiperSlide>
-            ))
+              );
+            }
+              
+             
+            )
           }
 
         </Swiper>
