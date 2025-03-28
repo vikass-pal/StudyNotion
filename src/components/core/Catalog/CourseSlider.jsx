@@ -64,3 +64,15 @@ const CourseSlider = ({Courses}) => {
 }
 
 export default CourseSlider
+
+
+
+// import React from 'react'
+
+// const CourseSlider = () => {
+//   return (
+//     <div>CourseSlider</div>
+//   )
+// }
+
+// export default CourseSlider
