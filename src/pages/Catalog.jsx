@@ -9,6 +9,7 @@ import {getCatalogPageData} from '../services/pageAndComponentData'
 import { fetchCourseCategories } from './../services/operations/courseDetailsAPI';
 import { useState } from 'react'
 
+
 const Catalog = () => {
 
   const {catalogName} = useParams();

@@ -33,6 +33,7 @@ const CourseSlider = ({ Courses }) => {
             1024:{slidesPerView: 2,}
           }}
           
+          
         >
           {Courses?.map((course, index) => (
             <SwiperSlide key={index}>
