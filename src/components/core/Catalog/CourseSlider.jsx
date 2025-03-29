@@ -1,78 +1,52 @@
 import React from 'react'
-import {Swiper, SwiperSlide} from 'swiper/react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import 'swiper/css/free-mode';
+import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
-// import { Autoplay } from 'swiper'
-// import { FreeMode, Pagination, Navigation } from 'swiper'
+import 'swiper/css/navigation'
 
+import { FreeMode, Autoplay, Pagination, Navigation } from 'swiper/modules'
 
 import Course_Card from './Course_Card'
 
-const CourseSlider = ({Courses}) => {
-  console.log("Courses in Slider:", Courses);
+const CourseSlider = ({ Courses }) => {
+  console.log("Courses in Slider:", Courses)
 
   return (
     <>
-    
-    {
-      Courses?.length ? (
-       <Swiper
-                 slidesPerView={1}
-                 spaceBetween={25}
-                 loop={true}
-                 // modules={[ Pagination]}
-       
-                 breakpoints={{
-                   1024: {
-                     slidesPerView: 3,
-                   },
-                 }}
-                 className="max-h-[30rem] pt-8 px-2"
-        >
+      {Courses?.length ? (
+        <Swiper
+          slidesPerView={1}
+          loop={true}
+          spaceBetween={100}
+          pagination={true}
           
-          {
-            Courses?.map((course, index) => {
-              console.log("Rendering Course:", course); // Debugging each course
-              return( <SwiperSlide key={index}>
-                <Course_Card course={course} Height={"h-[250px]"} />
-
-              </SwiperSlide>
-              );
-            }
-              
-             
-            )
-          }
-
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper"
+        
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          navigation={true}
+          breakpoints={{
+            1024:{slidesPerView: 2,}
+          }}
+          
+        >
+          {Courses?.map((course, index) => (
+            <SwiperSlide key={index}>
+              <Course_Card course={course} Height={"h-[300px]"} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       ) : (
         <div>
-          
-          <p>No Courses Found </p>
+          <p>No Courses Found</p>
         </div>
-        
-        
-        
-      ) 
-      
-
-    }
-    
+      )}
     </>
   )
 }
 
 export default CourseSlider
-
-
-
-// import React from 'react'
-
-// const CourseSlider = () => {
-//   return (
-//     <div>CourseSlider</div>
-//   )
-// }
-
-// export default CourseSlider
