@@ -13,32 +13,28 @@ const MyCourses = () => {
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-    // console.log("User Data:", user);  // ✅ Check user details
-    // console.log("User Role:", user?.accountType);  // ✅ Check role
-  
-    useEffect(() => {
-        const fetchCourses = async () => {
-          setLoading(true);
-          const result = await fetchInstructorCourses(token)
-          // console.log('Instructors all courses  ', result);
-          setLoading(false);
-          if (result) {
-            setCourses(result)
-          }
-        }
-        fetchCourses()
-      }, [])
-  
+  useEffect(() => {
+    const fetchCourses = async () => {
+      setLoading(true)
+      const result = await fetchInstructorCourses(token)
+      setLoading(false)
+      if (result) {
+        setCourses(result)
+      }
+    }
+    fetchCourses()
+  }, [])
 
   return (
     <div className='text-white'>
       <div>
         <h1>My Courses</h1>
-        <IconBtn 
-        text={"Add Course"}
-        onClick={() => navigate("/dashboard/add-course")}
-        // TODO ADD ICON oF plus here
+        <IconBtn
+          text={"Add Course"}
+          onClick={() => {
+            console.log("Navigating to Add Course") // Debugging navigation
+            navigate("/dashboard/add-course")
+          }}
         />
       </div>
 

@@ -32,41 +32,41 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={
-          <OpenRoute>
+      
             <Home />
-          </OpenRoute>
+        
         } />
           <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="/login" element={
-          <OpenRoute>
+      
             <Login />
-          </OpenRoute>
+        
         } /> 
         <Route path="/signup" element={
-          <OpenRoute>
+      
             <Signup />
-          </OpenRoute>
+        
         } /> 
         <Route path="forgot-password" element={
-          <OpenRoute>
+      
             <ForgotPassword />
-          </OpenRoute>
+        
         } />
         <Route path="update-password/:token" element={
-          <OpenRoute>
+      
             <UpdatePassword />
-          </OpenRoute>
+        
         } />
         <Route path="verify-email" element={
-          <OpenRoute>
+      
             <VerifyEmail />
-          </OpenRoute>
+        
         } />
         
         <Route path="about" element={
-          <OpenRoute>
+      
             <About />
-          </OpenRoute>
+        
         } />
         <Route 
           element={
@@ -76,6 +76,7 @@ const App = () => {
           }
         >
           <Route path="dashboard/my-profile" element={<MyProfile />}  />
+          
        
 
 
@@ -94,6 +95,7 @@ const App = () => {
                 <Route path="dashboard/add-course" element={<AddCourse />} />
                 <Route path="dashboard/my-courses" element={<MyCourses />} />
                 <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
+                {/* <Route path="/dashboard/add-course" element={<AddCourse />} /> */}
               </>
             )
           }
