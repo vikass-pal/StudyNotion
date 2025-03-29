@@ -26,14 +26,17 @@ const MyCourses = () => {
   }, [])
 
   return (
-    <div className='text-white'>
-      <div>
-        <h1>My Courses</h1>
+    <div className='text-white mb-10 p-5'>
+      <div className='flex justify-between'>
+        <h1 className='text-2xl'>My Courses</h1>
         <IconBtn
+        
           text={"Add Course"}
+          className="translate-y-28 mb-10"
           onClick={() => {
             console.log("Navigating to Add Course") // Debugging navigation
             navigate("/dashboard/add-course")
+            
           }}
         />
       </div>
