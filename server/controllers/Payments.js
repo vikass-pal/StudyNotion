@@ -114,6 +114,23 @@ exports.capturePayment = async (req, res) => {
 
 }
 
+const enrollStudents = async(courses, userId, res) => {
+    if(!courses || !userId) {
+        return res.status(400).json({
+            success:false,
+            message:'IPlease Provide valid data for Courses or UserID',
+        })
+    }
+    for (const courseId of courses) {
+        // find the course and enroll student in it
+        const enrolledCourse = await Course.findOneAndUpdate(
+            {_id:courseId},
+            {$push:{studentsEnrolled:userId}},
+            {new:true},
+        )
+    }
+}
+
 // // capture the payment and initiate the razorpay
 // exports.capturePayment = async (req, res) => {
 //     // gey=t courseId and userID
