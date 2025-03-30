@@ -72,6 +72,7 @@ export default function PublishCourse () {
                 {...register('public', {required: true})}
                 />
                <span className=' text-richblack-100'> Make this course as public</span>
+               
                 </label>
             </div>
 
