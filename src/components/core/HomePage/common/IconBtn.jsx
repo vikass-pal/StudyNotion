@@ -1,4 +1,4 @@
-import { BiEdit } from "react-icons/bi";
+// import { BiEdit } from "react-icons/bi";
 
 export default function IconBtn({ text, onclick, children, disabled, outline = false, customClasses, type, }) {
     return (
@@ -19,7 +19,7 @@ export default function IconBtn({ text, onclick, children, disabled, outline = f
                 ) :
                     (text)
             }
-            <BiEdit />
+            {/* <BiEdit /> */}
         </button>
     )
 }

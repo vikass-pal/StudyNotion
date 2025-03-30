@@ -6,6 +6,7 @@ import CourseTable from '../Dashboard/InstructorCourses/CourseTable'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import IconBtn from '../HomePage/common/IconBtn';
+import { IoMdAdd } from "react-icons/io";
 
 const MyCourses = () => {
   const { token } = useSelector((state) => state.auth)
@@ -26,10 +27,12 @@ const MyCourses = () => {
   }, [])
 
   return (
-    <div className='text-white mb-10 p-5'>
+    <div className='text-white mb-10 p-4'>
       <div className='flex justify-between'>
         <h1 className='text-2xl'>My Courses</h1>
+       
         <IconBtn
+        
         
           text={"Add Course"}
           className="translate-y-28 mb-10"
@@ -38,7 +41,10 @@ const MyCourses = () => {
             navigate("/dashboard/add-course")
             
           }}
-        />
+          
+        >
+           <IoMdAdd />
+           </IconBtn>
       </div>
 
       {courses && <CourseTable courses={courses} setCourses={setCourses} />}

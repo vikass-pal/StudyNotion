@@ -80,7 +80,7 @@ const course = courseData.course || { courseContent: [] };
 
   
   return (
-     <div className="space-y-8 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-6">
+     <div className="space-y-5 rounded-2xl border-[1px] border-richblack-700 bg-richblack-800 p-6 w-[660px] ">
           <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
     
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -94,7 +94,7 @@ const course = courseData.course || { courseContent: [] };
                 disabled={loading}
                 placeholder="Add a section to build your course"
                 {...register("sectionName", { required: true })}
-                className="form-style w-full"
+                className="form-style w-full bg-richblack-700 text-richblack-5 p-3 rounded-md"
               />
               {errors.sectionName && (
                 <span className="ml-2 text-xs tracking-wide text-pink-200">
@@ -104,14 +104,14 @@ const course = courseData.course || { courseContent: [] };
             </div>
     
             {/* Edit Section Name OR Create Section */}
-            <div className="flex items-end gap-x-4">
+            <div className="flex items-end gap-x-4 ">
               <IconBtn
                 type="submit"
                 disabled={loading}
                 text={editSectionName ? "Edit Section Name" : "Create Section"}
                 outline={true}
               >
-                 <IoMdAddCircleOutline />
+                 <IoMdAddCircleOutline className='text-yellow-100' />
               </IconBtn>
               {/* if editSectionName mode is on */}
               {editSectionName && (
@@ -133,13 +133,15 @@ const course = courseData.course || { courseContent: [] };
           
           {/* {
           console.log("Course Content:", course?.courseContent)
-} */}
+          } */}
+
+           
          { course.courseContent.length > 0 && (
-            <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
+            <NestedView handleChangeEditSectionName={handleChangeEditSectionName}  />
           )}
     
           {/* Next Prev Button */}
-          <div className="flex justify-end gap-x-3">
+          <div className="flex justify-end gap-x-3 -translate-y-8 ">
             <button
               onClick={goBack}
               className={`rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
@@ -148,7 +150,7 @@ const course = courseData.course || { courseContent: [] };
             </button>
     
             {/* Next button */}
-            <IconBtn disabled={loading} text="Next" onclick={goToNext}>
+            <IconBtn disabled={loading} text="Next" onclick={goToNext} >
                <IoIosArrowForward />
             </IconBtn>
           </div>

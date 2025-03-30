@@ -150,7 +150,7 @@ formData.append("subSectionId", modalData._id);
             id='lectureTitle'
             placeholder='Enter lecture Title'
             {...register("lectureTitle", {required:true})}
-            className='w-full' />
+            className='w-full bg-richblack-700 text-richblack-25 rounded-md p-3 m-2' />
             {errors.lectureTitle && (<span>Lecture Title is Required</span>)}
           </div>
           <div>
@@ -159,7 +159,7 @@ formData.append("subSectionId", modalData._id);
             id='lectureDesc'
             placeholder='Enter lecture Description'
             {...register("lectureDesc", {required:true})}
-            className='w-full min-h-[130px] text-black' />
+            className='w-full min-h-[130px] bg-richblack-700 text-richblack-25 rounded-md p-3 m-2' />
             {errors.lectureDesc && (<span>Lecture Description is Required</span>)}
           </div>
           {
