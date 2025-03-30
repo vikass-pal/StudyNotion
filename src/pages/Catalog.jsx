@@ -77,12 +77,12 @@ useEffect(() => {
 
 
   return (
-    <div className='text-white'>
+    <div className='text-white '>
      
-     <div>
-        <p>{`Home / Catalog /`}
-        <span>{catalogPageData?.selectedCategory?.name}</span></p>
-        <p>{catalogPageData?.selectedCategory?.name}</p>
+     <div className='w-full h-[240px] bg-richblack-800 flex flex-col gap-y-5 p-10' >
+        <p className='text-sm text-richblack-100 mt-5'>{`Home  / Catalog  / `}
+        <span className='text-yellow-100'>{catalogPageData?.selectedCategory?.name}</span></p>
+        <p className='text-2xl font-bold'>{catalogPageData?.selectedCategory?.name}</p>
         <p>{catalogPageData?.selectedCategory?.description}</p>
      </div>
      <div>
