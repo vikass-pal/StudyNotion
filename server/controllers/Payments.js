@@ -50,9 +50,10 @@ exports.capturePayment = async (req, res) => {
     }
 
     }
+        const currency = "INR";
      const options = {
         amount: totalAmount * 100,
-        currency: "INR",
+        currency,
         receipt:Math.random(Date.now()).toString(),
 
      }
@@ -165,6 +166,39 @@ const enrollStudents = async(courses, userId, res) => {
        }
 }
 
+exports.sendPaymentSuccessEmail = async (req, res) => {
+    const {orderId, paymentId, amount} = req.body;
+
+    const userId = req.user.id;
+
+    if(!orderId || !paymentId || !amount || !userId) {
+        return res.status(400).json({
+            success:false,
+            message:'Please provide valid data',
+            
+        })
+    }
+    try{
+        const enrolledStudent = await User.findById(userId);
+        await mailSender (
+            enrolledStudent.email,
+            `Payment Received`,
+            paymentSuccessEmail(`${enrolledStudent.firstName}`,
+                amount/100, orderId, paymentId
+            )
+        )
+
+    } catch(error) {
+        console.log("Error in sending email", error);
+        return res.status(500).json({
+            success:false,
+            message:"Could not send email"
+        })
+
+    }
+    
+}
+
 
 // capture the payment and initiate the razorpay
 // exports.capturePayment = async (req, res) => {
@@ -213,7 +247,7 @@ const enrollStudents = async(courses, userId, res) => {
 //     const options = {
 //         amount: amount *100,
 //         currency,
-//         receipt: Math.random(Date.now()).toString(),
+// receipt: Math.random().toString(),
 //         notes:{
 //             courseId: course_id,
 //             userId,
