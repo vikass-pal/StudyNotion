@@ -78,13 +78,28 @@ useEffect(() => {
 
   return (
     <div className='text-white '>
-     
-     <div className='w-full h-[240px] bg-richblack-800 flex flex-col gap-y-5 p-10' >
+
+      <div className='flex w-full bg-richblack-800  '>
+      <div className='w-[870px] h-[300px]  flex flex-col gap-y-5 p-10' >
         <p className='text-sm text-richblack-100 mt-5'>{`Home  / Catalog  / `}
         <span className='text-yellow-100'>{catalogPageData?.selectedCategory?.name}</span></p>
         <p className='text-2xl font-bold'>{catalogPageData?.selectedCategory?.name}</p>
-        <p>{catalogPageData?.selectedCategory?.description}</p>
+        <p className='text-sm text-richblack-100'>{catalogPageData?.selectedCategory?.description}</p>
      </div>
+     <div className='w-[280px] h-[300px] p-10 flex flex-col items-center bg-richblack-800'>
+      <h3 className='font-bold text-xl'>Related Resourses</h3>
+      <ul>
+        <li>Doc Python</li>
+        <li>Cheatsheets</li>
+        <li>Articles</li>
+        <li>Community Forums</li>
+        <li>Projects</li>
+      </ul>
+     </div>
+
+      </div>
+     
+    
      <div>
         {/* section1 */}
         <div>
