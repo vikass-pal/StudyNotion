@@ -54,9 +54,9 @@ export async function buyCourse(token, courses, userDetails,navigate, dispatch) 
         }
         const options = {
             key:process.env.RAZORPAY_KEY,
-            currency:orderResponse.data.data.message.currency,
-            amount:`${orderResponse.data.data.amount}`,
-            order_id:orderResponse.data.data.id,
+            currency:orderResponse.data.message.currency,
+            amount:`${orderResponse.data.message.amount}`,
+            order_id:orderResponse.data.message.id,
             name:"StudyNotion",
             description:"Thank you for payment",
             image:rzplogo,
@@ -70,6 +70,13 @@ export async function buyCourse(token, courses, userDetails,navigate, dispatch) 
                 verifyPayment({...response, courses}, token, navigate, dispatch);
             }
         }
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+        paymentObject.on("payment.failed", function(response){
+            toast.error("Payment failed");
+            console.log(response.error)
+        })
+
     } catch(error) {
         console.log("PAYMENT ERROR ....", error);
         toast.error("could not make Payment")
