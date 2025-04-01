@@ -1,8 +1,11 @@
 const {instance} = require("../config/razorpay");
+const crypto = require('crypto');
 const Course = require("../models/Course");
 const User = require("../models/User");
+// const CourseProgress = require("../models/courseProgress")
 const mailSender = require("../utils/mailSender");
 const {courseEnrollmentEmail} = require("../mail/templates/courseEnrollmentEmail");
+const { default: mongoose } = require('mongoose')
 
 
 
@@ -150,12 +153,19 @@ const enrollStudents = async(courses, userId, res) => {
 
             
         )
-        const mailResponse = await mailSender(
+try {
+    const emailResponse = await mailSender(
             enrollStudents.email,
             `Successfully Enrolled into ${enrolledCourse.courseName}`,
             courseEnrollmentEmail(enrolledCourse.courseName, `${enrolledStudent.firstName}`)
     )
-    console.log("Email sent successfully", mailResponse);
+    } catch (error) {
+        console.log("Error in sending enrollment email", error);
+        return res.status(500).json({
+            success: false,
+            message: "Could not send email"
+        });
+    }
     } catch(error) {
         console.log(error);
         return res.status(500).json({
@@ -184,8 +194,7 @@ exports.sendPaymentSuccessEmail = async (req, res) => {
             enrolledStudent.email,
             `Payment Received`,
             paymentSuccessEmail(`${enrolledStudent.firstName}`,
-                amount/100, orderId, paymentId
-            )
+                amount / 100, orderId, paymentId)
         )
 
     } catch(error) {

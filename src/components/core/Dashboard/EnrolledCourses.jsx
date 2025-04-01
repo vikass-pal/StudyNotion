@@ -22,6 +22,13 @@ const EnrolledCourses = () => {
         getEnrolledCourses();
     },[]);
 
+    if (enrolledCourses?.length == 0) {
+        return (
+          <p className="grid h-[50vh] w-full place-content-center text-center text-richblack-5 text-3xl">
+            You have not enrolled in any course yet.
+          </p>)
+      }
+
   return (
     <div className='text-richblack-5'>
         <div>
@@ -40,28 +47,28 @@ const EnrolledCourses = () => {
                 </div>
                 {/* cards shuru  */}
                 {
-                    enrolledCourses.map((course, index) => {
+                    enrolledCourses.map((course, index) => (
                         <div key={index}>
+                        <div>
+                            <img src={course.thumbnail} alt="" />
                             <div>
-                                <img src={course.thumbnail} alt="" />
-                                <div>
-                                    <p>{course.courseName}</p>
-                                    <p>{course.courseDescription}</p>
-                                </div>
-                                <div>
-                                    {course?.totalDuration}
-                                </div>
-                                <div>
-                                    <p>Progress: {course.progressPercentage || 0}%</p>
-                                    <ProgressBar 
-                                    completed={course.progressPercentage || 0}
-                                    height='8px'
-                                    isLabelVisible={false}
-                                    />
-                                </div>
+                                <p>{course.courseName}</p>
+                                <p>{course.courseDescription}</p>
+                            </div>
+                            <div>
+                                {course?.totalDuration}
+                            </div>
+                            <div>
+                                <p>Progress: {course.progressPercentage || 0}%</p>
+                                <ProgressBar 
+                                completed={course.progressPercentage || 0}
+                                height='8px'
+                                isLabelVisible={false}
+                                />
                             </div>
                         </div>
-                    })
+                    </div>
+                    ))
                 }
             </div>)
         }

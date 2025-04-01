@@ -65,7 +65,7 @@ export async function buyCourse(token, courses, userDetails,navigate, dispatch) 
                 email:userDetails.email,
             },
             handler:function(response) {
-                sendPaymentSuccessEmail(response, orderResponse.data.data.amount, token);
+                sendPaymentSuccessEmail(response, orderResponse.data.message.amount, token);
                 // verify Payment
                 verifyPayment({...response, courses}, token, navigate, dispatch);
             }
@@ -111,7 +111,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
             throw new Error(response.data.message);
         } 
         toast.success("Payment Successful, You're added to the course");
-        navigate("dashboard/enrolled-courses");
+        navigate("/dashboard/enrolled-courses");
         dispatch(resetCart());
     }
     catch(error) {
