@@ -4,6 +4,7 @@ import {  useParams, useNavigate } from 'react-router-dom'
 import { buyCourse } from '../services/operations/studentFeaturesAPI'
 import { fetchCourseDetails } from '../services/operations/courseDetailsAPI'
 import GetAvgRating from '../utils/avgRating'
+import Error from '../components/core/Error'
 // import { toast } from 'react-hot-toast'
 // import { setPaymentLoading } from '../slices/courseSlice'
 // import { useState } from 'react'
@@ -49,12 +50,25 @@ const CourseDetails = () => {
         setTotalNoOfLectures(lectures);
       },[courseData]);
 
-
+// TODO update
     const handleBuyCourse = () => { 
       if(token) {
         buyCourse(token, [courseId], user, navigate, dispatch);
         return;
       }
+    }
+
+    if(loading || !courseData) {
+      return (
+        <div>Loading...</div>
+      )
+    }
+    if(!courseData.success) {
+      return (
+        <div>
+          <Error />
+        </div>
+      )
     }
 
   return (
