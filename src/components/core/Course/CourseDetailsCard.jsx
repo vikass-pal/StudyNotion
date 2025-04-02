@@ -2,6 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import copy from 'copy-to-clipboard';
+ import toast from 'react-hot-toast';
 
 function CourseDetailsCard ({course, setConfirmationModal, handleBuyCourse})  {
 
@@ -14,6 +16,8 @@ function CourseDetailsCard ({course, setConfirmationModal, handleBuyCourse})  {
 
     }
     const handleShare = () => {
+        copy(window.location.href);
+        toast.success('Link Copied to clipboard')
 
     }
 
