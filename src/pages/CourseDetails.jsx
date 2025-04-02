@@ -4,12 +4,14 @@ import {  useParams, useNavigate } from 'react-router-dom'
 import { buyCourse } from '../services/operations/studentFeaturesAPI'
 import { fetchCourseDetails } from '../services/operations/courseDetailsAPI'
 import GetAvgRating from '../utils/avgRating'
-import Error from '../components/core/Error'
+import Error from './Error'
 import ConfirmationModal from '../components/core/HomePage/common/ConfirmationModal'
 import RatingStars from '../components/core/HomePage/common/RatingStars'
 // import { toast } from 'react-hot-toast'
 // import { setPaymentLoading } from '../slices/courseSlice'
-// import { useState } from 'react'
+import { useState } from 'react'
+import { formatDate } from '../utils/formatDate'
+import CourseDetailsCard from '../components/core/Course/CourseDetailsCard'
 
 const CourseDetails = () => {
       const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const CourseDetails = () => {
       const {token} = useSelector((state) => state.auth);
       const {courseId} = useParams();
 
-      const [courseData, setCourseData] = useEffect(null); 
+      const [courseData, setCourseData] = useState(null); 
 
       useEffect(() => {
       const getCourseFullDetails = async () => {
@@ -100,15 +102,33 @@ const CourseDetails = () => {
     } = courseData.data?.courseDetails;
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col  text-richblack-5'>
+        <div className='relative flex flex-col justify-start p-10'>
         <p>{courseName}</p>
-        <p>{courseDescription}</p>
-       <div>
-        <span>{avgReviewCount}</span>
-        <RatingStars Review_Count= {avgReviewCount} Star_Size={24} />
-        <span>{`(${ratingAndReviews.length} reviews)`}</span>
-        <span>{`(${studentsEnrolled.length} students enrolled)`}</span>
-       </div>
+          <p>{courseDescription}</p>
+        <div className='flex gap-x-2'>
+          <span>{avgReviewCount}</span>
+          <RatingStars Review_Count= {avgReviewCount} Star_Size={24} />
+          <span>{`(${ratingAndReviews.length} reviews)`}</span>
+          <span>{`(${studentsEnrolled.length} students enrolled)`}</span>
+        </div>
+        <div>
+          <p>Created By {`${instructor.firstName}`}</p>
+        </div>
+
+        <div className='flex gap-x-3'>
+          <p>Created At: {formatDate(createdAt)}</p>
+          <p>Language:{" "} English</p>
+        </div>
+        <div>
+          <CourseDetailsCard 
+          course = {courseData?.data?.courseDetails}
+          setConfirmationModal = {setConfirmationModal}
+          handleBuyCourse = {handleBuyCourse}
+          />
+        </div>
+
+        </div>
 
 
         {confirmationModal && <ConfirmationModal modalData={confirmationModal}/>}
