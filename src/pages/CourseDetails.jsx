@@ -55,6 +55,19 @@ const CourseDetails = () => {
         setTotalNoOfLectures(lectures);
       },[courseData]);
 
+
+      const [isActive, setIsActive] = useState(Array(0))
+
+      const handleActive = (id) => {
+        setIsActive(
+          !isActive.includes(id) ? isActive.concat(id)
+          : isActive.filter((e) => e != id)
+        )
+         
+
+      }
+
+
 // TODO update
     const handleBuyCourse = () => { 
       if(token) {
@@ -129,7 +142,32 @@ const CourseDetails = () => {
         </div>
 
         </div>
-
+        <div>
+          <p>What You Will Learn</p>
+          <div>
+            {whatYouWillLearn}
+          </div>
+        </div>
+        <div>
+          <div>
+            <p>Course Content :</p>
+          </div>
+          <div className='flex gap-x-3 justify-between'>
+           <div>
+           <span>{courseContent.length} section(s)</span>
+          <span> {totalNoOfLectures}</span>
+          <span>
+            {courseData.data?.totalDuration} Total length
+          </span>
+           </div>
+           <div>
+            <button onClick={() => setIsActive([])}>
+              Collapse all sections
+            </button>
+           </div>
+         
+        </div>
+          </div>
 
         {confirmationModal && <ConfirmationModal modalData={confirmationModal}/>}
     </div>

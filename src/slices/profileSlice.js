@@ -15,19 +15,14 @@ const initialState = {
 
 const profileSlice = createSlice({
     name: "profile",
-    initialState: {
-        user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
-        loading: false,
-    },
+    initialState: initialState,
     reducers: {
         setUser(state, value) {
-            state.user = {
-                ...value.payload,
-                accountType: value.payload.accountType?.toLowerCase() === "instructor"
-                  ? ACCOUNT_TYPE.INSTRUCTOR
-                  : value.payload.accountType,
-            };
+            state.user = value.payload;
         },
+        setLoading(state, value) {
+            state.loading = value.payload
+        }
     },
 });
 
