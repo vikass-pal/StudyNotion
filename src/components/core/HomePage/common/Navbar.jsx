@@ -57,6 +57,35 @@ const location = useLocation();
   const matchRoute = (route) => {
      return matchPath({path:route}, location.pathname)
   }
+
+
+    // when user scroll down , we will hide navbar , and if suddenly scroll up , we will show navbar 
+    const [showNavbar, setShowNavbar] = useState('top');
+    const [lastScrollY, setLastScrollY] = useState(0);
+    useEffect(() => {
+        window.addEventListener('scroll', controlNavbar);
+
+        return () => {
+            window.removeEventListener('scroll', controlNavbar);
+        }
+    },)
+
+    // control Navbar
+    const controlNavbar = () => {
+        if (window.scrollY > 200) {
+            if (window.scrollY > lastScrollY)
+                setShowNavbar('hide')
+
+            else setShowNavbar('show')
+        }
+
+        else setShowNavbar('top')
+
+        setLastScrollY(window.scrollY);
+    }
+
+
+
   return (
     <div className='flex h-14 items-cente justify-center border-b-[1px] border-b-richblack-600'>
       <div className='w-11/12 flex max-w-maxContent items-center justify-between'>
@@ -78,7 +107,7 @@ const location = useLocation();
                       <div className='invisible absolute left-[50%] top-[50%] 
                       flex flex-col transition-all duration-200 rounded-md p-4 bg-richblack-5
                        text-richblack-900 opacity-0 translate-x-[-50%] translate-y-[5%]
-                      group-hover:visible group-hover:opacity-100 lg:w-[300px]'>
+                      group-hover:visible hover:visible group-hover:opacity-100 hover:opacity-100 lg:w-[300px]'>
 
                         <div className='absolute left-[50%] top-0 w-6 h-6 rotate-45 translate-y-[-45%] translate-x-[80%]  rounded bg-richblack-5  '>
 
