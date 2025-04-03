@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import copy from 'copy-to-clipboard';
 import toast from 'react-hot-toast';
 import { ACCOUNT_TYPE } from '../../../utils/constants';
+import { addToCart } from '../../../slices/cartSlice';
 
 function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
     const { user } = useSelector((state) => state.profile);
@@ -12,13 +13,18 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const {
+        thumbnail: ThumbnailImage,
+        price: CurrentPrice,
+    } = course;
+
     const handleAddToCart = () => {
         if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
             toast.error("You're an instructor, you cannot buy a course");
             return;
         }
         if (token) {
-            dispatch(course);
+            dispatch(addToCart(course));
             return;
         }
         setConfirmationModal({
@@ -36,10 +42,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
         toast.success('Link Copied to clipboard');
     };
 
-    const {
-        thumbnail: ThumbnailImage,
-        price: CurrentPrice,
-    } = course;
+   
 
     return (
         <div>
