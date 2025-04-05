@@ -105,7 +105,8 @@ const location = useLocation();
                       <p>{link.title}</p>
                       <IoIosArrowDropdown />
                       <div className='invisible absolute left-[50%] top-[50%] 
-                      flex flex-col transition-all duration-200 rounded-md p-4 bg-richblack-5
+                      flex flex-col transition-all 
+                      duration-200 rounded-md p-4 bg-richblack-5
                        text-richblack-900 opacity-0 translate-x-[-50%] translate-y-[5%]
                       group-hover:visible hover:visible group-hover:opacity-100 hover:opacity-100 lg:w-[300px]'>
 
