@@ -7,18 +7,19 @@ import GetAvgRating from '../utils/avgRating'
 import Error from './Error'
 import ConfirmationModal from '../components/core/HomePage/common/ConfirmationModal'
 import RatingStars from '../components/core/HomePage/common/RatingStars'
-// import { toast } from 'react-hot-toast'
-// import { setPaymentLoading } from '../slices/courseSlice'
+
+
 import { useState } from 'react'
 import { formatDate } from '../utils/formatDate'
-import CourseDetailsCard from '../components/core/Course/CourseDetailsCard'
 
+import CourseDetailsCard from '../components/core/Course/CourseDetailsCard'
 import CourseAccordionBar from '../../src/components/core/Course/CourseAccordionBar'
 
 import { GiReturnArrow } from 'react-icons/gi'
 import { MdOutlineVerified } from 'react-icons/md'
 import Img from './../components/common/Img';
 import toast from "react-hot-toast"
+
 
 
 const CourseDetails = () => {
