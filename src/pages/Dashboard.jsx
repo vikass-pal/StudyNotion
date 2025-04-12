@@ -17,6 +17,7 @@ const Dashboard = () => {
         <Sidebar />
         <div className=''>
     <div className='mx-auto w-11/12 py-10'>
+    
         <Outlet />
     </div>
         </div>
