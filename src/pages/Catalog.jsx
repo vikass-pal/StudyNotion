@@ -88,7 +88,7 @@ useEffect(() => {
      </div>
      <div className='w-[280px] h-[300px] p-10 flex flex-col items-center bg-richblack-800'>
       <h3 className='font-bold text-xl'>Related Resourses</h3>
-      <ul>
+      <ul className='text-richblack-200 text-[15px] mt-3 flex flex-col items-start list-disc pl-5'>
         <li>Doc Python</li>
         <li>Cheatsheets</li>
         <li>Articles</li>
@@ -102,9 +102,9 @@ useEffect(() => {
     
      <div>
         {/* section1 */}
-        <div>
-          <div>Courses to get you started</div>
-            <div className='flex gap-x-3'>
+        <div className='p-5 m-5'>
+          <div className='text-2xl font-bold mb-3'>Courses to get you started</div>
+            <div className='flex gap-x-3 mb-3 pb-3 border-b border-white'>
                 <p>Most Popular</p>
                 <p>New</p>
             </div>
