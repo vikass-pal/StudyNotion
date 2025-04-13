@@ -30,7 +30,9 @@ const Course_Card = ({course, Height}) => {
                 <p>{course?.instructor?.firstName} {course?.instructor?.lastName}</p>
                 <div>
                     <span>{avgReviewCount || 0}</span>
+
                     <RatingStars Review_Count={avgReviewCount} />
+                    
                     <span>{course?.ratingAndReviews?.length} Rating</span>
                 </div>
                 <p>₹{" "}{course?.price}</p>
