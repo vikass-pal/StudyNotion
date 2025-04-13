@@ -67,7 +67,9 @@ const MyProfile = () => {
         <div className="grid grid-cols-2 gap-4 mt-4">
           <div>
             <p className="text-richblack-300">First Name</p>
+
             <p className="font-medium">{user?.firstName}</p>
+            
           </div>
           <div>
             <p className="text-richblack-300">Last Name</p>
