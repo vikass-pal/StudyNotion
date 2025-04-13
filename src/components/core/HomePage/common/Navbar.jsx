@@ -102,8 +102,10 @@ const location = useLocation();
                   {
                     link.title === "Catalog" ? (
                     <div className=' relative flex items-center gap-2 group'>
+
                       <p>{link.title}</p>
                       <IoIosArrowDropdown />
+                      
                       <div className='invisible absolute left-[50%] top-[50%] 
                       flex flex-col transition-all 
                       duration-200 rounded-md p-4 bg-richblack-5
