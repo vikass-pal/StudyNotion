@@ -83,11 +83,12 @@ const handleCourseDelete = async(courseId) => {
                                    
                                     {
                                         course.status === COURSE_STATUS.DRAFT ? (
-                                           <div className='flex flex-row w-fit h-[24px] gap-x-2 items-center mt-2 rounded-3xl border-richblack-500 border-2  bg-richblack-800 p-2  '>
-                                             <p className="text-pink-500">
-                                             <CiClock2 />
-                                                DRAFTED</p>
-                                            </div>
+                                            <div className='flex flex-row w-fit h-[24px] gap-x-2 items-center mt-2 rounded-3xl border-richblack-500 border-2  bg-richblack-800 p-2 '>
+                                            <CiClock2 className="text-pink-200" />
+                                        <p className="text-pink-200">
+                                           
+                                           Draft</p>
+                                       </div>
                                         ) :
                                         (
                                             <div className='flex flex-row w-fit h-[24px] gap-x-2 items-center mt-2 rounded-3xl border-richblack-500 border-2  bg-richblack-800 p-2 '>

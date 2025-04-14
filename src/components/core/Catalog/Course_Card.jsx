@@ -17,7 +17,7 @@ const Course_Card = ({course, Height}) => {
     },[course])
     
   return (
-    <div>
+    <div className='hover:scale-[1.03] transition-all duration-200 z-50 '>
         <Link to={`/courses/${course._id}`}>
         <div>
             <div>
@@ -25,9 +25,9 @@ const Course_Card = ({course, Height}) => {
                 className={`${Height} w-full rounded-xl object-cover`}
                 />
             </div>
-            <div>
-                <p>{course?.courseName }</p>
-                <p>{course?.instructor?.firstName} {course?.instructor?.lastName}</p>
+            <div className='flex flex-col gap-2 px-1 py-3'>
+                <p className='text-xl text-richblack-5'>{course?.courseName }</p>
+                <p className="text-sm text-richblack-50">{course?.instructor?.firstName} {course?.instructor?.lastName}</p>
                 <div>
                     <span>{avgReviewCount || 0}</span>
 
@@ -35,7 +35,7 @@ const Course_Card = ({course, Height}) => {
                     
                     <span>{course?.ratingAndReviews?.length} Rating</span>
                 </div>
-                <p>₹{" "}{course?.price}</p>
+                <p className='text-xl text-richblack-5'>₹{" "}{course?.price}</p>
             </div>
         </div>
         </Link>
