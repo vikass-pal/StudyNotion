@@ -13,6 +13,7 @@ import { useState } from 'react'
 const Catalog = () => {
 
   const {catalogName} = useParams();
+   const [active, setActive] = useState(1)
   const [loading, setLoading] = useState(false);
   const [catalogPageData, setCatalogPageData] = useState(null);
   const [categoryId, setCategoryId] = useState("");
@@ -80,7 +81,7 @@ useEffect(() => {
     <div className='text-white '>
 
       <div className='flex w-full bg-richblack-800  '>
-      <div className='w-[870px] h-[300px]  flex flex-col gap-y-5 p-10' >
+      <div className='mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ' >
         <p className='text-sm text-richblack-100 mt-5'>{`Home  / Catalog  / `}
         <span className='text-yellow-100'>{catalogPageData?.selectedCategory?.name}</span></p>
         <p className='text-2xl font-bold'>{catalogPageData?.selectedCategory?.name}</p>
@@ -100,21 +101,36 @@ useEffect(() => {
       </div>
      
     
-     <div>
-        {/* section1 */}
-        <div className='p-5 m-5'>
-          <div className='text-2xl font-bold mb-3'>Courses to get you started</div>
-            <div className='flex gap-x-3 mb-3 pb-3 border-b border-white'>
-                <p>Most Popular</p>
-                <p>New</p>
+     <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+                <div className="section_heading">Courses to get you started</div>
+                <div className="my-4 flex border-b border-b-richblack-600 text-sm">
+                    <p
+                        className={`px-4 py-2 ${active === 1
+                            ? "border-b border-b-yellow-25 text-yellow-25"
+                            : "text-richblack-50"
+                            } cursor-pointer`}
+                        onClick={() => setActive(1)}
+                    >
+                        Most Populer
+                    </p>
+                    <p
+                        className={`px-4 py-2 ${active === 2
+                            ? "border-b border-b-yellow-25 text-yellow-25"
+                            : "text-richblack-50"
+                            } cursor-pointer`}
+                        onClick={() => setActive(2)}
+                    >
+                        New
+                    </p>
+                </div>
+                <div>
+                    <CourseSlider
+                        Courses={catalogPageData?.selectedCategory?.courses}
+                    />
+                </div>
             </div>
-            <div>
-            <CourseSlider Courses={catalogPageData?.selectedCategory?.courses}/>
-            </div>
-        </div>
-     </div>
      {/* section2 */}
-     <div>
+     <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
     <div>Top Courses in {catalogPageData?.selectedCategory?.name} </div>
       <div>
         {/* <CourseSlider  Courses={catalogPageData?.data?.differentCategory?.courses} /> */}
@@ -124,14 +140,14 @@ useEffect(() => {
       </div>
      </div>
      {/* section 3 */}
-      <div>
-        <div>Frequently Bought</div>
+      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+        <div className='"section_heading'>Frequently Bought</div>
         <div className='grid grid-cols-1 lg:grid-cols-2'> 
           {
             catalogPageData?.mostSellingCourses?.slice(0,4).
             map((course, index) => {
               return (
-                <Course_Card course={course} key={index} Height={'h-[400px]'} />
+                <Course_Card course={course} key={index} Height={'h-[250px]'} />
 
               )
               
