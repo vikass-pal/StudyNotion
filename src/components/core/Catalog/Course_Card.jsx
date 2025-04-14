@@ -33,7 +33,7 @@ const Course_Card = ({course, Height}) => {
 
                     <RatingStars Review_Count={avgReviewCount} />
                     
-                    <span>{course?.ratingAndReviews?.length} Rating</span>
+                    <span className='text-yellow-5'>{course?.ratingAndReviews?.length} Rating</span>
                 </div>
                 <p className='text-xl text-richblack-5'>₹{" "}{course?.price}</p>
             </div>
