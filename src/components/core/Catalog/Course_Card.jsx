@@ -18,10 +18,12 @@ const Course_Card = ({course, Height}) => {
     
   return (
     <div className='hover:scale-[1.03] transition-all duration-200 z-50 '>
+
         <Link to={`/courses/${course._id}`}>
         <div>
             <div>
                 <img src={course?.thumbnail} alt="Course Thumbnail"
+
                 className={`${Height} w-full rounded-xl object-cover`}
                 />
             </div>
@@ -36,6 +38,7 @@ const Course_Card = ({course, Height}) => {
                     
                     <span className='text-yellow-5'>{course?.ratingAndReviews?.length} Rating</span>
                 </div>
+                
                 <p className='text-xl text-richblack-5'>₹{" "}{course?.price}</p>
             </div>
         </div>

@@ -56,6 +56,7 @@ const handleCourseDelete = async(courseId) => {
                      </Tr>
                    </Thead>
                 <Tbody>
+
                      {
                         courses.length === 0 ? (
                             <Tr>
@@ -136,6 +137,7 @@ const handleCourseDelete = async(courseId) => {
                             ))
                         )
                      }
+                     
                 </Tbody>
             </Table>
             {confirmationModal && <ConfirmationModal modalData={confirmationModal} /> }
