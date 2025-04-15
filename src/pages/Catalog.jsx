@@ -80,7 +80,7 @@ useEffect(() => {
   return (
     <div className='text-white '>
 
-      <div className='flex w-full bg-richblack-800  '>
+      <div className='flex w-full bg-richblack-800 p-6  '>
       <div className='mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ' >
         <p className='text-sm text-richblack-100 mt-5'>{`Home  / Catalog  / `}
         <span className='text-yellow-100'>{catalogPageData?.selectedCategory?.name}</span></p>
@@ -131,7 +131,7 @@ useEffect(() => {
             </div>
      {/* section2 */}
      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-    <div>Top Courses in {catalogPageData?.selectedCategory?.name} </div>
+    <div className='text-2xl'>Top Courses in {catalogPageData?.selectedCategory?.name} </div>
       <div>
         {/* <CourseSlider  Courses={catalogPageData?.data?.differentCategory?.courses} /> */}
         <CourseSlider Courses={catalogPageData?.selectedCategory?.courses || []} />
@@ -141,7 +141,7 @@ useEffect(() => {
      </div>
      {/* section 3 */}
       <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-        <div className='"section_heading'>Frequently Bought</div>
+        <div className='section_heading text-2xl'>Frequently Bought</div>
         <div className='grid grid-cols-1 lg:grid-cols-2'> 
           {
             catalogPageData?.mostSellingCourses?.slice(0,4).
