@@ -147,12 +147,14 @@ const CourseDetails = () => {
           course = {courseData?.data?.courseDetails}
           setConfirmationModal = {setConfirmationModal}
           handleBuyCourse = {handleBuyCourse}
+
           />
         </div>
 
         </div>
         <div>
           <p>What You Will Learn</p>
+
           <div>
             {whatYouWillLearn}
           </div>
@@ -160,10 +162,12 @@ const CourseDetails = () => {
         <div>
           <div>
             <p>Course Content :</p>
+
           </div>
           <div className='flex gap-x-3 justify-between'>
            <div>
            <span>{courseContent.length} section(s)</span>
+           
           <span> {totalNoOfLectures}</span>
           <span>
             {courseData.data?.totalDuration} Total length
