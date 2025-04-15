@@ -141,7 +141,7 @@ useEffect(() => {
      </div>
      {/* section 3 */}
       <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-        <div className='section_heading text-2xl'>Frequently Bought</div>
+        <div className='section_heading text-2xl text-center'>Frequently Bought</div>
         <div className='grid grid-cols-1 lg:grid-cols-2'> 
           {
             catalogPageData?.mostSellingCourses?.slice(0,4).
