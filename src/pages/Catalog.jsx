@@ -133,7 +133,7 @@ useEffect(() => {
      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
     <div className='text-2xl font-bold text-richblack-100 mb-8'>Top Courses in {catalogPageData?.selectedCategory?.name} </div>
       <div>
-        {/* <CourseSlider  Courses={catalogPageData?.data?.differentCategory?.courses} /> */}
+       
         <CourseSlider Courses={catalogPageData?.selectedCategory?.courses || []} />
         {console.log("Courses in selectedCategory:", catalogPageData?.selectedCategory?.courses)}
 
