@@ -80,7 +80,7 @@ useEffect(() => {
   return (
     <div className='text-white '>
 
-      <div className='flex w-full bg-richblack-800 p-6  '>
+      <div className='flex  bg-richblack-800 p-6  '>
       <div className='mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ' >
         <p className='text-sm text-richblack-100 mt-5'>{`Home  / Catalog  / `}
         <span className='text-yellow-100'>{catalogPageData?.selectedCategory?.name}</span></p>
@@ -102,7 +102,7 @@ useEffect(() => {
      
     
      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                <div className="section_heading">Courses to get you started</div>
+                <div className="section_heading text-2xl font-bold text-richblack-100 mb-8">Courses to get you started</div>
                 <div className="my-4 flex border-b border-b-richblack-600 text-sm">
                     <p
                         className={`px-4 py-2 ${active === 1
@@ -131,7 +131,7 @@ useEffect(() => {
             </div>
      {/* section2 */}
      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-    <div className='text-2xl'>Top Courses in {catalogPageData?.selectedCategory?.name} </div>
+    <div className='text-2xl font-bold text-richblack-100 mb-8'>Top Courses in {catalogPageData?.selectedCategory?.name} </div>
       <div>
         {/* <CourseSlider  Courses={catalogPageData?.data?.differentCategory?.courses} /> */}
         <CourseSlider Courses={catalogPageData?.selectedCategory?.courses || []} />
@@ -140,14 +140,14 @@ useEffect(() => {
       </div>
      </div>
      {/* section 3 */}
-      <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-        <div className='section_heading text-2xl text-center'>Frequently Bought</div>
+      <div className=" mx-auto box-content  px-4 py-12 w-[1200px] p-5 gap-x-2">
+        <div className='section_heading text-2xl font-bold text-richblack-100 mb-8'>Frequently Bought</div>
         <div className='grid grid-cols-1 lg:grid-cols-2'> 
           {
             catalogPageData?.mostSellingCourses?.slice(0,4).
             map((course, index) => {
               return (
-                <Course_Card course={course} key={index} Height={'h-[250px]'} />
+                <Course_Card course={course} key={index} Height={'h-[300px]'} />
 
               )
               

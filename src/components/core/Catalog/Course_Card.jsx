@@ -17,14 +17,14 @@ const Course_Card = ({course, Height}) => {
     },[course])
     
   return (
-    <div className='hover:scale-[1.03] transition-all duration-200 z-50 '>
+    <div className='hover:scale-[1.03] transition-all duration-200 z-50 gap-x-2'>
 
         <Link to={`/courses/${course._id}`}>
         <div>
-            <div>
+            <div >
                 <img src={course?.thumbnail} alt="Course Thumbnail"
 
-                className={`${Height} w-full rounded-xl object-cover`}
+                className={`${Height} w-[530px]  object-cover`}
                 />
             </div>
             <div className='flex flex-col gap-2 px-1 py-3'>
@@ -38,7 +38,7 @@ const Course_Card = ({course, Height}) => {
                     
                     <span className='text-yellow-5'>{course?.ratingAndReviews?.length} Rating</span>
                 </div>
-                
+
                 <p className='text-xl text-richblack-5'>₹{" "}{course?.price}</p>
             </div>
         </div>
