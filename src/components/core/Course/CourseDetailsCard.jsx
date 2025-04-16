@@ -45,15 +45,15 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
    
 
     return (
-        <div>
+        <div className={`flex flex-col gap-4 rounded-2xl bg-richblack-700 p-4 text-richblack-5 w-fit`}>
             <img src={ThumbnailImage} alt="Thumbnail image"
-                className='max-h-[300px] min-h-[180px] w-[400px] rounded-xl' />
-            <div>
+                className="max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full" />
+            <div className="space-x-3 pb-4 text-3xl font-semibold">
                 ₹ {CurrentPrice}
             </div>
-            <div className='flex flex-col gap-y-6'>
+            <div className='flex flex-col gap-4'>
                 <button
-                    className='bg-yellow-50 w-fit text-black p-2 px-4 rounded-md'
+                    className='bg-yellow-50 hover:bg-richblack-200 transition-all duration-200 hover:text-white w-[330px] text-center translate-x-7 text-black p-2 px-4 rounded-md'
                     onClick={
                         user && course?.studentsEnrolled.includes(user?._id) ? () =>
                             navigate("dashboard/enrolled-courses") : handleBuyCourse
@@ -65,14 +65,14 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
                 </button>
                 {
                     (!course?.studentsEnrolled.includes(user?._id)) && (
-                        <button onClick={handleAddToCart} className='bg-yellow-50 w-fit text-black p-2 px-4 rounded-md'>
+                        <button onClick={handleAddToCart} className='bg-richblack-800 w-[330px] text-richblack-25  hover:bg-richblack-600 transition-all duration-200 p-2 px-4 rounded-md translate-x-7'>
                             Add to Cart
                         </button>
                     )
                 }
             </div>
             <div>
-                <p>30 Days Money Back Guarantee</p>
+                <p className="pb-3 pt-4 text-center text-sm text-richblack-25">30 Days Money Back Guarantee</p>
             </div>
             <div>
                 <p>This Course includes : </p>
@@ -88,7 +88,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }) {
             </div>
             <div>
                 <button onClick={handleShare}
-                    className='bg-brown-100 w-fit text-black p-2 px-4 rounded-md'
+                    className='bg-transparent w-fit text-yellow-200 text-center items-center justify-center w-full p-2 px-4 rounded-md'
                 >
                     Share
                 </button>
