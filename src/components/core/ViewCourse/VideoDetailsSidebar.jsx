@@ -16,6 +16,7 @@ const VideoDetailsSidebar = () => {
     } = useSelector((state) => state.viewCourse);
     useEffect(() => {
         ;(() => {
+            
 
         }) ()
     })
