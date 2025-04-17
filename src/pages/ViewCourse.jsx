@@ -8,7 +8,7 @@ const ViewCourse = () => {
 const [reviewModal, setReviewModal] = useState(false)
 const {courseId} = useParams()
 const {token} = useSelector((state) => state.auth);
-const diapatch = useDispatch();
+const dispatch = useDispatch();
 
   useEffect(() => {
     const setCourseSpecificDetails = async() => {
@@ -23,6 +23,7 @@ const diapatch = useDispatch();
       })
       dispatch(setTotalNoOfLectures(lectures));
     }
+    setCourseSpecificDetails();
   },[]);
  
 
