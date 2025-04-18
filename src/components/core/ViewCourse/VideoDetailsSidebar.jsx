@@ -35,9 +35,24 @@ const VideoDetailsSidebar = () => {
     },[courseSectionData, courseEntireData, location.pathname])
 
   return (
+   <>
     <div>
+    {/* for buttons */}
+    <div>
+       {/* for buttons */}
+       <div>
+        <div onClick={() => { navigate("/dashboard/enrolled-courses")}}>
+          Back
+        </div>
 
+       </div>
+       {/* for heading and title */}
+       <div>
+
+       </div>
     </div>
+    </div>
+   </>
   )
 }
 
