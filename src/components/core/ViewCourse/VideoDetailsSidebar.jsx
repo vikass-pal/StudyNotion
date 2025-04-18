@@ -16,17 +16,22 @@ const VideoDetailsSidebar = () => {
         completedLectures,
     } = useSelector((state) => state.viewCourse);
     useEffect(() => {
-        ;(() => {
-            if(!courseSectionData.length)
-              return;
-            const currentSectionIndex = courseSectionData.findIndex(
-              (data) => data.id === sectionId
-            )
-            const currentSubsectionIndex = courseSectionData?.[currentSectionIndex]?.subSection.findIndex(
-              (data) => data._id === subSectionId
-            )
-            const activeSubSectionId = courseSectionData[currentSectionIndex]?.subSection?.[currentSubSectionIndex]?._id;
-        }) ()
+        const setActiveFlags = () => {
+          if(!courseSectionData.length)
+            return;
+          const currentSectionIndex = courseSectionData.findIndex(
+            (data) => data.id === sectionId
+          )
+          const currentSubsectionIndex = courseSectionData?.[currentSectionIndex]?.subSection.findIndex(
+            (data) => data._id === subSectionId
+          )
+          const activeSubSectionId = courseSectionData[currentSectionIndex]?.subSection?.[currentSubSectionIndex]?._id;
+          // current section
+          setActiveStatus(courseSectionData?.[currentSectionIndex]?._id);
+          // current subsection
+          setvideoBarActive[activeSubSectionId];
+        }
+        setActiveFlags();
     },[courseSectionData, courseEntireData, location.pathname])
 
   return (
