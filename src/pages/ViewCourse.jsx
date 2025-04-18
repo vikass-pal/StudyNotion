@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import {Outlet, useParams} from 'react-router-dom'
+import {getFullDetailsOfCourse} from '../services/operations/courseDetailsAPI'
+import VideoDetailsSidebar from '../components/core/ViewCourse/VideoDetailsSidebar'
+import CourseReviewModal from '../components/core/ViewCourse/CourseReviewModal'
 
 const ViewCourse = () => {
 const [reviewModal, setReviewModal] = useState(false)
