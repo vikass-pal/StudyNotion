@@ -3,12 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const VideoDetails = () => {
 
   const {courseId, sectionId, subSectionId} = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const playerRef = useRef();
   const {token} = useSelector((state) => state.auth)
   const {courseSectionData, courseEntireData, completedLectures} = useSelector((state) => state.viewCourse);
@@ -31,15 +33,51 @@ const VideoDetails = () => {
         const filteredData = courseSectionData.filter(
           (course) => course._id === sectionId
         )
+        const filteredVideoData = filteredData?.[0].subsection.filter(
+          (data) => data._id === subSectionId
+        )
+        setVideoData(filteredVideoData?.[0]);
+        setVideoEnded(false);
       }
     }
-  })
+  },[courseSectionData, courseEntireData, location.pathname])
 
   const isFirstVideo = () => {
+    const currentSectionIndex = courseSectionData.findIndex(
+      (data) => data._id === subSectionId
+    )
+
+    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSectionId.findIndex(
+      (data) => data.id === subSectionId
+    )
+    if(currentSectionIndex === 0 && currentSubSectionIndex === 0) {
+      return true;
+
+    }
+    else{
+      return false;
+    }
 
   }
 
   const isLastVideo = () => {
+    const currentSectionIndex = courseSectionData.findIndex(
+      (data) => data._id === subSectionId
+    )
+    const noOfSubSections = courseSectionData[currentSectionIndex].subSection.length;
+
+    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSectionId.findIndex(
+      (data) => data.id === subSectionId
+    )
+    if(currentSectionIndex === courseSectionData.length - 1 && 
+      currentSubSectionIndex === noOfSubSections - 1
+    ) {
+      return true;
+
+    }
+    else{
+      return false;
+    }
     
   }
   const goToNextVideo = () => {
