@@ -81,10 +81,50 @@ const VideoDetails = () => {
     
   }
   const goToNextVideo = () => {
+    const currentSectionIndex = courseSectionData.findIndex(
+      (data) => data._id === subSectionId
+    )
+    const noOfSubSections = courseSectionData[currentSectionIndex].subSection.length;
+
+    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSectionId.findIndex(
+      (data) => data.id === subSectionId
+    ) 
+    if(currentSubSectionIndex !== noOfSubSections - 1) {
+      // samesection ka next video
+      const nextSubSectionId = courseSectionData[currentSectionIndex].subSection
+      [currentSectionIndex + 1]._id;
+      // new video pe jao
+      navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${nextSubSectionId}`)
+    }
+    else{
+      // diff section next video
+      const nextSectionId = courseSectionData[currentSectionIndex +1]._id;
+      const nextSubSectionId = courseSectionData[currentSectionIndex+1].subsection[0]._id;
+
+      navigate(`/view-course/${courseId}/section/${nextSectionId}/sub-section/${nextSubSectionId}`)
+    }
     
   }
 
   const goToPrevVideo = () => {
+    const currentSectionIndex = courseSectionData.findIndex(
+      (data) => data._id === subSectionId
+    )
+    const noOfSubSections = courseSectionData[currentSectionIndex].subSection.length;
+
+    const currentSubSectionIndex = courseSectionData[currentSectionIndex].subSectionId.findIndex(
+      (data) => data.id === subSectionId
+    )
+    if(currentSubSectionIndex !== 0) {
+      // same section , previous video
+      const prevSubSectionId = courseSectionData[currentSectionIndex].subSection[currentSubSectionIndex - 1]
+     // new video pe jao
+     navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${prevSubSectionId}`)
+    }
+    else{
+      // diff section last video
+      const prevSectionId = courseSectionData[currentSectionIndex - 1]._id;
+    }
     
   }
   const handleLectureCompletion = () => {
