@@ -124,12 +124,21 @@ const VideoDetails = () => {
     else{
       // diff section last video
       const prevSectionId = courseSectionData[currentSectionIndex - 1]._id;
+      prevSubSectionLength = courseSectionData[currentSectionIndex - 1].subSection.length;
+      const prevSubSectionId = courseSectionData[currentSectionIndex-1].subSection[prevSubSectionLength - 1]._id;
+        // new video pe jao
+     navigate(`/view-course/${courseId}/section/${prevSectionId}/sub-section/${prevSubSectionId}`)
     }
-    
+     
   }
-  const handleLectureCompletion = () => {
-    
-  }
+  const handleLectureCompletion = async() => {
+    setLoading(true);
+    const res = await markLecturesAsComplete({courseId:courseId, subSectionId:subSectionId}, token);
+    if(res) {
+      dispatch(updateCompletedLectures(subSectionId))
+    }
+    setLoading(false)
+  } 
 
   return (
     <div>
