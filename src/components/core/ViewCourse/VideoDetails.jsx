@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Player } from 'video-react';
-import '~video-react/dist/video-react.css'; // import css
+import 'video-react/dist/video-react.css'; // import css
 import { FaPlay } from "react-icons/fa";
 
 const VideoDetails = () => {
