@@ -122,6 +122,7 @@ const VideoDetails = () => {
       // same section , previous video
       const prevSubSectionId = courseSectionData[currentSectionIndex].subSection[currentSubSectionIndex - 1]
      // new video pe jao
+     
      navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${prevSubSectionId}`)
     }
     else{
@@ -141,6 +142,7 @@ const VideoDetails = () => {
     if(res) {
       dispatch(updateCompletedLectures(subSectionId))
     }
+
     setLoading(false)
   } 
 
