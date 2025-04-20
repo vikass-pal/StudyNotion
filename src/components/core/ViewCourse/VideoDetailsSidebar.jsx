@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import IconBtn from '../HomePage/common/IconBtn';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { setCourseViewSidebar } from "../../../slices/sidebarSlice"
 
-const VideoDetailsSidebar = (setReviewModal) => {
+
+
+const VideoDetailsSidebar = ({setReviewModal}) => {
     const [activeStatus, setActiveStatus]= usestate("");
     const [videoBarActive, setvideoBarActive] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {token} = useSelector((state) => state.auth);
+   
     
     const location = useLocation();
     const {sectionId, subSectionId} = useParams();

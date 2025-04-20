@@ -4,9 +4,15 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
 import { Player } from 'video-react';
 import 'video-react/dist/video-react.css'; // import css
 import { FaPlay } from "react-icons/fa";
+import IconBtn from '../HomePage/common/IconBtn';
+
+import { markLectureAsComplete } from "../../../services/operations/courseDetailsAPI"
+import { updateCompletedLectures } from "../../../slices/viewCourseSlice"
+import { setCourseViewSidebar } from "../../../slices/sidebarSlice"
 
 const VideoDetails = () => {
 
@@ -128,7 +134,7 @@ const VideoDetails = () => {
     else{
       // diff section last video
       const prevSectionId = courseSectionData[currentSectionIndex - 1]._id;
-      prevSubSectionLength = courseSectionData[currentSectionIndex - 1].subSection.length;
+      const prevSubSectionLength = courseSectionData[currentSectionIndex - 1].subSection.length;
       const prevSubSectionId = courseSectionData[currentSectionIndex-1].subSection[prevSubSectionLength - 1]._id;
         // new video pe jao
      navigate(`/view-course/${courseId}/section/${prevSectionId}/sub-section/${prevSubSectionId}`)
@@ -138,7 +144,7 @@ const VideoDetails = () => {
   const handleLectureCompletion = async() => {
     setLoading(true);
     // pending course progress
-    const res = await markLecturesAsComplete({courseId:courseId, subSectionId:subSectionId}, token);
+    const res = await markLectureAsComplete({courseId:courseId, subSectionId:subSectionId}, token);
     if(res) {
       dispatch(updateCompletedLectures(subSectionId))
     }
