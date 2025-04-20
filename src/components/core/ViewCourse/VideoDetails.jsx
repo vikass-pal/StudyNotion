@@ -4,6 +4,9 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { Player } from 'video-react';
+import '~video-react/dist/video-react.css'; // import css
+import { FaPlay } from "react-icons/fa";
 
 const VideoDetails = () => {
 
@@ -133,6 +136,7 @@ const VideoDetails = () => {
   }
   const handleLectureCompletion = async() => {
     setLoading(true);
+    // pending course progress
     const res = await markLecturesAsComplete({courseId:courseId, subSectionId:subSectionId}, token);
     if(res) {
       dispatch(updateCompletedLectures(subSectionId))
@@ -142,6 +146,82 @@ const VideoDetails = () => {
 
   return (
     <div>
+    {
+      !videoData ? (
+        <div>
+          No Data Found
+        </div>
+      ) : (
+        <Player  ref={playerRef}
+        aspectRatio="16:9"
+        playsInline
+        onEnded={() => setVideoEnded(true)}
+        src={videoData?.videoUrl}>
+         <FaPlay className='items-center'/>
+         {
+          videoEnded && (
+            <div>
+            {
+              !completedLectures.includes(subSectionId) && (
+                <IconBtn 
+                disabled={loading}
+                onClick={() => handleLectureCompletion()}
+                text={!loading ? "Mark as Completed" : "Loading..."}
+                />
+              )
+            }
+            <IconBtn 
+            disabled={loading}
+            onClick={() => {
+              if(playerRef?.current) {
+                playerRef?.seek(0);
+            setVideoEnded(false);
+              }
+          
+            }}
+            text="Rewatch"
+            customClasses="bg-gray-500 text-white"
+            />
+
+            <div>
+              {
+                !isFirstVideo() && (
+                  <button 
+                  disabled={loading}
+                  onClick={() => goToPrevVideo()}
+                  className="bg-gray-500 text-white px-4 py-2 rounded-md mr-2"
+                  >
+                    Previous
+                  </button>
+                )
+              }
+              {
+                !isLastVideo() && (
+                  <button disabled={loading}
+                  onClick={() => goToNextVideo()}
+                  className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2" > 
+                  Next
+                  </button>
+                )
+              }
+            </div>
+
+
+            </div>
+          )
+        }
+        </Player>
+
+       
+      )
+    }
+    <h1>
+      {videoData?.title}
+
+    </h1>
+    <p>
+      {videoData?.description}
+    </p>
 
     </div>
   )
