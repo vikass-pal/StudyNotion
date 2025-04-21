@@ -111,6 +111,7 @@ const VideoDetails = () => {
       const nextSubSectionId = courseSectionData[currentSectionIndex+1].subSection[0]._id;
 
       navigate(`/view-course/${courseId}/section/${nextSectionId}/sub-section/${nextSubSectionId}`)
+      
     }
     
   }
@@ -130,7 +131,7 @@ const VideoDetails = () => {
      // new video pe jao
 
      navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${prevSubSectionId}`)
-     
+
     }
 
     else{
