@@ -144,6 +144,9 @@ const VideoDetails = () => {
   const handleLectureCompletion = async() => {
     setLoading(true);
     // pending course progress
+    
+
+    
     const res = await markLectureAsComplete({courseId:courseId, subSectionId:subSectionId}, token);
     if(res) {
       dispatch(updateCompletedLectures(subSectionId))
