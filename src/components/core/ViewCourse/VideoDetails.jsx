@@ -130,7 +130,9 @@ const VideoDetails = () => {
      // new video pe jao
 
      navigate(`/view-course/${courseId}/section/${sectionId}/sub-section/${prevSubSectionId}`)
+     
     }
+
     else{
       // diff section last video
       const prevSectionId = courseSectionData[currentSectionIndex - 1]._id;
@@ -146,7 +148,7 @@ const VideoDetails = () => {
     // pending course progress
     
 
-    
+
     const res = await markLectureAsComplete({courseId:courseId, subSectionId:subSectionId}, token);
     if(res) {
       dispatch(updateCompletedLectures(subSectionId))
