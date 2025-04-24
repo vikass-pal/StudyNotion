@@ -36,6 +36,7 @@ export function getUserDetails(token, navigate) {
 
 // ================ get User Enrolled Courses  ================
 export async function getUserEnrolledCourses(token) {
+  console.log("Token in getUserEnrolledCourses:", token);
   // const toastId = toast.loading("Loading...")
   let result = []
   try {

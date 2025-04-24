@@ -1,3 +1,4 @@
+const razorpay = require("razorpay");
 const {instance} = require("../config/razorpay");
 const crypto = require('crypto');
 const Course = require("../models/Course");
@@ -13,6 +14,7 @@ const { default: mongoose } = require('mongoose')
 exports.capturePayment = async (req, res) => {
      
     const {courses} = req.body;
+    console.log('coursesId = ', courses)
     const userId = req.user.id;
 
     // validation
@@ -104,7 +106,7 @@ const expectedSignature = crypto.createHmac("sha256", process.env.RAZORPAY_SECRE
 
 if(expectedSignature === razorpay_signature) {
     // enroll karwa student ko
-    await enrollStudents(courses, userId, res);
+     await enrollStudents(courses, userId, res);
     // return res
 
     return res.status(200).json({success:true,
