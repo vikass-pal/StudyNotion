@@ -85,7 +85,7 @@ exports.verifyPayment = async (req, res) => {
     const razorpay_order_id = req.body?.razorpay_order_id;
     const razorpay_payment_id = req.body?.razorpay_payment_id;
     const razorpay_signature = req.body?.razorpay_signature;
-    const courses = req.body?.courses;
+    const courses = req.body?.coursesId;
     const userId = req.user.id;
 
     if(!razorpay_order_id || 
@@ -104,7 +104,7 @@ const expectedSignature = crypto.createHmac("sha256", process.env.RAZORPAY_SECRE
 
 if(expectedSignature === razorpay_signature) {
     // enroll karwa student ko
-
+    await enrollStudents(courses, userId, res);
     // return res
 
     return res.status(200).json({success:true,

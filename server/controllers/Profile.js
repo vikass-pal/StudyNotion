@@ -218,12 +218,12 @@ exports.getEnrolledCourses = async (req, res) => {
 
         userDetails = userDetails.toObject();
 
-        if (!userDetails.courses || userDetails.courses.length === 0) {
-            return res.status(200).json({
-                success: true,
-                data: [],
-            });
-        }
+        // if (!userDetails.courses || userDetails.courses.length === 0) {
+        //     return res.status(200).json({
+        //         success: true,
+        //         data: [],
+        //     });
+        // }
 
 
         var SubsectionLength = 0
