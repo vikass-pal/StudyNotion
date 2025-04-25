@@ -1,8 +1,41 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+import {Autoplay, FreeMode, Navigation, Pagination} from 'swiper'
+
+import ReactStars from 'react-rating-stars-component'
+import { apiConnector } from '../../services/apiconnector';
+import { ratingsEndpoints } from '../../services/apis';
 
 const ReviewSlider = () => {
+
+    const [reviews, setReviews] = useState([])
+    const truncateWords = 15;
+
+    useEffect(() => {
+        const fetchAllReviews = async() => {
+            const {data}= await apiConnector("GET", ratingsEndpoints.REVIEWS_DETAILS_API)
+            console.log("Logging response in rating", response);
+
+            // const {data} = response;
+            if(data?.success) {
+                setReviews(data?.data);
+
+            }
+            console.log("Printing review",reviews)
+          
+        }
+        fetchAllReviews();
+    },[])
+
   return (
-    <div>ReviewSlider</div>
+    <div>
+
+    </div>
   )
 }
 
