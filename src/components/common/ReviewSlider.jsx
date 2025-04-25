@@ -19,7 +19,7 @@ const ReviewSlider = () => {
     useEffect(() => {
         const fetchAllReviews = async() => {
             const {data}= await apiConnector("GET", ratingsEndpoints.REVIEWS_DETAILS_API)
-            console.log("Logging response in rating", response);
+            console.log("Logging response in rating", data);
 
             // const {data} = response;
             if(data?.success) {
@@ -33,7 +33,31 @@ const ReviewSlider = () => {
     },[])
 
   return (
-    <div>
+    <div className='text-white'>
+        <div className='h-[190] max-w-maxContent'>
+            <Swiper 
+            slidesPerView={4}
+            spaceBetween={24}
+            loop={true}
+            freeMode={true}
+            autoplay={{
+
+            }}
+            modules={[FreeMode, Pagination, Navigation, Autoplay]}
+            className='w-full'
+            >
+
+                {
+                    reviews.map((review, index) => {
+                        <SwiperSlide key={index}>
+                            <img src={review} alt="" />
+                        </SwiperSlide>
+                    })
+                }
+
+            </Swiper>
+
+        </div>
 
     </div>
   )
