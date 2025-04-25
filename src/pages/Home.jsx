@@ -10,6 +10,7 @@ import TimelineSection from '../components/core/HomePage/TimelineSection';
 import InstuctorSection from '../components/core/HomePage/InstuctorSection';
 import ExploreMore from '../components/core/HomePage/ExploreMore';
 import Footer from '../components/core/HomePage/common/footer';
+import ReviewSlider from '../components/common/ReviewSlider';
 
 export const Home = () => {
   return (
@@ -184,6 +185,7 @@ export const Home = () => {
                 <InstuctorSection/>
                 <h2 className='text-center font-semibold text-4xl mt-10 '>Review from other Learners</h2>
                 {/* Review slider here */}
+                <ReviewSlider/>
           </div>
 
            <Footer/>

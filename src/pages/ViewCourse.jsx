@@ -38,7 +38,7 @@ const dispatch = useDispatch();
             <Outlet />
         </div>
     </div>
-    <CourseReviewModal setReviewModal={setReviewModal}/>
+    {reviewModal && (<CourseReviewModal setReviewModal={setReviewModal}/>)}
     </>
   )
 }
