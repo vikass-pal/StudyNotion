@@ -25,8 +25,10 @@ const MyProfile = () => {
           />
           <div>
             <p className="text-xl font-semibold">{user?.firstName + " " + user?.lastName}</p>
+         
             <p className="text-sm text-richblack-300">{user?.email}</p>
           </div>
+          
         </div>
 
         <IconBtn
