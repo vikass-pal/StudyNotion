@@ -9,6 +9,7 @@ const Tab = ({ tabData, field, setField }) => {
                     onClick={() => setField(tab.type)}
                     className={`p-2 ${field === tab.type ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                 >
+                    
                     {tab.tabName}
                 </button>
             ))}

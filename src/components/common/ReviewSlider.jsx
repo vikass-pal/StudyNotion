@@ -45,6 +45,7 @@ const ReviewSlider = () => {
             }}
             modules={[FreeMode, Pagination, Navigation, Autoplay]}
             className='w-full'
+            
             >
 
                 {
