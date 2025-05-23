@@ -44,6 +44,7 @@ const ReviewSlider = () => {
 
             }}
             modules={[FreeMode, Pagination, Navigation, Autoplay]}
+            
             className='w-full'
             
             >
@@ -55,7 +56,7 @@ const ReviewSlider = () => {
                              src={review?.user?.image ? 
                                 review?.user?.image : 
                                 `https://api.dicebar.com/5.x/initials/svg?seed=${review?.user?.firstName} 
-                                
+
                                 ${review?.user?.lastName}`
                                 }  alt="Profile picture"
                                 className='h-9 w-9 object-cover rounded-full' />
