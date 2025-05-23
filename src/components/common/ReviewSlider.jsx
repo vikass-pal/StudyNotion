@@ -58,7 +58,8 @@ const ReviewSlider = () => {
                                 ${review?.user?.lastName}`
                                 }  alt="Profile picture"
                                 className='h-9 w-9 object-cover rounded-full' />
-                                <p> </p>
+                                <p>{review?.user?.firstName} {review?.user?.lastName}</p>
+                                <p>{review?.course?.courseName} </p>
                         </SwiperSlide>
                     })
                 }
