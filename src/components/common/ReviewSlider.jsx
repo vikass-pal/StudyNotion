@@ -51,7 +51,14 @@ const ReviewSlider = () => {
                 {
                     reviews.map((review, index) => {
                         <SwiperSlide key={index}>
-                            <img src={review} alt="" />
+                            <img
+                             src={review?.user?.image ? 
+                                review?.user?.image : 
+                                `https://api.dicebar.com/5.x/initials/svg?seed=${review?.user?.firstName} 
+                                ${review?.user?.lastName}`
+                                }  alt="Profile picture"
+                                className='h-9 w-9 object-cover rounded-full' />
+                                <p> </p>
                         </SwiperSlide>
                     })
                 }
