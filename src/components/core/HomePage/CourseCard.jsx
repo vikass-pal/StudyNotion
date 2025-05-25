@@ -9,6 +9,7 @@ const CourseCard = ({cardData, currentCard, setCurrentCard} ) => {
         : "bg-richblack-800"
         }  text-richblack-25 h-[300px] box-border cursor-pointer `}
       onClick={() => setCurrentCard(cardData?.heading)}>
+      
         <div className='border-b-[2px] border-richblack-400 border-dashed flex flex-col p-6'>
 
             <div className={`${currentCard === cardData?.heading && "text-richblack-800"} font-semibold mb-3 mt-3`}>
