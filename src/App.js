@@ -102,6 +102,7 @@ const App = () => {
                 <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
                 {/* <Route path="/dashboard/add-course" element={<AddCourse />} /> */}
               </>
+              
             )
           }
 
