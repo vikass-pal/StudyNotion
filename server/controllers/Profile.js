@@ -294,7 +294,9 @@ exports.instructorDashboard = async (req, res) => {
                 _id: course._id,
                 courseName: course.courseName,
                 courseDescription: course.courseDescription,
+
                 // Include other course properties as needed
+                
                 totalStudentsEnrolled,
                 totalAmountGenerated,
             }
