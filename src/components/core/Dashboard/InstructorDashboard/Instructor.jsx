@@ -2,7 +2,7 @@ import React from 'react'
 import { getInstructorData } from '../../../../services/operations/profileAPI';
 import { fetchInstructorCourses } from '../../../../services/operations/courseDetailsAPI';
 
-
+import InstructorChart from './InstructorChart';
 
 
 export default function Instructor() {
