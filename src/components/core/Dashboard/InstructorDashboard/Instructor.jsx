@@ -13,6 +13,7 @@ import InstructorChart from './InstructorChart';
 
 export default function Instructor() {
   const { token } = useSelector((state) => state.auth)
+
   const { user } = useSelector((state) => state.profile)
 
   const [loading, setLoading] = useState(false)
@@ -34,6 +35,8 @@ export default function Instructor() {
       setLoading(false)
     })()
   }, [])
+
+  
 
   const totalAmount = instructorData?.reduce((acc, curr) => acc + curr.totalAmountGenerated, 0)
 
