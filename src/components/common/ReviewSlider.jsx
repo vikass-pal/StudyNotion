@@ -5,11 +5,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
+import { FaStar } from "react-icons/fa"
 import {Autoplay, FreeMode, Navigation, Pagination} from 'swiper'
 
 import ReactStars from 'react-rating-stars-component'
 import { apiConnector } from '../../services/apiconnector';
 import { ratingsEndpoints } from '../../services/apis';
+import Img from '../common/Img';
 
 function ReviewSlider() {
   const [reviews, setReviews] = useState(null)

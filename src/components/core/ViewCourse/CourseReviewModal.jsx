@@ -2,6 +2,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import IconBtn from '../HomePage/common/IconBtn';
+import ReactStars from "react-rating-stars-component"
 import { createRating } from '../../../services/operations/courseDetailsAPI';
 
 const CourseReviewModal = ({setReviewModal}) => {

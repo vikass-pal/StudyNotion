@@ -6,6 +6,13 @@ import {Outlet, useParams} from 'react-router-dom'
 import {getFullDetailsOfCourse} from '../services/operations/courseDetailsAPI'
 import VideoDetailsSidebar from '../components/core/ViewCourse/VideoDetailsSidebar'
 import CourseReviewModal from '../components/core/ViewCourse/CourseReviewModal'
+import {
+  setCompletedLectures,
+  setCourseSectionData,
+  setEntireCourseData,
+  setTotalNoOfLectures,
+} from "../slices/viewCourseSlice"
+import {useEffect} from "react"
 
 const ViewCourse = () => {
 const [reviewModal, setReviewModal] = useState(false)
