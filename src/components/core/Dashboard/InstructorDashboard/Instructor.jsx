@@ -54,18 +54,20 @@ export default function Instructor() {
               <p className="w-[200px] h-4 rounded-xl skeleton"></p>
               <p className="w-[100px] h-4 rounded-xl skeleton"></p>
             </div>
-
             <div className="flex justify-center items-center flex-col">
               <div className="w-[80%] h-24 rounded-xl mt-5 skeleton"></div>
               {/* circle */}
+
               <div className="w-60 h-60 rounded-full  mt-4 grid place-items-center skeleton"></div>
             </div>
           </div>
           {/* right column */}
+
           <div className="sm:flex hidden min-w-[250px] flex-col rounded-xl p-6 skeleton"></div>
         </div>
 
         {/* bottom row */}
+        
         <div className="flex flex-col gap-y-6  mt-5">
           <div className="flex justify-between">
             <p className="text-lg font-bold text-richblack-5 pl-5">Your Courses</p>
